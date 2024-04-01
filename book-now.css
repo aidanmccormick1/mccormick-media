@@ -183,7 +183,7 @@
   font-weight: 100;
 }
 .book-now-container4 {
-  width: 1128px;
+  width: 819px;
   height: 391px;
   display: flex;
   flex-wrap: wrap;
@@ -236,11 +236,12 @@
   padding-top: var(--dl-space-space-halfunit);
   margin-right: 10px;
   padding-left: var(--dl-space-space-oneandhalfunits);
+  border-radius: 40px;
   padding-right: var(--dl-space-space-oneandhalfunits);
   animation-name: fadeIn;
   padding-bottom: var(--dl-space-space-halfunit);
   animation-delay: 0s;
-  background-color: rgb(58, 74, 150);
+  background-color: #004DDC;
   animation-duration: 8s;
   animation-direction: normal;
   animation-iteration-count: 1;

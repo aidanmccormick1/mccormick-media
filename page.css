@@ -4,19 +4,11 @@
   overflow: auto;
   min-height: 100vh;
   align-items: center;
-  border-color: #171ab7;
-  border-style: dashed;
-  border-width: 5px;
   flex-direction: column;
 }
-.page-text {
-  text-align: left;
-  font-family: "Jost";
-  padding-top: var(--dl-space-space-oneandhalfunits);
-}
 .page-lottie-node {
-  width: 1029px;
-  height: 515px;
+  width: 1006px;
+  height: 476px;
 }
 .page-container1 {
   width: auto;
@@ -26,12 +18,12 @@
   flex-direction: column;
   justify-content: flex-start;
 }
-.page-text1 {
+.page-text {
   width: 864px;
   font-size: 3rem;
   max-width: auto;
   text-align: center;
-  font-family: "Grandstander";
+  font-family: "Jost";
 }
 .page-container2 {
   width: auto;
@@ -42,6 +34,7 @@
   justify-content: flex-start;
 }
 .page-navlink {
+  font-size: 24px;
   transition: 0.3s;
   font-family: "Jost";
   margin-left: var(--dl-space-space-unit);
@@ -58,7 +51,7 @@
   background-color: var(--dl-color-primary-100);
 }
 @media(max-width: 991px) {
-  .page-text1 {
+  .page-text {
     text-align: center;
   }
 }
@@ -66,7 +59,7 @@
   .page-lottie-node {
     width: 479px;
   }
-  .page-text1 {
+  .page-text {
     width: 479px;
     height: 53px;
     padding-left: 10px;

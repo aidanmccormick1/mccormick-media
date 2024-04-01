@@ -235,8 +235,9 @@
   display: contents;
 }
 .home-image {
-  width: 135px;
-  height: 67px;
+  width: 195px;
+  height: 79px;
+  align-self: stretch;
   object-fit: cover;
   text-decoration: none;
 }
@@ -269,6 +270,7 @@
   font-family: "Jost";
   font-weight: 700;
   margin-right: 32px;
+  text-decoration: none;
 }
 .home-login:hover {
   color: #717171;
@@ -276,7 +278,7 @@
 .home-register {
   color: rgb(255, 255, 255);
   z-index: 100;
-  font-size: 24px;
+  font-size: 20px;
   font-style: normal;
   transition: 0.3s;
   font-family: "Jost";
@@ -375,10 +377,10 @@
   display: contents;
 }
 .home-hero-heading {
-  color: #000000;
+  color: rgb(0, 0, 0);
   width: 1105px;
   height: 68px;
-  font-size: 85px;
+  font-size: 80px;
   max-width: 100%;
   font-style: normal;
   text-align: center;
@@ -401,10 +403,10 @@
 }
 .home-lottie-node {
   width: 100%;
-  height: 458px;
+  height: 441px;
   transform: rotate(180deg);
   align-self: center;
-  margin-bottom: -90px;
+  margin-bottom: -100px;
   transform-style: rotate(180deg);
 }
 .home-features {
@@ -507,7 +509,7 @@
 }
 .home-pricing-card {
   height: 514px;
-  box-shadow: 5px 5px 10px 0px #d4d4d4;
+  box-shadow: 5px 5px 10px 0px #909090;
   padding-left: var(--dl-space-space-twounits);
   border-radius: 20px;
 }
@@ -578,7 +580,7 @@
   background-color: #4483fb;
 }
 .home-pricing-card1 {
-  height: 501px;
+  height: 514px;
   z-index: .5;
   box-shadow: 5px 5px 10px 0px #909090;
   border-color: #ffffff;
@@ -659,8 +661,8 @@
   background-color: #357bff;
 }
 .home-pricing-card2 {
-  height: 506px;
-  box-shadow: 5px 5px 10px 0px #d4d4d4;
+  height: 514px;
+  box-shadow: 5px 5px 10px 0px #909090;
   border-radius: 20px;
 }
 .home-container18 {
@@ -1396,6 +1398,7 @@
   .home-hero-heading {
     color: rgb(0, 0, 0);
     width: 425px;
+    height: 384px;
     font-size: 80px;
     font-style: normal;
     font-family: Jost;
