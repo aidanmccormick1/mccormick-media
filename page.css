@@ -1,0 +1,82 @@
+.page-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  border-color: #171ab7;
+  border-style: dashed;
+  border-width: 5px;
+  flex-direction: column;
+}
+.page-text {
+  text-align: left;
+  font-family: "Jost";
+  padding-top: var(--dl-space-space-oneandhalfunits);
+}
+.page-lottie-node {
+  width: 1029px;
+  height: 515px;
+}
+.page-container1 {
+  width: auto;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.page-text1 {
+  width: 864px;
+  font-size: 3rem;
+  max-width: auto;
+  text-align: center;
+  font-family: "Grandstander";
+}
+.page-container2 {
+  width: auto;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.page-navlink {
+  transition: 0.3s;
+  font-family: "Jost";
+  margin-left: var(--dl-space-space-unit);
+  padding-top: var(--dl-space-space-unit);
+  border-color: transparent;
+  padding-left: var(--dl-space-space-twounits);
+  padding-right: var(--dl-space-space-twounits);
+  padding-bottom: var(--dl-space-space-unit);
+  text-decoration: none;
+  background-color: var(--dl-color-primary-300);
+}
+.page-navlink:hover {
+  border-color: var(--dl-color-gray-black);
+  background-color: var(--dl-color-primary-100);
+}
+@media(max-width: 991px) {
+  .page-text1 {
+    text-align: center;
+  }
+}
+@media(max-width: 479px) {
+  .page-lottie-node {
+    width: 479px;
+  }
+  .page-text1 {
+    width: 479px;
+    height: 53px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .page-container2 {
+    justify-content: flex-end;
+  }
+  .page-navlink {
+    margin-top: var(--dl-space-space-unit);
+    margin-left: 0px;
+  }
+}

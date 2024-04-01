@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Book-Now - Media I thinl</title>
+    <meta property="og:title" content="Book-Now - Media I thinl" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: "Jost";
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/animate.css@4.1.1/animate.css"
+    />
+    <link
+      rel="shortcut icon"
+      href="public/am logo square.png"
+      type="icon/png"
+      sizes="32x32"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
+    />
+    <style>
+      @keyframes fade-in-left {
+        0% {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <link rel="stylesheet" href="./style.css" />
+    <div>
+      <link href="./book-now.css" rel="stylesheet" />
+
+      <div class="book-now-container">
+        <header
+          data-thq="thq-navbar"
+          class="book-now-navbar-interactive navbarContainer"
+        >
+          <a href="index.html" class="book-now-navlink">
+            <img
+              alt="McCormick Media Logo"
+              src="https://i.postimg.cc/Hkdc2yRV/Mccormick-media-watermark.png"
+              loading="eager"
+              class="book-now-image"
+            />
+          </a>
+          <svg viewBox="0 0 1024 1024" class="book-now-icon">
+            <path
+              d="M1024 201.143v621.714c0 14.857-9.143 28-22.286 33.714-4.571 1.714-9.714 2.857-14.286 2.857-9.714 0-18.857-3.429-25.714-10.857l-230.286-230.286v94.857c0 90.857-73.714 164.571-164.571 164.571h-402.286c-90.857 0-164.571-73.714-164.571-164.571v-402.286c0-90.857 73.714-164.571 164.571-164.571h402.286c90.857 0 164.571 73.714 164.571 164.571v94.286l230.286-229.714c6.857-7.429 16-10.857 25.714-10.857 4.571 0 9.714 1.143 14.286 2.857 13.143 5.714 22.286 18.857 22.286 33.714z"
+            ></path>
+          </svg>
+          <div data-thq="thq-navbar-nav" class="book-now-desktop-menu">
+            <nav class="book-now-links"></nav>
+            <div class="book-now-buttons">
+              <button class="book-now-login buttonFlat">Login</button>
+              <animate-on-reveal
+                animation="fadeIn"
+                duration="300ms"
+                delay="0s"
+                direction="normal"
+                easing="ease"
+                iteration="1"
+              >
+                <a
+                  href="book-now.html"
+                  data-thq-animate-on-reveal="true"
+                  class="book-now-register buttonFilled"
+                >
+                  Book Now
+                </a>
+              </animate-on-reveal>
+            </div>
+          </div>
+          <div data-thq="thq-burger-menu" class="book-now-burger-menu">
+            <svg viewBox="0 0 1024 1024" class="book-now-icon2 socialIcons">
+              <path
+                d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+              ></path>
+            </svg>
+          </div>
+          <div
+            data-thq="thq-mobile-menu"
+            class="book-now-mobile-menu1 mobileMenu"
+          >
+            <div class="book-now-nav">
+              <div class="book-now-top">
+                <div data-thq="thq-close-menu" class="book-now-close-menu">
+                  <svg
+                    viewBox="0 0 1024 1024"
+                    class="book-now-icon4 socialIcons"
+                  >
+                    <path
+                      d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <nav class="book-now-links1">
+                <span class="book-now-nav42"></span>
+              </nav>
+              <div class="book-now-buttons1">
+                <button class="buttonFlat book-now-login1">Login</button>
+                <button class="buttonFilled book-now-register1">
+                  Book Now&nbsp;
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="book-now-container1">
+          <div class="book-now-container2">
+            <div class="book-now-container3">
+              <h1 class="book-now-text">
+                <br />
+                <span>Request a Quote</span>
+                <br />
+                <br />
+                <span class="book-now-text05">McCormick Media</span>
+                <br class="book-now-text06" />
+                <span class="book-now-text07">Orange County, CA</span>
+                <br class="book-now-text08" />
+                <span class="book-now-text09">https://aidanmccormick.com</span>
+                <br />
+              </h1>
+              <div class="book-now-container4">
+                <form
+                  name="contact-form"
+                  action='<form action="https://formsubmit.co/am@aidanmccormick.com" method="POST" />'
+                  method="POST"
+                  enctype="application/x-www-form-urlencoded"
+                  autocomplete="on"
+                  class="book-now-form"
+                >
+                  <input
+                    type="text"
+                    name="name"
+                    required="true"
+                    placeholder="Name"
+                    autocomplete="name"
+                    class="book-now-textinput input"
+                  />
+                  <input
+                    type="text"
+                    name="email"
+                    required="true"
+                    placeholder="Your Email"
+                    autocomplete="email"
+                    class="book-now-textinput1 input"
+                  />
+                  <input
+                    type="text"
+                    name="Project"
+                    required="true"
+                    placeholder="Provide Details About Your Project"
+                    autocomplete="off"
+                    class="book-now-textinput2 input"
+                  />
+                  <button
+                    name="Submit"
+                    type="submit"
+                    class="book-now-button button"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      data-section-id="navbar"
+      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
+    ></script>
+    <script
+      defer=""
+      src="https://unpkg.com/@teleporthq/react-components/dist/animate-on-reveal.umd.js"
+    ></script>
+  </body>
+</html>

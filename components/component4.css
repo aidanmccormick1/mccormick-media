@@ -1,0 +1,19 @@
+.component4-container {
+  display: flex;
+  position: relative;
+}
+.component4-lottie-node {
+  width: 145px;
+  height: 167px;
+  transition: 0.3s;
+}
+.component4-lottie-node:focus {
+  scroll-behavior: smooth;
+}
+
+
+@media(max-width: 479px) {
+  .component4-lottie-node {
+    align-self: center;
+  }
+}

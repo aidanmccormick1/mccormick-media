@@ -1,0 +1,16 @@
+.component2-container {
+  display: flex;
+  position: relative;
+}
+.component2-lottie-node {
+  width: 145px;
+  height: 127px;
+  transition: 0.3s;
+  padding-top: 52px;
+}
+.component2-lottie-node:focus {
+  scroll-behavior: smooth;
+}
+
+
+
