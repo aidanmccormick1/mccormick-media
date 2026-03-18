@@ -11,9 +11,22 @@
 </head>
 <body>
 
+  <!-- PAGE LOADER -->
+  <div class="page-loader" id="pageLoader"><div class="loader-line"></div></div>
+
+  <!-- SCROLL PROGRESS -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- CURSOR -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
   <!-- NAV -->
   <nav class="nav" id="navbar">
-    <a href="index.html" class="nav-logo">McCormick <span>Media</span></a>
+    <a href="index.html" class="nav-logo">
+      <img src="img/AM LOGO White.png" alt="McCormick Media" onerror="this.style.display='none'">
+      McCormick <span>Media</span>
+    </a>
     <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
       <span></span><span></span><span></span>
     </button>
@@ -28,6 +41,7 @@
 
   <!-- HERO -->
   <section class="hero">
+    <canvas id="heroCanvas"></canvas>
     <div class="hero-bg-grid"></div>
     <div class="hero-content">
       <p class="hero-eyebrow">Orange County &amp; Santa Barbara, CA</p>
@@ -71,8 +85,8 @@
   <!-- SERVICES PREVIEW -->
   <section class="services-preview section">
     <div class="container">
-      <div class="section-label reveal">What We Do</div>
-      <h2 class="section-title reveal">Three pillars.<br />One vision.</h2>
+      <div class="section-label scroll-text">What I Do</div>
+      <h2 class="section-title scroll-text">Three pillars.<br />One vision.</h2>
       <div class="services-grid">
 
         <div class="service-card reveal">
@@ -113,25 +127,31 @@
   </section>
 
   <!-- WORK PREVIEW / GALLERY STRIP -->
-  <section class="work-preview section">
-    <div class="container">
-      <div class="section-label reveal">Selected Work</div>
-      <h2 class="section-title reveal">A collection of<br />our favorite work.</h2>
-    </div>
-    <div class="gallery-strip reveal">
-      <div class="gallery-strip-inner" id="galleryStrip">
-        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/85d5a840-0012-4289-8b37-f53f8a173107_rw_1920.jpg?h=dbda3521d1137a81bfbfb4d477baa283" alt="McCormick Media Photography" loading="lazy" /></div>
-        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/82ed8d0c-5e43-4e7e-aeef-0fdcc4cd8c96_rw_1920.jpg?h=dd82a72cb7f21009e9e0ae9850054a38" alt="McCormick Media Photography" loading="lazy" /></div>
-        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/1fef38f6-089f-4766-aa8c-0c1c25279714_rw_1920.jpg?h=4ce2831314dd7fe4c27dddedd18f16b7" alt="McCormick Media Photography" loading="lazy" /></div>
-        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/e2bcee32-a2df-4b57-862a-c09753e94238_rw_1920.jpg?h=79284859349bb49c70f3438a26bc4a76" alt="McCormick Media Photography" loading="lazy" /></div>
-        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/3607d0f2-c85c-4b21-95bc-942ad91e1966_rw_1920.jpg?h=00427bf7613e3c5ab925f5ba3467b73c" alt="McCormick Media Photography" loading="lazy" /></div>
-        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/2d98f23d-c4a3-4849-bbd2-35b9fcfbcf59_rw_1920.jpg?h=eb64706daee49d91c2b354c4354b0c1b" alt="McCormick Media Photography" loading="lazy" /></div>
-        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/85c99eea-052a-4b6d-bab9-4707e3d58996_rw_1920.jpg?h=29627580b238eed64885831ae81e868b" alt="McCormick Media Photography" loading="lazy" /></div>
-        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/1f213db9-63dd-40b8-841f-29fb8edeb25c_rw_1920.jpg?h=7aa0be2f081818ae2d23666569efe56a" alt="McCormick Media Photography" loading="lazy" /></div>
+  <section class="work-preview" id="workPreview">
+    <!-- Sticky viewport that pins during horizontal scroll -->
+    <div class="gallery-viewport" id="galleryViewport">
+      <!-- Header overlay on top of photos -->
+      <div class="gallery-header">
+        <div class="section-label">Selected Work</div>
+        <h2 class="gallery-title">A collection of<br />my favorite work.</h2>
       </div>
-    </div>
-    <div class="container">
-      <div class="work-cta reveal">
+      <!-- The horizontal track -->
+      <div class="gallery-track" id="galleryTrack">
+        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/85d5a840-0012-4289-8b37-f53f8a173107_rw_1920.jpg?h=dbda3521d1137a81bfbfb4d477baa283" alt="McCormick Media Photography" /></div>
+        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/82ed8d0c-5e43-4e7e-aeef-0fdcc4cd8c96_rw_1920.jpg?h=dd82a72cb7f21009e9e0ae9850054a38" alt="McCormick Media Photography" /></div>
+        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/1fef38f6-089f-4766-aa8c-0c1c25279714_rw_1920.jpg?h=4ce2831314dd7fe4c27dddedd18f16b7" alt="McCormick Media Photography" /></div>
+        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/e2bcee32-a2df-4b57-862a-c09753e94238_rw_1920.jpg?h=79284859349bb49c70f3438a26bc4a76" alt="McCormick Media Photography" /></div>
+        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/3607d0f2-c85c-4b21-95bc-942ad91e1966_rw_1920.jpg?h=00427bf7613e3c5ab925f5ba3467b73c" alt="McCormick Media Photography" /></div>
+        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/2d98f23d-c4a3-4849-bbd2-35b9fcfbcf59_rw_1920.jpg?h=eb64706daee49d91c2b354c4354b0c1b" alt="McCormick Media Photography" /></div>
+        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/85c99eea-052a-4b6d-bab9-4707e3d58996_rw_1920.jpg?h=29627580b238eed64885831ae81e868b" alt="McCormick Media Photography" /></div>
+        <div class="gs-item"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/1f213db9-63dd-40b8-841f-29fb8edeb25c_rw_1920.jpg?h=7aa0be2f081818ae2d23666569efe56a" alt="McCormick Media Photography" /></div>
+      </div>
+      <!-- Progress indicator -->
+      <div class="gallery-progress-wrap">
+        <div class="gallery-progress-bar" id="galleryProgressBar"></div>
+      </div>
+      <!-- CTA at end of scroll -->
+      <div class="gallery-cta" id="galleryCta">
         <a href="pages/work.html" class="btn btn-primary">View Full Gallery</a>
       </div>
     </div>
@@ -164,8 +184,8 @@
   <!-- FEATURED VIDEO -->
   <section class="featured-video section">
     <div class="container">
-      <div class="section-label reveal">Featured Work</div>
-      <h2 class="section-title reveal">Video projects<br />that move people.</h2>
+      <div class="section-label scroll-text">Featured Work</div>
+      <h2 class="section-title scroll-text">Video projects<br />that move people.</h2>
       <div class="video-cards">
 
         <div class="video-card reveal">
@@ -203,9 +223,9 @@
   <!-- CTA BAND -->
   <section class="cta-band">
     <div class="cta-band-bg"></div>
-    <div class="container cta-band-inner reveal">
+    <div class="container cta-band-inner scroll-text">
       <h2>Ready to create something captivating?</h2>
-      <p>Fill out the form and we'll be in touch. Orange County &amp; Santa Barbara based.</p>
+      <p>Fill out the form and I'll be in touch. Orange County &amp; Santa Barbara based.</p>
       <a href="pages/contact.html" class="btn btn-primary btn-lg">Get in Touch</a>
     </div>
   </section>
@@ -214,6 +234,7 @@
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
+        <img src="img/AM LOGO White.png" alt="McCormick Media" class="footer-logo-img" onerror="this.style.display='none'">
         <a href="index.html" class="nav-logo">McCormick <span>Media</span></a>
         <p>A modern digital production company based in Orange County &amp; Santa Barbara, CA.</p>
         <div class="footer-socials">

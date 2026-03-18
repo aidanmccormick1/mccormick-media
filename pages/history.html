@@ -11,8 +11,18 @@
 </head>
 <body>
 
+  <!-- PAGE LOADER -->
+  <div class="page-loader" id="pageLoader"><div class="loader-line"></div></div>
+
+  <!-- SCROLL PROGRESS -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- CURSOR -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
   <nav class="nav scrolled" id="navbar">
-    <a href="../index.html" class="nav-logo">McCormick <span>Media</span></a>
+    <a href="../index.html" class="nav-logo"><img src="../img/AM LOGO White.png" alt="McCormick Media" onerror="this.style.display='none'" style="height:28px;width:auto;">McCormick <span>Media</span></a>
     <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
     <ul class="nav-links" id="navLinks">
       <li><a href="../index.html">Home</a></li>
@@ -25,45 +35,53 @@
 
   <section class="page-header">
     <div class="container">
-      <p class="page-header-eyebrow reveal">Our Story</p>
-      <h1 class="reveal">History</h1>
+      <p class="page-header-eyebrow reveal">My Story</p>
+      <h1 class="reveal">About Me</h1>
     </div>
   </section>
 
   <section class="history-body">
     <div class="container">
-      <div class="history-content">
-        <div class="history-text reveal">
-          <h2>Built on storytelling.<br />Driven by craft.</h2>
-          <p>Established in 2019, McCormick Media stands as a creative powerhouse in videography and photography, committed to crafting compelling, high-quality visuals that elevate businesses, groups, and individuals.</p>
-          <p>Our journey has been marked by collaborations with exceptional individuals and the cultivation of diverse professional relationships, enabling us to extend our services across a spectrum of industries.</p>
-          <p>With a track record of skillfully managing brand accounts, fostering meaningful interactions, and contributing to the realization of client goals, McCormick Media brings unparalleled performance to every project.</p>
-          <p>Rooted in an educational foundation enriched by advanced film classes, a storytelling perspective shines through in every frame. At McCormick Media, my team and I wholeheartedly dedicate ourselves to narrating your story in a manner that deeply resonates with and inspires your audience.</p>
+
+      <!-- ABOUT ROW: photo + text -->
+      <div class="about-intro">
+        <div class="about-photo-wrap reveal">
+          <img src="../img/aidan-mccormick.jpg" alt="Aidan McCormick" class="about-photo" />
+        </div>
+        <div class="about-intro-text">
+          <p class="about-name-label">Aidan McCormick</p>
+          <h2 class="reveal">Built on storytelling.<br />Driven by craft.</h2>
+          <p>I started McCormick Media in 2019 with one goal: create visuals that actually mean something. Based in Orange County and Santa Barbara, I work directly with businesses, athletes, organizations, and individuals to produce photography and video that stands out.</p>
+          <p>Over the years I've built relationships across a wide range of industries — from high school athletics to nonprofits to local brands — and every project has sharpened how I approach the work. I'm not just pointing a camera; I'm figuring out what story needs to be told and how to tell it well.</p>
+          <p>My background includes advanced film coursework and years behind the lens, and that foundation shows in every frame. Whether it's a short film, event coverage, or a brand campaign, I bring the same level of focus and care to the job.</p>
           <p class="sig">— Aidan M. McCormick, Founder</p>
         </div>
-        <div class="history-stat-col">
-          <div class="h-stat reveal">
-            <h3>2019</h3>
-            <p>Founded in Orange County, CA</p>
-          </div>
-          <div class="h-stat reveal">
-            <h3>8+</h3>
-            <p>Years of Photography Experience</p>
-          </div>
-          <div class="h-stat reveal">
-            <h3>Multi</h3>
-            <p>Industry Client Portfolio</p>
-          </div>
-          <div class="h-stat reveal">
-            <h3>1</h3>
-            <p>PTSA National Student Film Award</p>
-          </div>
-          <div class="h-stat reveal">
-            <h3>OC + SB</h3>
-            <p>Orange County &amp; Santa Barbara, CA</p>
-          </div>
+      </div>
+
+      <!-- STATS ROW -->
+      <div class="history-stats-row">
+        <div class="h-stat reveal">
+          <h3>2019</h3>
+          <p>Founded in Orange County, CA</p>
+        </div>
+        <div class="h-stat reveal">
+          <h3>8+</h3>
+          <p>Years of Photography Experience</p>
+        </div>
+        <div class="h-stat reveal">
+          <h3>Multi</h3>
+          <p>Industry Client Portfolio</p>
+        </div>
+        <div class="h-stat reveal">
+          <h3>1</h3>
+          <p>PTSA National Student Film Award</p>
+        </div>
+        <div class="h-stat reveal">
+          <h3>OC + SB</h3>
+          <p>Orange County &amp; Santa Barbara, CA</p>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -80,7 +98,7 @@
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <a href="../index.html" class="nav-logo">McCormick <span>Media</span></a>
+        <a href="../index.html" class="nav-logo"><img src="../img/AM LOGO White.png" alt="McCormick Media" onerror="this.style.display='none'" style="height:28px;width:auto;">McCormick <span>Media</span></a>
         <p>A modern digital production company based in Orange County &amp; Santa Barbara, CA.</p>
         <div class="footer-socials">
           <a href="https://www.linkedin.com/in/aidanmccormick/" target="_blank" aria-label="LinkedIn">

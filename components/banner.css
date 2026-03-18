@@ -1,0 +1,54 @@
+.banner-banner {
+  position: relative;
+  margin-top: 39px;
+  padding-top: 40px;
+  margin-bottom: 99px;
+  background-color: #000000;
+}
+.banner-banner-heading {
+  text-align: center;
+  padding-bottom: 10px;
+}
+.banner-text {
+  text-align: center;
+  line-height: 2;
+}
+
+@media(max-width: 991px) {
+  .banner-banner {
+    height: 530px;
+  }
+}
+@media(max-width: 767px) {
+  .banner-banner {
+    position: relative;
+    padding-left: var(--dl-space-space-twounits);
+    padding-right: var(--dl-space-space-twounits);
+  }
+  .banner-text {
+    right: 32px;
+    width: 100%;
+    bottom: 96px;
+    position: absolute;
+  }
+}
+@media(max-width: 479px) {
+  .banner-banner {
+    width: 447px;
+    height: 744px;
+    padding-top: var(--dl-space-space-twounits);
+    padding-left: var(--dl-space-space-unit);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-twounits);
+  }
+  .banner-banner-heading {
+    height: 129px;
+  }
+  .banner-text {
+    left: -7px;
+    bottom: 19px;
+  }
+  .banner-root-class-name {
+    margin-top: 100px;
+  }
+}

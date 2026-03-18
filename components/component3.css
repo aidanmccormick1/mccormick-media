@@ -1,0 +1,118 @@
+.feature-card-icon {
+  fill: #040404;
+}
+.feature-card-container {
+  gap: var(--dl-space-space-unit);
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.feature-card-text {
+  font-weight: 600;
+  line-height: 28px;
+}
+@media(max-width: 767px) {
+  .feature-card-feature-card {
+    flex-direction: row;
+  }
+  .feature-card-container {
+    flex-direction: column;
+  }
+}
+@media(max-width: 479px) {
+  .feature-card-container {
+    flex-direction: column;
+  }
+}
+
+.component3-container {
+  width: 100%;
+  display: grid;
+  grid-gap: var(--dl-space-space-oneandhalfunits);
+  position: relative;
+  grid-template-columns: 1fr 1fr;
+}
+.component3-icon {
+  width: 54px;
+  height: 30px;
+}
+.component3-container1 {
+  gap: var(--dl-space-space-unit);
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.component3-text {
+  font-weight: 600;
+  line-height: 28px;
+}
+.component3-icon2 {
+  width: 53px;
+  height: 30px;
+}
+.component3-container2 {
+  gap: var(--dl-space-space-unit);
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.component3-text2 {
+  font-weight: 600;
+  line-height: 28px;
+}
+.component3-icon4 {
+  width: 53px;
+  height: 30px;
+}
+.component3-container3 {
+  gap: var(--dl-space-space-unit);
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.component3-text4 {
+  font-weight: 600;
+  line-height: 28px;
+}
+
+@media(max-width: 767px) {
+  .component3-container {
+    grid-template-columns: 1fr;
+  }
+  .component3-feature-card {
+    flex-direction: row;
+  }
+  .component3-container1 {
+    flex-direction: column;
+  }
+  .component3-feature-card1 {
+    flex-direction: row;
+  }
+  .component3-container2 {
+    flex-direction: column;
+  }
+  .component3-feature-card2 {
+    flex-direction: row;
+  }
+  .component3-container3 {
+    flex-direction: column;
+  }
+}
+@media(max-width: 479px) {
+  .component3-container1 {
+    flex-direction: column;
+  }
+  .component3-container2 {
+    flex-direction: column;
+  }
+  .component3-container3 {
+    flex-direction: column;
+  }
+  .component3-root-class-name {
+    margin-top: 160px;
+  }
+}

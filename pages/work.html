@@ -8,11 +8,196 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    /* ---- WORK PAGE HEADER ---- */
+    .work-hero {
+      position: relative;
+      padding: 160px 0 0;
+      background: var(--dark2);
+      overflow: hidden;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .work-hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    .work-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 40px 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .work-hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.3s forwards;
+    }
+
+    .work-hero-title {
+      font-family: var(--font-head);
+      font-size: clamp(4rem, 10vw, 8rem);
+      line-height: 0.95;
+      letter-spacing: 0.01em;
+      color: var(--white);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.5s forwards;
+    }
+
+    .work-hero-title span {
+      -webkit-text-stroke: 2px var(--accent);
+      color: transparent;
+    }
+
+    .work-hero-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 500px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.7s forwards;
+    }
+
+    /* ---- TAB SWITCHER ---- */
+    .work-tabs {
+      position: relative;
+      z-index: 2;
+      background: var(--dark2);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .work-tabs-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      gap: 0;
+    }
+
+    .work-tab-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 20px 32px;
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color var(--transition);
+      cursor: pointer;
+    }
+
+    .work-tab-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform var(--transition);
+    }
+
+    .work-tab-btn.active {
+      color: var(--white);
+    }
+
+    .work-tab-btn.active::after {
+      transform: scaleX(1);
+    }
+
+    .work-tab-btn .tab-icon {
+      width: 18px; height: 18px;
+      opacity: 0.6;
+      transition: opacity var(--transition);
+    }
+
+    .work-tab-btn.active .tab-icon { opacity: 1; }
+
+    .work-tab-btn .tab-count {
+      background: rgba(0,102,255,0.15);
+      color: var(--accent);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 20px;
+      border: 1px solid rgba(0,102,255,0.25);
+      letter-spacing: 0.05em;
+      transition: background var(--transition);
+    }
+
+    .work-tab-btn.active .tab-count {
+      background: rgba(0,102,255,0.25);
+    }
+
+    /* ---- TAB PANELS ---- */
+    .work-panel {
+      display: none;
+      animation: panelFadeIn 0.45s ease forwards;
+    }
+
+    .work-panel.active {
+      display: block;
+    }
+
+    @keyframes panelFadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- VIDEO PANEL HEADER ---- */
+    .video-panel-header {
+      background: linear-gradient(180deg, var(--dark2) 0%, var(--dark) 100%);
+      padding: 60px 0 0;
+    }
+
+    /* ---- PHOTO PANEL ---- */
+    .photo-panel-header {
+      background: var(--dark);
+      padding: 60px 0 0;
+    }
+
+    @media (max-width: 768px) {
+      .work-hero-content { padding: 0 24px 0; }
+      .work-tabs-inner { padding: 0 16px; }
+      .work-tab-btn { padding: 16px 20px; font-size: 0.78rem; }
+      .work-hero-title { font-size: clamp(3rem, 12vw, 5rem); }
+    }
+  </style>
 </head>
 <body>
 
+  <!-- PAGE LOADER -->
+  <div class="page-loader" id="pageLoader"><div class="loader-line"></div></div>
+
+  <!-- SCROLL PROGRESS -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- CURSOR -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
   <nav class="nav scrolled" id="navbar">
-    <a href="../index.html" class="nav-logo">McCormick <span>Media</span></a>
+    <a href="../index.html" class="nav-logo"><img src="../img/AM LOGO White.png" alt="McCormick Media" onerror="this.style.display='none'" style="height:28px;width:auto;">McCormick <span>Media</span></a>
     <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
     <ul class="nav-links" id="navLinks">
       <li><a href="../index.html">Home</a></li>
@@ -23,107 +208,219 @@
     </ul>
   </nav>
 
-  <section class="page-header">
-    <div class="container">
-      <p class="page-header-eyebrow reveal">Portfolio</p>
-      <h1 class="reveal">Our Work</h1>
+  <!-- ANIMATED WORK HERO -->
+  <section class="work-hero">
+    <canvas class="work-hero-canvas" id="workHeroCanvas"></canvas>
+    <div class="work-hero-content">
+      <p class="work-hero-eyebrow">Portfolio</p>
+      <h1 class="work-hero-title">Our<br /><span>Work</span></h1>
+      <p class="work-hero-sub">Photography, video production, and everything in between. Pick a category below.</p>
     </div>
   </section>
 
-  <!-- PHOTO GALLERY -->
-  <section class="photo-gallery">
-    <div class="container" style="margin-bottom: 40px;">
-      <div class="section-label reveal">Photography</div>
-      <h2 class="section-title reveal">Photo Gallery</h2>
+  <!-- TAB SWITCHER -->
+  <div class="work-tabs">
+    <div class="work-tabs-inner">
+      <button class="work-tab-btn active" data-tab="video">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        Video Work
+        <span class="tab-count">06</span>
+      </button>
+      <button class="work-tab-btn" data-tab="photo">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        Photography
+        <span class="tab-count">24</span>
+      </button>
     </div>
-    <div class="photo-grid">
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/85d5a840-0012-4289-8b37-f53f8a173107_rw_1920.jpg?h=dbda3521d1137a81bfbfb4d477baa283" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/82ed8d0c-5e43-4e7e-aeef-0fdcc4cd8c96_rw_1920.jpg?h=dd82a72cb7f21009e9e0ae9850054a38" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/1fef38f6-089f-4766-aa8c-0c1c25279714_rw_1920.jpg?h=4ce2831314dd7fe4c27dddedd18f16b7" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/e2bcee32-a2df-4b57-862a-c09753e94238_rw_1920.jpg?h=79284859349bb49c70f3438a26bc4a76" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/3607d0f2-c85c-4b21-95bc-942ad91e1966_rw_1920.jpg?h=00427bf7613e3c5ab925f5ba3467b73c" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/2d98f23d-c4a3-4849-bbd2-35b9fcfbcf59_rw_1920.jpg?h=eb64706daee49d91c2b354c4354b0c1b" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/85c99eea-052a-4b6d-bab9-4707e3d58996_rw_1920.jpg?h=29627580b238eed64885831ae81e868b" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/1f213db9-63dd-40b8-841f-29fb8edeb25c_rw_1920.jpg?h=7aa0be2f081818ae2d23666569efe56a" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/04ea9711-f174-4003-a7e7-7aa29425f812_rw_1920.jpg?h=c93ef8f3305d842bd4302b62732bf643" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/c54d633f-d236-41e6-8ec1-a175fcb35a44_rw_1920.jpg?h=cd29f3f2b16132075a4a55d1b1904191" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/900a2fea-a618-4f8a-ab64-06dc37d9b828_rw_1920.jpg?h=092f66f7e7ce77361827a788d1442e4c" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/cb16e893-1deb-4e17-8f4b-c0c8085bf121_rw_1920.jpg?h=30cee73f3dab9bc48d3b7ff312fb7473" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/75e217cf-76e2-4625-bff5-d0b0e9ad46c6_rw_1920.jpg?h=4504aacdad7e637c447404f950dd8c28" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/629f9810-0794-42ae-9128-82e9fbc87203_rw_1920.jpg?h=d32613bc4580bc53de1bedbe4c411549" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/82ec7907-3be7-4db0-a84a-420a0206a490_rw_1920.jpg?h=619a43cbcfed301526c7aa7b7cabc392" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/d2b09da3-5dac-44e2-8b2a-0cf1cbf83a2d_rw_1920.jpg?h=f4f3fc69649d74476dd455b81df5f9ae" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/3e7d1994-58e8-4ebe-81b0-23ab56b293a3_rw_1920.jpg?h=440da1b0dda1a17ed9cb739cc5afc968" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/4882c62e-6f01-41f9-9991-16efc18c44f2_rw_1920.jpg?h=920d75d3a59fbd7408ac590a4be8a4c8" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/b3b248a2-b7aa-41d3-957e-3ec82fdc2fe3_rw_1920.jpg?h=8b3d4f461fe3769663e60889e1b49b94" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/84a7fc8c-c18e-408f-88b1-36785c7e0088_rw_1920.jpg?h=41c758ab35d845eb9c0b72fbe29671c4" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/784d752d-bb2f-4214-b8cc-8ff17eff5ead_rw_1920.jpg?h=77e95e2d021e9b05ebd971f165215da0" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/fb63bda2-865e-4c68-bb24-b254739384b9_rw_1920.jpg?h=0bb6af61325898a48c78ac1c31e72f78" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/7dbdc8b7-4070-41ab-9853-ada0769beb37_rw_1920.jpg?h=8d28fb0c8f407830723385a61687e112" alt="McCormick Media" loading="lazy" /></div>
-      <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/df3ccc28-305c-4660-8411-bb6d2cbf1180_rw_1920.jpg?h=8c022711ea879d434cf9f69e707d197d" alt="McCormick Media" loading="lazy" /></div>
+  </div>
+
+  <!-- VIDEO PANEL (default active) -->
+  <div class="work-panel active" id="panel-video">
+    <div class="video-panel-header">
+      <div class="container">
+        <div class="section-label reveal">Video Production</div>
+        <h2 class="section-title reveal" style="margin-bottom:40px;">Projects that<br />move people.</h2>
+      </div>
     </div>
-  </section>
 
-  <!-- VIDEO PROJECTS -->
-  <section class="video-section" id="video">
-    <div class="container">
-      <div class="section-label reveal">Video</div>
-      <h2 class="section-title reveal">Video Projects</h2>
+    <section class="video-section" id="video" style="padding-top:40px;">
+      <div class="container">
 
-      <div class="video-project reveal">
-        <div class="vp-num">01</div>
-        <div class="vp-content">
-          <div class="vp-tag">Leadership</div>
-          <h3>FIVE</h3>
-          <p>Trusted with leading video production for FIVE, I produced a full promotional campaign for the Men's Leadership Breakfast Groups featuring a dynamic interview and a clean, compelling ad designed to drive sign-ups and spark engagement. From scripting and filming to editing and publishing, I handled every step of the process working closely with the Director and Founder. The goal was to capture and communicate FIVE's core mission: helping men grow in purpose, leadership, and faith through intentional community. The final content was well received, energizing the launch and helping build momentum around the program.</p>
+        <!-- FIVE -->
+        <div class="video-project reveal">
+          <a href="https://youtu.be/oI9p2Z92RQ8" target="_blank" rel="noopener" class="video-project-inner">
+            <div class="vp-thumbnail">
+              <img data-vid="oI9p2Z92RQ8" alt="FIVE — McCormick Media" loading="lazy" />
+              <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="vp-body">
+              <div class="vp-top">
+                <div class="vp-num">01</div>
+                <div class="vp-content">
+                  <div class="vp-tag">Leadership</div>
+                  <h3>FIVE</h3>
+                  <p>Full promotional campaign for the Men's Leadership Breakfast Groups — interview-style video + compelling ad. Scripted, filmed, edited, and published end-to-end working closely with the Director and Founder.</p>
+                </div>
+              </div>
+              <span class="vp-link">Watch on YouTube <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </a>
         </div>
-      </div>
 
-      <div class="video-project reveal">
-        <div class="vp-num">02</div>
-        <div class="vp-content">
-          <div class="vp-tag">Conference</div>
-          <h3>OCL 2024 Recap</h3>
-          <p>We were entrusted with video production for OCLA17.org and the California Association of Activity Directors, tasked with creating a dynamic recap video for one of the most exhilarating leadership conferences for students. Our team of two videographers captured the energy and excitement of the four-day camp, producing a high-energy video shown on the final day in front of thousands of students. The result was a captivating recap that far surpassed the traditional slideshow format — met with overwhelming enthusiasm and praise, and setting a new standard for how these moments are celebrated.</p>
+        <!-- OCL 2024 -->
+        <div class="video-project reveal">
+          <a href="https://www.youtube.com/watch?v=7EXa5hYzCig" target="_blank" rel="noopener" class="video-project-inner">
+            <div class="vp-thumbnail">
+              <img data-vid="7EXa5hYzCig" alt="OCL 2024 Recap — McCormick Media" loading="lazy" />
+              <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="vp-body">
+              <div class="vp-top">
+                <div class="vp-num">02</div>
+                <div class="vp-content">
+                  <div class="vp-tag">Conference</div>
+                  <h3>OCL 2024 Recap</h3>
+                  <p>Dynamic recap video for the California Association of Activity Directors' leadership conference — shown live to thousands of students on the final day. Set a new standard over the traditional slideshow format.</p>
+                </div>
+              </div>
+              <span class="vp-link">Watch on YouTube <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </a>
         </div>
-      </div>
 
-      <div class="video-project reveal">
-        <div class="vp-num">03</div>
-        <div class="vp-content">
-          <div class="vp-tag">Film Festival</div>
-          <h3>DPFF Advertisement</h3>
-          <p>Working closely with the Dana Point Entertainment Arts Council, we produced a compelling promotional advertisement for the Dana Point Film Festival. This video was designed to inspire students to submit their films for the prestigious awards category. The ad was prominently featured on the festival's website, driving a surge in submissions from across the country. This worldwide film festival, renowned for celebrating the unique surf culture of Dana Point, showcases the breathtaking beauty of the surrounding area — and our video captured that spirit entirely.</p>
+        <!-- OCL 2025 -->
+        <div class="video-project reveal">
+          <a href="https://www.youtube.com/watch?v=kSD1K-4DFY0" target="_blank" rel="noopener" class="video-project-inner">
+            <div class="vp-thumbnail">
+              <img data-vid="kSD1K-4DFY0" alt="OCL 2025 Recap — McCormick Media" loading="lazy" />
+              <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="vp-body">
+              <div class="vp-top">
+                <div class="vp-num">03</div>
+                <div class="vp-content">
+                  <div class="vp-tag">Conference</div>
+                  <h3>OCL 2025 Recap</h3>
+                  <p>Year two with the California Association of Activity Directors — bigger venue, bigger crowd, bigger production. Contracted back for 2025, this recap expanded on everything that worked in 2024 with a more cinematic approach and a wider scope of coverage.</p>
+                </div>
+              </div>
+              <span class="vp-link">Watch on YouTube <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </a>
         </div>
-      </div>
 
-      <div class="video-project reveal">
-        <div class="vp-num">04</div>
-        <div class="vp-content">
-          <div class="vp-tag">Sports</div>
-          <h3>Dana Hills Football Season Recap</h3>
-          <p>We created an engaging season recap video for the Dana High School Football Booster 12 Man Club, showcasing the most thrilling plays from coverage of seven games. The video highlighted the dedication and hard work of the players, while celebrating the vibrant atmosphere of Friday night lights. Our focus was on presenting Dana Hills Football in the best possible light — capturing the energy and excitement that defines high school football and bringing the season's unforgettable moments to life.</p>
+        <!-- DPFF -->
+        <div class="video-project reveal">
+          <a href="https://www.youtube.com/watch?v=Q7CAsF3_qAI" target="_blank" rel="noopener" class="video-project-inner">
+            <div class="vp-thumbnail">
+              <img data-vid="Q7CAsF3_qAI" alt="DPFF Advertisement — McCormick Media" loading="lazy" />
+              <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="vp-body">
+              <div class="vp-top">
+                <div class="vp-num">04</div>
+                <div class="vp-content">
+                  <div class="vp-tag">Film Festival</div>
+                  <h3>DPFF Advertisement</h3>
+                  <p>Promotional ad for the Dana Point Film Festival, driving nationwide student film submissions. Featured on the festival's website and capturing the unique surf culture of Dana Point.</p>
+                </div>
+              </div>
+              <span class="vp-link">Watch on YouTube <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </a>
         </div>
-      </div>
 
-      <div class="video-project reveal">
-        <div class="vp-num">05</div>
-        <div class="vp-content">
-          <div class="vp-tag">Award Winner</div>
-          <h3>PTSA National Student Short Film</h3>
-          <p>A personal project by Aidan McCormick submitted to the PTSA National Student Short Films competition — and it won. This film, centered around themes of gratefulness and excitement for the future, utilizes video and music to craft a deeply engaging and emotional narrative. The project captures the essence of human connection, showing how even simple visuals and sound can tell a powerful story. A testament to the impact of storytelling through film.</p>
+        <!-- Dana Hills Football -->
+        <div class="video-project reveal">
+          <a href="https://www.youtube.com/watch?v=d2Arwz-hlMc" target="_blank" rel="noopener" class="video-project-inner">
+            <div class="vp-thumbnail">
+              <img data-vid="d2Arwz-hlMc" alt="Dana Hills Football — McCormick Media" loading="lazy" />
+              <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="vp-body">
+              <div class="vp-top">
+                <div class="vp-num">05</div>
+                <div class="vp-content">
+                  <div class="vp-tag">Sports</div>
+                  <h3>Dana Hills Football Season Recap</h3>
+                  <p>Season recap for the Dana High School Football Booster 12 Man Club — highlights from seven games, capturing the energy and Friday night lights atmosphere that defines high school football.</p>
+                </div>
+              </div>
+              <span class="vp-link">Watch on YouTube <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </a>
         </div>
-      </div>
 
+        <!-- PTSA Short Film -->
+        <div class="video-project reveal">
+          <a href="https://www.youtube.com/watch?v=UeoR4JYEkCY" target="_blank" rel="noopener" class="video-project-inner">
+            <div class="vp-thumbnail">
+              <img data-vid="UeoR4JYEkCY" alt="PTSA Short Film — McCormick Media" loading="lazy" />
+              <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="vp-body">
+              <div class="vp-top">
+                <div class="vp-num">06</div>
+                <div class="vp-content">
+                  <div class="vp-tag">Award Winner</div>
+                  <h3>PTSA National Student Short Film</h3>
+                  <p>Personal project by Aidan McCormick — submitted to and won the PTSA National Student Short Films competition. Themes of gratefulness and future excitement, told through video and music.</p>
+                </div>
+              </div>
+              <span class="vp-link">Watch on YouTube <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- PHOTO PANEL -->
+  <div class="work-panel" id="panel-photo">
+    <div class="photo-panel-header">
+      <div class="container">
+        <div class="section-label reveal">Photography</div>
+        <h2 class="section-title reveal" style="margin-bottom:40px;">A collection of<br />our favorite shots.</h2>
+      </div>
     </div>
-  </section>
+
+    <section class="photo-gallery" style="padding-top:20px;">
+      <div class="photo-grid">
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/85d5a840-0012-4289-8b37-f53f8a173107_rw_1920.jpg?h=dbda3521d1137a81bfbfb4d477baa283" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/82ed8d0c-5e43-4e7e-aeef-0fdcc4cd8c96_rw_1920.jpg?h=dd82a72cb7f21009e9e0ae9850054a38" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/1fef38f6-089f-4766-aa8c-0c1c25279714_rw_1920.jpg?h=4ce2831314dd7fe4c27dddedd18f16b7" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/e2bcee32-a2df-4b57-862a-c09753e94238_rw_1920.jpg?h=79284859349bb49c70f3438a26bc4a76" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/3607d0f2-c85c-4b21-95bc-942ad91e1966_rw_1920.jpg?h=00427bf7613e3c5ab925f5ba3467b73c" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/2d98f23d-c4a3-4849-bbd2-35b9fcfbcf59_rw_1920.jpg?h=eb64706daee49d91c2b354c4354b0c1b" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/85c99eea-052a-4b6d-bab9-4707e3d58996_rw_1920.jpg?h=29627580b238eed64885831ae81e868b" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/1f213db9-63dd-40b8-841f-29fb8edeb25c_rw_1920.jpg?h=7aa0be2f081818ae2d23666569efe56a" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/04ea9711-f174-4003-a7e7-7aa29425f812_rw_1920.jpg?h=c93ef8f3305d842bd4302b62732bf643" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/c54d633f-d236-41e6-8ec1-a175fcb35a44_rw_1920.jpg?h=cd29f3f2b16132075a4a55d1b1904191" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/900a2fea-a618-4f8a-ab64-06dc37d9b828_rw_1920.jpg?h=092f66f7e7ce77361827a788d1442e4c" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/cb16e893-1deb-4e17-8f4b-c0c8085bf121_rw_1920.jpg?h=30cee73f3dab9bc48d3b7ff312fb7473" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/75e217cf-76e2-4625-bff5-d0b0e9ad46c6_rw_1920.jpg?h=4504aacdad7e637c447404f950dd8c28" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/629f9810-0794-42ae-9128-82e9fbc87203_rw_1920.jpg?h=d32613bc4580bc53de1bedbe4c411549" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/82ec7907-3be7-4db0-a84a-420a0206a490_rw_1920.jpg?h=619a43cbcfed301526c7aa7b7cabc392" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/d2b09da3-5dac-44e2-8b2a-0cf1cbf83a2d_rw_1920.jpg?h=f4f3fc69649d74476dd455b81df5f9ae" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/3e7d1994-58e8-4ebe-81b0-23ab56b293a3_rw_1920.jpg?h=440da1b0dda1a17ed9cb739cc5afc968" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/4882c62e-6f01-41f9-9991-16efc18c44f2_rw_1920.jpg?h=920d75d3a59fbd7408ac590a4be8a4c8" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/b3b248a2-b7aa-41d3-957e-3ec82fdc2fe3_rw_1920.jpg?h=8b3d4f461fe3769663e60889e1b49b94" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/84a7fc8c-c18e-408f-88b1-36785c7e0088_rw_1920.jpg?h=41c758ab35d845eb9c0b72fbe29671c4" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/784d752d-bb2f-4214-b8cc-8ff17eff5ead_rw_1920.jpg?h=77e95e2d021e9b05ebd971f165215da0" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/fb63bda2-865e-4c68-bb24-b254739384b9_rw_1920.jpg?h=0bb6af61325898a48c78ac1c31e72f78" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/7dbdc8b7-4070-41ab-9853-ada0769beb37_rw_1920.jpg?h=8d28fb0c8f407830723385a61687e112" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/df3ccc28-305c-4660-8411-bb6d2cbf1180_rw_1920.jpg?h=8c022711ea879d434cf9f69e707d197d" alt="McCormick Media" loading="lazy" /></div>
+      </div>
+    </section>
+  </div>
 
   <!-- CTA BAND -->
   <section class="cta-band">
     <div class="cta-band-bg"></div>
     <div class="container cta-band-inner reveal">
-      <h2>Want to be in our next project?</h2>
-      <p>Let's create something unforgettable together.</p>
+      <h2>Ready to work together?</h2>
+      <p>Hire me for your next shoot, event, or campaign. Let's make something great.</p>
       <a href="contact.html" class="btn btn-primary btn-lg">Get in Touch</a>
     </div>
   </section>
@@ -131,7 +428,7 @@
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <a href="../index.html" class="nav-logo">McCormick <span>Media</span></a>
+        <a href="../index.html" class="nav-logo"><img src="../img/AM LOGO White.png" alt="McCormick Media" onerror="this.style.display='none'" style="height:28px;width:auto;">McCormick <span>Media</span></a>
         <p>A modern digital production company based in Orange County &amp; Santa Barbara, CA.</p>
         <div class="footer-socials">
           <a href="https://www.linkedin.com/in/aidanmccormick/" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
@@ -148,5 +445,102 @@
   </footer>
 
   <script src="../js/main.js"></script>
+  <script>
+    // ---- YOUTUBE THUMBNAIL SMART LOADER ----
+    // Tries maxresdefault → sddefault → hqdefault → mqdefault → default
+    // Also detects YouTube's 120x90 "no thumbnail" placeholder and skips it
+    document.querySelectorAll('img[data-vid]').forEach(img => {
+      const vid = img.dataset.vid;
+      const qualities = [
+        `https://img.youtube.com/vi/${vid}/maxresdefault.jpg`,
+        `https://img.youtube.com/vi/${vid}/sddefault.jpg`,
+        `https://img.youtube.com/vi/${vid}/hqdefault.jpg`,
+        `https://img.youtube.com/vi/${vid}/mqdefault.jpg`,
+        `https://img.youtube.com/vi/${vid}/default.jpg`,
+      ];
+      let qi = 0;
+      function tryNext() {
+        if (qi >= qualities.length) {
+          // Final fallback: styled gradient placeholder
+          img.parentElement.style.background = 'linear-gradient(135deg, #0a0a2e 0%, #001166 50%, #0066ff22 100%)';
+          img.style.display = 'none';
+          return;
+        }
+        img.src = qualities[qi];
+        img.onerror = () => { qi++; tryNext(); };
+        img.onload  = () => {
+          // YouTube returns a 120x90 grey "no thumbnail" image when none exists
+          // naturalWidth 120 with naturalHeight 90 = placeholder, skip it
+          if (img.naturalWidth === 120 && img.naturalHeight === 90) {
+            qi++; tryNext();
+          } else {
+            img.onerror = null;
+          }
+        };
+      }
+      tryNext();
+    });
+
+    // ---- WORK PAGE TAB SWITCHER ----
+    document.querySelectorAll('.work-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+        document.querySelectorAll('.work-tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.work-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('panel-' + target).classList.add('active');
+        // Re-trigger reveal observer for newly shown panel
+        document.querySelectorAll('#panel-' + target + ' .reveal:not(.visible)').forEach(el => {
+          revealObserver && revealObserver.observe(el);
+        });
+      });
+    });
+
+    // Check for #video hash in URL to pre-select video tab
+    if (window.location.hash === '#video') {
+      document.querySelector('[data-tab="video"]').click();
+    }
+
+    // ---- WORK HERO CANVAS ----
+    const whCanvas = document.getElementById('workHeroCanvas');
+    if (whCanvas) {
+      const whCtx = whCanvas.getContext('2d');
+      let whW, whH;
+      function whResize() {
+        whW = whCanvas.width  = whCanvas.offsetWidth;
+        whH = whCanvas.height = whCanvas.offsetHeight;
+      }
+      whResize();
+      window.addEventListener('resize', whResize);
+
+      const STAR_COUNT = 120;
+      const stars = Array.from({length: STAR_COUNT}, () => ({
+        x: Math.random(),
+        y: Math.random(),
+        r: Math.random() * 1.5 + 0.3,
+        alpha: Math.random() * 0.7 + 0.1,
+        speed: Math.random() * 0.0003 + 0.0001,
+        twinkleSpeed: Math.random() * 0.02 + 0.005,
+        twinkleOffset: Math.random() * Math.PI * 2,
+      }));
+
+      let t = 0;
+      function whLoop() {
+        whCtx.clearRect(0, 0, whW, whH);
+        t += 0.016;
+        stars.forEach(s => {
+          s.y -= s.speed;
+          if (s.y < 0) { s.y = 1; s.x = Math.random(); }
+          const tw = Math.sin(t * s.twinkleSpeed * 60 + s.twinkleOffset) * 0.3 + 0.7;
+          whCtx.beginPath();
+          whCtx.arc(s.x * whW, s.y * whH, s.r, 0, Math.PI * 2);
+          whCtx.fillStyle = `rgba(180,210,255,${s.alpha * tw})`;
+          whCtx.fill();
+        });
+        requestAnimationFrame(whLoop);
+      }
+      whLoop();
+    }
+  </script>
 </body>
 </html>
