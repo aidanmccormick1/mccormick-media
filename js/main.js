@@ -480,6 +480,124 @@ document.querySelectorAll('.video-card, .video-project').forEach(card => {
 
 // (drag-to-scroll removed — gallery is now scroll-driven)
 
+// ---------- LAUNCH SEQUENCE ----------
+function runLaunchSequence(onComplete) {
+  const overlay  = document.getElementById('launchOverlay');
+  const loLabel  = document.getElementById('loLabel');
+  const loDigit  = document.getElementById('loDigit');
+  const loRocket = document.getElementById('loRocketWrap');
+  const loFlash  = document.getElementById('loFlash');
+  const loHost   = document.getElementById('loIconsHost');
+  const loSuccess= document.getElementById('loSuccess');
+  if (!overlay) { onComplete?.(); return; }
+
+  // ── Starfield canvas ──
+  const canvas = document.getElementById('loStars');
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const ctx = canvas.getContext('2d');
+  const stars = Array.from({length: 180}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.4 + 0.3,
+    s: Math.random() * 0.4 + 0.1,
+  }));
+  let starRaf;
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      s.y -= s.s;
+      if (s.y < 0) s.y = canvas.height;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${0.4 + Math.random() * 0.4})`;
+      ctx.fill();
+    });
+    starRaf = requestAnimationFrame(drawStars);
+  }
+  drawStars();
+
+  // ── Media icons data ──
+  const iconSVGs = [
+    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>`,
+    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>`,
+    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="17" y1="7" x2="22" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/></svg>`,
+    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>`,
+    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`,
+    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+  ];
+  // 8 icons burst at angles around center, radius ~28vmin
+  const R = Math.min(window.innerWidth, window.innerHeight) * 0.32;
+  iconSVGs.forEach((svg, i) => {
+    const angle = (i / iconSVGs.length) * Math.PI * 2 - Math.PI / 2;
+    const el = document.createElement('div');
+    el.className = 'lo-icon';
+    el.innerHTML = svg;
+    el.style.setProperty('--tx', `${Math.cos(angle) * R}px`);
+    el.style.setProperty('--ty', `${Math.sin(angle) * R}px`);
+    el.style.setProperty('--d', `${i * 0.06}s`);
+    loHost.appendChild(el);
+  });
+
+  // ── Countdown helper ──
+  function showDigit(text, cb) {
+    loDigit.textContent = text;
+    loDigit.classList.remove('d-in','d-out');
+    void loDigit.offsetWidth; // reflow
+    loDigit.classList.add('d-in');
+    setTimeout(() => {
+      loDigit.classList.remove('d-in');
+      void loDigit.offsetWidth;
+      loDigit.classList.add('d-out');
+      setTimeout(cb, 320);
+    }, 900);
+  }
+
+  // ── Timeline ──
+  overlay.classList.add('lo-active');
+  setTimeout(() => loLabel.classList.add('show'), 400);
+  setTimeout(() => showDigit('3', () =>
+    showDigit('2', () =>
+      showDigit('1', () => {
+        // LAUNCH
+        loDigit.style.cssText = '';
+        loRocket.classList.add('show');
+        setTimeout(() => {
+          loRocket.classList.add('launch');
+          loFlash.classList.add('pop');
+          // Accelerate stars
+          stars.forEach(s => s.s *= 6);
+        }, 300);
+        setTimeout(() => {
+          // Burst media icons
+          stars.forEach(s => s.s /= 6);
+          loHost.querySelectorAll('.lo-icon').forEach(el => el.classList.add('burst'));
+        }, 1400);
+        setTimeout(() => {
+          // Success
+          loSuccess.classList.add('show');
+        }, 2600);
+        setTimeout(() => {
+          // Fade out overlay
+          overlay.classList.add('lo-out');
+          setTimeout(() => {
+            overlay.classList.remove('lo-active','lo-out');
+            cancelAnimationFrame(starRaf);
+            loHost.innerHTML = '';
+            loRocket.classList.remove('show','launch');
+            loSuccess.classList.remove('show');
+            loLabel.classList.remove('show');
+            loFlash.classList.remove('pop');
+            onComplete?.();
+          }, 1000);
+        }, 5000);
+      })
+    )
+  ), 800);
+}
+
 // ---------- CONTACT FORM ----------
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
@@ -488,7 +606,6 @@ if (contactForm) {
     const btn = contactForm.querySelector('.form-submit-btn');
     const success = document.getElementById('formSuccess');
     const originalText = btn.textContent;
-
     btn.textContent = 'Sending...';
     btn.disabled = true;
 
@@ -498,10 +615,11 @@ if (contactForm) {
         body: new FormData(contactForm),
         headers: { 'Accept': 'application/json' }
       });
-
       if (response.ok) {
-        contactForm.style.display = 'none';
-        if (success) success.style.display = 'block';
+        runLaunchSequence(() => {
+          contactForm.style.display = 'none';
+          if (success) success.style.display = 'block';
+        });
       } else {
         const data = await response.json().catch(() => ({}));
         const msg = (data.errors || []).map(err => err.message).join(', ') || 'Something went wrong. Please try again.';

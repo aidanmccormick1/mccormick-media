@@ -8,8 +8,154 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== LAUNCH OVERLAY ===== */
+    #launchOverlay {
+      position: fixed; inset: 0; z-index: 99999;
+      background: #00000e;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.5s ease;
+      overflow: hidden;
+    }
+    #launchOverlay.lo-active { opacity: 1; pointer-events: all; }
+    #launchOverlay.lo-out { opacity: 0; transition: opacity 1s ease; }
+    #loStars { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .lo-inner { position: relative; z-index: 2; text-align: center; color: #fff; width: 100vw; }
+
+    /* Label */
+    .lo-label {
+      font-family: 'Inter', sans-serif; font-size: 0.65rem;
+      letter-spacing: 0.5em; color: #0066ff; text-transform: uppercase;
+      margin-bottom: 32px; opacity: 0; transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .lo-label.show { opacity: 1; transform: translateY(0); }
+
+    /* Countdown digit */
+    .lo-digit {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(140px, 22vw, 240px);
+      line-height: 1; display: block;
+      text-shadow: 0 0 60px rgba(0,102,255,0.9), 0 0 140px rgba(0,102,255,0.4);
+      opacity: 0; transform: scale(2.5);
+    }
+    .lo-digit.d-in  { animation: loDigitIn  0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+    .lo-digit.d-out { animation: loDigitOut 0.3s ease-in forwards; }
+
+    /* Rocket */
+    #loRocketWrap {
+      position: fixed; bottom: 8vh; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    #loRocketWrap.show { opacity: 1; }
+    #loRocketWrap.launch { animation: loLaunch 1.1s cubic-bezier(0.4,0,0.2,1) forwards; }
+    .lo-rocket-svg { width: 70px; filter: drop-shadow(0 0 18px rgba(0,102,255,0.7)); }
+    .lo-flame {
+      width: 18px; height: 36px;
+      background: linear-gradient(to bottom, #ffcc00, #ff4400, transparent);
+      border-radius: 0 0 60% 60%; filter: blur(3px);
+      margin-top: -4px;
+      animation: loFlame 0.08s ease infinite alternate;
+    }
+
+    /* Flash */
+    #loFlash {
+      position: fixed; inset: 0; z-index: 3;
+      background: #fff; opacity: 0; pointer-events: none;
+    }
+    #loFlash.pop { animation: loFlashPop 0.5s ease forwards; }
+
+    /* Media icons */
+    .lo-icon {
+      position: fixed; top: 50%; left: 50%;
+      width: 54px; height: 54px;
+      background: rgba(0,102,255,0.12);
+      border: 1px solid rgba(0,150,255,0.35);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      color: #33aaff; opacity: 0;
+      backdrop-filter: blur(6px);
+    }
+    .lo-icon svg { width: 24px; height: 24px; }
+    .lo-icon.burst { animation: loBurst 0.9s cubic-bezier(0.34,1.4,0.64,1) var(--d,0s) forwards; }
+
+    /* Success */
+    #loSuccess {
+      opacity: 0; transform: translateY(28px);
+      transition: none;
+    }
+    #loSuccess.show { animation: loUp 0.9s cubic-bezier(0.34,1.4,0.64,1) forwards; }
+    .lo-check {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg,#0055ff,#00c2ff);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 0 40px rgba(0,102,255,0.7);
+    }
+    .lo-check svg { width: 36px; height: 36px; stroke: #fff; }
+    #loSuccess h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px,5.5vw,72px);
+      letter-spacing: 0.05em; color: #fff; margin-bottom: 10px;
+    }
+    #loSuccess p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem; color: rgba(255,255,255,0.55);
+      letter-spacing: 0.06em;
+    }
+
+    /* Keyframes */
+    @keyframes loDigitIn  { from{opacity:0;transform:scale(2.5)} to{opacity:1;transform:scale(1)} }
+    @keyframes loDigitOut { from{opacity:1;transform:scale(1)}   to{opacity:0;transform:scale(0.15)} }
+    @keyframes loLaunch   { to{transform:translateX(-50%) translateY(-130vh); opacity:0;} }
+    @keyframes loFlame    { from{height:28px;opacity:.8} to{height:48px;opacity:1} }
+    @keyframes loFlashPop { 0%{opacity:0} 30%{opacity:.9} 100%{opacity:0} }
+    @keyframes loBurst    {
+      from { opacity:0; transform:translate(-50%,-50%) scale(0.2); }
+      to   { opacity:1; transform:translate(calc(-50% + var(--tx,0px)), calc(-50% + var(--ty,0px))) scale(1); }
+    }
+    @keyframes loUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+  </style>
 </head>
 <body>
+
+  <!-- LAUNCH OVERLAY -->
+  <div id="launchOverlay" aria-hidden="true">
+    <canvas id="loStars"></canvas>
+    <div id="loFlash"></div>
+    <div class="lo-inner">
+      <p class="lo-label" id="loLabel">Initiating Launch Sequence</p>
+      <span class="lo-digit" id="loDigit"></span>
+    </div>
+    <!-- Rocket (fixed positioned) -->
+    <div id="loRocketWrap">
+      <svg class="lo-rocket-svg" viewBox="0 0 60 100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30 3 C30 3 12 28 10 56 L50 56 C48 28 30 3 30 3Z" fill="#dde8ff"/>
+        <path d="M30 10 C30 10 22 30 21 50 L30 50 Z" fill="white" opacity="0.35"/>
+        <circle cx="30" cy="41" r="9" fill="#050518" stroke="#3399ff" stroke-width="1.5"/>
+        <circle cx="27" cy="38" r="2.5" fill="white" opacity="0.3"/>
+        <path d="M10 56 L2 80 L20 70Z" fill="#0066ff"/>
+        <path d="M50 56 L58 80 L40 70Z" fill="#0066ff"/>
+        <rect x="20" y="56" width="20" height="7" rx="2" fill="#aabfee"/>
+      </svg>
+      <div class="lo-flame"></div>
+    </div>
+    <!-- Media icons injected by JS -->
+    <div id="loIconsHost"></div>
+    <!-- Success -->
+    <div id="loSuccess">
+      <div class="lo-check">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h2>Message Received.</h2>
+      <p>I'll be in touch within the week.</p>
+    </div>
+  </div>
 
   <!-- PAGE LOADER -->
   <div class="page-loader" id="pageLoader"><div class="loader-line"></div></div>
