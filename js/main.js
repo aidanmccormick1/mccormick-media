@@ -483,16 +483,37 @@ document.querySelectorAll('.video-card, .video-project').forEach(card => {
 // ---------- CONTACT FORM ----------
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-  contactForm.addEventListener('submit', e => {
+  contactForm.addEventListener('submit', async e => {
     e.preventDefault();
     const btn = contactForm.querySelector('.form-submit-btn');
     const success = document.getElementById('formSuccess');
+    const originalText = btn.textContent;
+
     btn.textContent = 'Sending...';
     btn.disabled = true;
-    setTimeout(() => {
-      contactForm.style.display = 'none';
-      if (success) success.style.display = 'block';
-    }, 1000);
+
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        contactForm.style.display = 'none';
+        if (success) success.style.display = 'block';
+      } else {
+        const data = await response.json().catch(() => ({}));
+        const msg = (data.errors || []).map(err => err.message).join(', ') || 'Something went wrong. Please try again.';
+        alert(msg);
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
+    } catch (err) {
+      alert('Network error — please check your connection and try again.');
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
   });
 }
 
