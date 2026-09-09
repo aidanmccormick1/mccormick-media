@@ -39,6 +39,14 @@ img { display: block; max-width: 100%; }
 ul { list-style: none; }
 button { cursor: none; }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--accent2);
+  outline-offset: 4px;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -1629,6 +1637,12 @@ button { cursor: none; }
   box-shadow: 0 0 0 3px rgba(0,102,255,0.12);
 }
 
+.form-group input:focus-visible,
+.form-group textarea:focus-visible {
+  outline: 3px solid var(--accent2);
+  outline-offset: 2px;
+}
+
 .form-group textarea {
   min-height: 140px;
   resize: vertical;
@@ -1688,6 +1702,18 @@ button { cursor: none; }
   .photo-grid { columns: 2; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
   .video-project-inner { grid-template-columns: 280px 1fr; }
+}
+
+/* iPad Mini landscape: keep the desktop composition comfortable at 1024px wide. */
+@media (min-width: 769px) and (max-width: 1100px) and (orientation: landscape) {
+  .nav { padding-left: 32px; padding-right: 32px; }
+  .nav-links { gap: 24px; }
+  .container { padding-left: 40px; padding-right: 40px; }
+  .hero { padding-left: 48px; padding-right: 48px; }
+  .hero-headline { font-size: clamp(4rem, 8.5vw, 6rem); }
+  .gallery-header { left: 40px; }
+  .gallery-track { padding-left: 40px; padding-right: 40px; }
+  .gs-item { width: 380px; height: 68vh; }
 }
 
 @media (max-width: 768px) {

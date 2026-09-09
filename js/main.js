@@ -628,7 +628,7 @@ if (contactForm) {
         btn.disabled = false;
       }
     } catch (err) {
-      alert('Network error — please check your connection and try again.');
+      alert('Network error, please check your connection and try again.');
       btn.textContent = originalText;
       btn.disabled = false;
     }

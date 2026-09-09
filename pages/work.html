@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Work — McCormick Media</title>
+  <title>My Work | McCormick Media</title>
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -182,6 +182,13 @@
       .work-tab-btn { padding: 16px 20px; font-size: 0.78rem; }
       .work-hero-title { font-size: clamp(3rem, 12vw, 5rem); }
     }
+
+    @media (min-width: 769px) and (max-width: 1100px) and (orientation: landscape) {
+      .work-hero { min-height: 360px; padding-top: 120px; }
+      .work-hero-content { padding: 0 40px; }
+      .work-hero-title { font-size: clamp(4rem, 9vw, 6.5rem); }
+      .work-tabs-inner { padding: 0 40px; }
+    }
   </style>
 </head>
 <body>
@@ -198,7 +205,7 @@
 
   <nav class="nav scrolled" id="navbar">
     <a href="../index.html" class="nav-logo"><img src="../img/AM LOGO White.png" alt="McCormick Media" onerror="this.style.display='none'" style="height:28px;width:auto;">McCormick <span>Media</span></a>
-    <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <button type="button" class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     <ul class="nav-links" id="navLinks">
       <li><a href="../index.html">Home</a></li>
       <li><a href="history.html">History</a></li>
@@ -213,7 +220,7 @@
     <canvas class="work-hero-canvas" id="workHeroCanvas"></canvas>
     <div class="work-hero-content">
       <p class="work-hero-eyebrow">Portfolio</p>
-      <h1 class="work-hero-title">Our<br /><span>Work</span></h1>
+      <h1 class="work-hero-title">My<br /><span>Work</span></h1>
       <p class="work-hero-sub">Photography, video production, and everything in between. Pick a category below.</p>
     </div>
   </section>
@@ -229,7 +236,7 @@
       <button class="work-tab-btn" data-tab="photo">
         <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
         Photography
-        <span class="tab-count">24</span>
+        <span class="tab-count">28</span>
       </button>
     </div>
   </div>
@@ -250,7 +257,7 @@
         <div class="video-project reveal">
           <a href="https://youtu.be/oI9p2Z92RQ8" target="_blank" rel="noopener" class="video-project-inner">
             <div class="vp-thumbnail">
-              <img data-vid="oI9p2Z92RQ8" alt="FIVE — McCormick Media" loading="lazy" />
+              <img data-vid="oI9p2Z92RQ8" alt="FIVE | McCormick Media" loading="lazy" />
               <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             </div>
             <div class="vp-body">
@@ -259,7 +266,7 @@
                 <div class="vp-content">
                   <div class="vp-tag">Leadership</div>
                   <h3>FIVE</h3>
-                  <p>Full promotional campaign for the Men's Leadership Breakfast Groups — interview-style video + compelling ad. Scripted, filmed, edited, and published end-to-end working closely with the Director and Founder.</p>
+                  <p>Full promotional campaign for the Men's Leadership Breakfast Groups, with an interview-style video and compelling ad. Scripted, filmed, edited, and published end-to-end while working closely with the Director and Founder.</p>
                 </div>
               </div>
               <span class="vp-link">Watch on YouTube <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
@@ -271,7 +278,7 @@
         <div class="video-project reveal">
           <a href="https://www.youtube.com/watch?v=7EXa5hYzCig" target="_blank" rel="noopener" class="video-project-inner">
             <div class="vp-thumbnail">
-              <img data-vid="7EXa5hYzCig" alt="OCL 2024 Recap — McCormick Media" loading="lazy" />
+              <img data-vid="7EXa5hYzCig" alt="OCL 2024 Recap | McCormick Media" loading="lazy" />
               <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             </div>
             <div class="vp-body">
@@ -280,7 +287,7 @@
                 <div class="vp-content">
                   <div class="vp-tag">Conference</div>
                   <h3>OCL 2024 Recap</h3>
-                  <p>Dynamic recap video for the California Association of Activity Directors' leadership conference — shown live to thousands of students on the final day. Set a new standard over the traditional slideshow format.</p>
+                  <p>Dynamic recap video for the California Association of Activity Directors' leadership conference, shown live to thousands of students on the final day. Set a new standard over the traditional slideshow format.</p>
                 </div>
               </div>
               <span class="vp-link">Watch on YouTube <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
@@ -292,7 +299,7 @@
         <div class="video-project reveal">
           <a href="https://www.youtube.com/watch?v=kSD1K-4DFY0" target="_blank" rel="noopener" class="video-project-inner">
             <div class="vp-thumbnail">
-              <img data-vid="kSD1K-4DFY0" alt="OCL 2025 Recap — McCormick Media" loading="lazy" />
+              <img data-vid="kSD1K-4DFY0" alt="OCL 2025 Recap | McCormick Media" loading="lazy" />
               <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             </div>
             <div class="vp-body">
@@ -301,7 +308,7 @@
                 <div class="vp-content">
                   <div class="vp-tag">Conference</div>
                   <h3>OCL 2025 Recap</h3>
-                  <p>Year two with the California Association of Activity Directors — bigger venue, bigger crowd, bigger production. Contracted back for 2025, this recap expanded on everything that worked in 2024 with a more cinematic approach and a wider scope of coverage.</p>
+                  <p>Year two with the California Association of Activity Directors, with a bigger venue, bigger crowd, and bigger production. Contracted back for 2025, this recap expanded on everything that worked in 2024 with a more cinematic approach and a wider scope of coverage.</p>
                 </div>
               </div>
               <span class="vp-link">Watch on YouTube <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
@@ -313,7 +320,7 @@
         <div class="video-project reveal">
           <a href="https://www.youtube.com/watch?v=Q7CAsF3_qAI" target="_blank" rel="noopener" class="video-project-inner">
             <div class="vp-thumbnail">
-              <img data-vid="Q7CAsF3_qAI" alt="DPFF Advertisement — McCormick Media" loading="lazy" />
+              <img data-vid="Q7CAsF3_qAI" alt="DPFF Advertisement | McCormick Media" loading="lazy" />
               <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             </div>
             <div class="vp-body">
@@ -334,7 +341,7 @@
         <div class="video-project reveal">
           <a href="https://www.youtube.com/watch?v=d2Arwz-hlMc" target="_blank" rel="noopener" class="video-project-inner">
             <div class="vp-thumbnail">
-              <img data-vid="d2Arwz-hlMc" alt="Dana Hills Football — McCormick Media" loading="lazy" />
+              <img data-vid="d2Arwz-hlMc" alt="Dana Hills Football | McCormick Media" loading="lazy" />
               <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             </div>
             <div class="vp-body">
@@ -343,7 +350,7 @@
                 <div class="vp-content">
                   <div class="vp-tag">Sports</div>
                   <h3>Dana Hills Football Season Recap</h3>
-                  <p>Season recap for the Dana High School Football Booster 12 Man Club — highlights from seven games, capturing the energy and Friday night lights atmosphere that defines high school football.</p>
+                  <p>Season recap for the Dana High School Football Booster 12 Man Club, with highlights from seven games that capture the energy and Friday night lights atmosphere of high school football.</p>
                 </div>
               </div>
               <span class="vp-link">Watch on YouTube <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
@@ -355,7 +362,7 @@
         <div class="video-project reveal">
           <a href="https://www.youtube.com/watch?v=UeoR4JYEkCY" target="_blank" rel="noopener" class="video-project-inner">
             <div class="vp-thumbnail">
-              <img data-vid="UeoR4JYEkCY" alt="PTSA Short Film — McCormick Media" loading="lazy" />
+              <img data-vid="UeoR4JYEkCY" alt="PTSA Short Film | McCormick Media" loading="lazy" />
               <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             </div>
             <div class="vp-body">
@@ -364,7 +371,7 @@
                 <div class="vp-content">
                   <div class="vp-tag">Award Winner</div>
                   <h3>PTSA National Student Short Film</h3>
-                  <p>Personal project by Aidan McCormick — submitted to and won the PTSA National Student Short Films competition. Themes of gratefulness and future excitement, told through video and music.</p>
+                  <p>Personal project by Aidan McCormick, submitted to and won the PTSA National Student Short Films competition. Themes of gratefulness and future excitement, told through video and music.</p>
                 </div>
               </div>
               <span class="vp-link">Watch on YouTube <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
@@ -381,15 +388,17 @@
     <div class="photo-panel-header">
       <div class="container">
         <div class="section-label reveal">Photography</div>
-        <h2 class="section-title reveal" style="margin-bottom:40px;">A collection of<br />our favorite shots.</h2>
+        <h2 class="section-title reveal" style="margin-bottom:40px;">A collection of<br />my favorite shots.</h2>
       </div>
     </div>
 
     <section class="photo-gallery" style="padding-top:20px;">
       <div class="photo-grid">
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/85d5a840-0012-4289-8b37-f53f8a173107_rw_1920.jpg?h=dbda3521d1137a81bfbfb4d477baa283" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="../img/F25_Hallowheels_All_-21.jpg" alt="Halloween roller skating portrait" loading="lazy" /></div>
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/82ed8d0c-5e43-4e7e-aeef-0fdcc4cd8c96_rw_1920.jpg?h=dd82a72cb7f21009e9e0ae9850054a38" alt="McCormick Media" loading="lazy" /></div>
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/1fef38f6-089f-4766-aa8c-0c1c25279714_rw_1920.jpg?h=4ce2831314dd7fe4c27dddedd18f16b7" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="../img/F2025_KAYAKING_-16.jpg" alt="Kayak team on the beach" loading="lazy" /></div>
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/e2bcee32-a2df-4b57-862a-c09753e94238_rw_1920.jpg?h=79284859349bb49c70f3438a26bc4a76" alt="McCormick Media" loading="lazy" /></div>
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/3607d0f2-c85c-4b21-95bc-942ad91e1966_rw_1920.jpg?h=00427bf7613e3c5ab925f5ba3467b73c" alt="McCormick Media" loading="lazy" /></div>
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/2d98f23d-c4a3-4849-bbd2-35b9fcfbcf59_rw_1920.jpg?h=eb64706daee49d91c2b354c4354b0c1b" alt="McCormick Media" loading="lazy" /></div>
@@ -397,6 +406,7 @@
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/1f213db9-63dd-40b8-841f-29fb8edeb25c_rw_1920.jpg?h=7aa0be2f081818ae2d23666569efe56a" alt="McCormick Media" loading="lazy" /></div>
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/04ea9711-f174-4003-a7e7-7aa29425f812_rw_1920.jpg?h=c93ef8f3305d842bd4302b62732bf643" alt="McCormick Media" loading="lazy" /></div>
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/c54d633f-d236-41e6-8ec1-a175fcb35a44_rw_1920.jpg?h=cd29f3f2b16132075a4a55d1b1904191" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="../img/S26_Cathy’sRetirementParty-32.jpg" alt="Retirement party group portrait" loading="lazy" /></div>
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/900a2fea-a618-4f8a-ab64-06dc37d9b828_rw_1920.jpg?h=092f66f7e7ce77361827a788d1442e4c" alt="McCormick Media" loading="lazy" /></div>
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/cb16e893-1deb-4e17-8f4b-c0c8085bf121_rw_1920.jpg?h=30cee73f3dab9bc48d3b7ff312fb7473" alt="McCormick Media" loading="lazy" /></div>
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/75e217cf-76e2-4625-bff5-d0b0e9ad46c6_rw_1920.jpg?h=4504aacdad7e637c447404f950dd8c28" alt="McCormick Media" loading="lazy" /></div>
@@ -409,6 +419,7 @@
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/84a7fc8c-c18e-408f-88b1-36785c7e0088_rw_1920.jpg?h=41c758ab35d845eb9c0b72fbe29671c4" alt="McCormick Media" loading="lazy" /></div>
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/784d752d-bb2f-4214-b8cc-8ff17eff5ead_rw_1920.jpg?h=77e95e2d021e9b05ebd971f165215da0" alt="McCormick Media" loading="lazy" /></div>
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/fb63bda2-865e-4c68-bb24-b254739384b9_rw_1920.jpg?h=0bb6af61325898a48c78ac1c31e72f78" alt="McCormick Media" loading="lazy" /></div>
+        <div class="photo-grid-item reveal"><img src="../img/S_2026_ARMFARM_APC-24.jpg" alt="Arm Farm athlete portrait" loading="lazy" /></div>
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/7dbdc8b7-4070-41ab-9853-ada0769beb37_rw_1920.jpg?h=8d28fb0c8f407830723385a61687e112" alt="McCormick Media" loading="lazy" /></div>
         <div class="photo-grid-item reveal"><img src="https://cdn.myportfolio.com/303bfc6d-2a53-475c-abbc-0f856c2cea3f/df3ccc28-305c-4660-8411-bb6d2cbf1180_rw_1920.jpg?h=8c022711ea879d434cf9f69e707d197d" alt="McCormick Media" loading="lazy" /></div>
       </div>
