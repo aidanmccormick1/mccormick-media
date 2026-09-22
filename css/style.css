@@ -765,6 +765,163 @@ textarea:focus-visible {
   margin-bottom: 24px;
 }
 
+/* ---------- WEB DESIGN ---------- */
+.web-design {
+  background: var(--dark2);
+  position: relative;
+  z-index: 3;
+}
+
+.web-design-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.72fr);
+  gap: 72px;
+  align-items: start;
+  margin-bottom: 56px;
+}
+
+.web-design-copy {
+  max-width: 430px;
+  padding-top: 48px;
+}
+
+.web-design-copy p {
+  font-size: 1.05rem;
+  color: var(--white);
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+.web-design-copy .web-design-note {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-bottom: 0;
+}
+
+.web-design-feature,
+.web-design-card {
+  background: var(--dark3);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.web-design-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  margin-bottom: 24px;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.web-design-feature:hover,
+.web-design-card:hover {
+  border-color: rgba(0,102,255,0.36);
+}
+
+.web-design-feature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+}
+
+.web-design-preview {
+  aspect-ratio: 16 / 10;
+  background: #050505;
+  overflow: hidden;
+}
+
+.web-design-preview--lead {
+  aspect-ratio: 16 / 8.5;
+}
+
+.web-design-preview iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: var(--white);
+}
+
+.web-design-feature-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 28px;
+  padding: 32px;
+}
+
+.web-design-kicker {
+  color: var(--accent2);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.web-design-feature h3,
+.web-design-card h3 {
+  color: var(--white);
+  font-size: 1.2rem;
+  line-height: 1.25;
+}
+
+.web-design-feature-meta > div > p:last-child {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  margin-top: 16px;
+}
+
+.web-design-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.web-design-card {
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.web-design-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+}
+
+.web-design-card-meta {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 28px 28px;
+}
+
+.web-design-card h3 {
+  max-width: 280px;
+}
+
+.web-design-card-meta a {
+  flex-shrink: 0;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color var(--transition);
+}
+
+.web-design-card-meta a:hover { color: var(--accent2); }
+
+.web-design-card-meta a span {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 1rem;
+  transition: transform var(--transition);
+}
+
+.web-design-card-meta a:hover span { transform: translate(2px, -2px); }
+
 /* ---------- CTA BAND ---------- */
 .cta-band {
   position: relative;
@@ -1702,6 +1859,9 @@ textarea:focus-visible {
   .photo-grid { columns: 2; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
   .video-project-inner { grid-template-columns: 280px 1fr; }
+  .web-design-intro { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .web-design-feature { grid-template-columns: minmax(0, 1fr) 240px; }
+  .web-design-feature-meta { padding: 28px; }
 }
 
 /* iPad Mini landscape: keep the desktop composition comfortable at 1024px wide. */
@@ -1770,6 +1930,13 @@ textarea:focus-visible {
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .brand-logos-row { gap: 28px; }
   .brand-logos-row img { height: 28px; }
+  .web-design-intro { grid-template-columns: 1fr; gap: 0; margin-bottom: 40px; }
+  .web-design-intro .section-title { margin-bottom: 24px; }
+  .web-design-copy { padding-top: 0; }
+  .web-design-feature { grid-template-columns: 1fr; }
+  .web-design-preview--lead { aspect-ratio: 16 / 10; }
+  .web-design-feature-meta { padding: 24px; }
+  .web-design-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
@@ -1778,4 +1945,5 @@ textarea:focus-visible {
   .gs-item { width: 260px; height: 180px; }
   .stats-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
   .history-stats-row { grid-template-columns: 1fr; }
+  .web-design-card-meta { align-items: flex-start; flex-direction: column; gap: 16px; padding: 22px; }
 }
