@@ -87,3 +87,6 @@ OCL 2024 Recap, DPFF Advertisement, and PTSA Short Film. Thumbnails link directl
 to their videos; existing descriptions and portfolio links remain. Use the highest
 available image resolution with fallbacks shared by the homepage and Work page.
 If the thumbnail host fails, keep a readable invitation to watch the linked video.
+
+The cover introduces digital creation and automation: websites, content, and
+everyday business workflows, with Aidan as the direct point of contact.
