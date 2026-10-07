@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     /* ---- WORK PAGE HEADER ---- */
     .work-hero {
@@ -191,8 +191,11 @@
       .work-tabs-inner { padding: 0 40px; }
     }
   </style>
+  <link rel="stylesheet" href="../css/redesign.css" />
+  <noscript><style>.work-panel { display:block; } .work-tabs { display:none; } .reveal { opacity:1; transform:none; }</style></noscript>
 </head>
 <body>
+  <a class="skip-link" href="#mainContent">Skip to content</a>
 
   <!-- PAGE LOADER -->
   <div class="page-loader" id="pageLoader"><div class="loader-line"></div></div>
@@ -205,8 +208,8 @@
   <div class="cursor-ring" id="cursorRing"></div>
 
   <nav class="nav scrolled" id="navbar">
-    <a href="../index.html" class="nav-logo"><img src="../img/AM LOGO White.png" alt="McCormick Media" onerror="this.style.display='none'" style="height:28px;width:auto;">McCormick <span>Media</span></a>
-    <button type="button" class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <a href="../index.html" class="nav-logo"><img src="../img/AM LOGO.png" alt="McCormick Media" onerror="this.style.display='none'" style="height:28px;width:auto;">McCormick <span>Media</span></a>
+    <button type="button" class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
     <ul class="nav-links" id="navLinks">
       <li><a href="../index.html">Home</a></li>
       <li><a href="history.html">History</a></li>
@@ -216,10 +219,11 @@
       <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
     </ul>
   </nav>
+  <main id="mainContent">
 
   <!-- ANIMATED WORK HERO -->
   <section class="work-hero">
-    <canvas class="work-hero-canvas" id="workHeroCanvas"></canvas>
+
     <div class="work-hero-content">
       <p class="work-hero-eyebrow">Portfolio</p>
       <h1 class="work-hero-title">My<br /><span>Work</span></h1>
@@ -453,17 +457,18 @@
   <section class="cta-band">
     <div class="cta-band-bg"></div>
     <div class="container cta-band-inner reveal">
-      <h2>Ready to work together?</h2>
+      <h2>Have a project in mind?</h2>
       <p>Hire me for your next shoot, event, or campaign. Let's make something great.</p>
       <a href="contact.html" class="btn btn-primary btn-lg">Get in Touch</a>
     </div>
   </section>
 
+  </main>
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <a href="../index.html" class="nav-logo"><img src="../img/AM LOGO White.png" alt="McCormick Media" onerror="this.style.display='none'" style="height:28px;width:auto;">McCormick <span>Media</span></a>
-        <p>A modern digital production company based in Orange County &amp; Santa Barbara, CA.</p>
+        <a href="../index.html" class="nav-logo"><img src="../img/AM LOGO.png" alt="McCormick Media" onerror="this.style.display='none'" style="height:28px;width:auto;">McCormick <span>Media</span></a>
+        <p>Photography, video, and brand management by Aidan McCormick. Orange County &amp; Santa Barbara, CA.</p>
         <div class="footer-socials">
           <a href="https://www.linkedin.com/in/aidanmccormick/" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
           <a href="https://www.instagram.com/aidannmccormick/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
@@ -515,66 +520,42 @@
       tryNext();
     });
 
-    // ---- WORK PAGE TAB SWITCHER ----
-    document.querySelectorAll('.work-tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = btn.dataset.tab;
-        document.querySelectorAll('.work-tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.work-panel').forEach(p => p.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById('panel-' + target).classList.add('active');
-        // Re-trigger reveal observer for newly shown panel
-        document.querySelectorAll('#panel-' + target + ' .reveal:not(.visible)').forEach(el => {
-          revealObserver && revealObserver.observe(el);
-        });
+    const tabButtons = [...document.querySelectorAll('.work-tab-btn')];
+    const tabList = document.querySelector('.work-tabs-inner');
+    tabList.setAttribute('role', 'tablist');
+    tabList.setAttribute('aria-label', 'Portfolio category');
+    function selectTab(target) {
+      tabButtons.forEach(button => {
+        const selected = button.dataset.tab === target;
+        button.classList.toggle('active', selected);
+        button.setAttribute('aria-selected', String(selected));
+        button.tabIndex = selected ? 0 : -1;
+      });
+      document.querySelectorAll('.work-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === 'panel-' + target);
+      });
+    }
+    tabButtons.forEach((button, index) => {
+      button.id = 'tab-' + button.dataset.tab;
+      button.setAttribute('role', 'tab');
+      button.setAttribute('aria-controls', 'panel-' + button.dataset.tab);
+      const panel = document.getElementById('panel-' + button.dataset.tab);
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', button.id);
+      button.addEventListener('click', () => selectTab(button.dataset.tab));
+      button.addEventListener('keydown', event => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabButtons.length - 1 :
+          (index + (event.key === 'ArrowRight' ? 1 : -1) + tabButtons.length) % tabButtons.length;
+        selectTab(tabButtons[next].dataset.tab);
+        tabButtons[next].focus();
       });
     });
-
-    // Check for #video hash in URL to pre-select video tab
-    if (window.location.hash === '#video') {
-      document.querySelector('[data-tab="video"]').click();
-    }
-
-    // ---- WORK HERO CANVAS ----
-    const whCanvas = document.getElementById('workHeroCanvas');
-    if (whCanvas) {
-      const whCtx = whCanvas.getContext('2d');
-      let whW, whH;
-      function whResize() {
-        whW = whCanvas.width  = whCanvas.offsetWidth;
-        whH = whCanvas.height = whCanvas.offsetHeight;
-      }
-      whResize();
-      window.addEventListener('resize', whResize);
-
-      const STAR_COUNT = 120;
-      const stars = Array.from({length: STAR_COUNT}, () => ({
-        x: Math.random(),
-        y: Math.random(),
-        r: Math.random() * 1.5 + 0.3,
-        alpha: Math.random() * 0.7 + 0.1,
-        speed: Math.random() * 0.0003 + 0.0001,
-        twinkleSpeed: Math.random() * 0.02 + 0.005,
-        twinkleOffset: Math.random() * Math.PI * 2,
-      }));
-
-      let t = 0;
-      function whLoop() {
-        whCtx.clearRect(0, 0, whW, whH);
-        t += 0.016;
-        stars.forEach(s => {
-          s.y -= s.speed;
-          if (s.y < 0) { s.y = 1; s.x = Math.random(); }
-          const tw = Math.sin(t * s.twinkleSpeed * 60 + s.twinkleOffset) * 0.3 + 0.7;
-          whCtx.beginPath();
-          whCtx.arc(s.x * whW, s.y * whH, s.r, 0, Math.PI * 2);
-          whCtx.fillStyle = `rgba(180,210,255,${s.alpha * tw})`;
-          whCtx.fill();
-        });
-        requestAnimationFrame(whLoop);
-      }
-      whLoop();
-    }
+    selectTab(window.location.hash === '#photo' ? 'photo' : 'video');
+    window.addEventListener('hashchange', () => {
+      if (['#video', '#photo'].includes(location.hash)) selectTab(location.hash.slice(1));
+    });
   </script>
 </body>
 </html>

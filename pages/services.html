@@ -8,9 +8,11 @@
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/redesign.css" />
 </head>
 <body>
+  <a class="skip-link" href="#mainContent">Skip to content</a>
 
   <!-- PAGE LOADER -->
   <div class="page-loader" id="pageLoader"><div class="loader-line"></div></div>
@@ -23,8 +25,8 @@
   <div class="cursor-ring" id="cursorRing"></div>
 
   <nav class="nav scrolled" id="navbar">
-    <a href="../index.html" class="nav-logo"><img src="../img/AM LOGO White.png" alt="McCormick Media" onerror="this.style.display='none'" style="height:28px;width:auto;">McCormick <span>Media</span></a>
-    <button type="button" class="nav-hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <a href="../index.html" class="nav-logo"><img src="../img/AM LOGO.png" alt="McCormick Media" onerror="this.style.display='none'" style="height:28px;width:auto;">McCormick <span>Media</span></a>
+    <button type="button" class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
     <ul class="nav-links" id="navLinks">
       <li><a href="../index.html">Home</a></li>
       <li><a href="history.html">History</a></li>
@@ -34,6 +36,7 @@
       <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
     </ul>
   </nav>
+  <main id="mainContent">
 
   <section class="page-header">
     <div class="container">
@@ -163,11 +166,12 @@
     </div>
   </section>
 
+  </main>
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <a href="../index.html" class="nav-logo"><img src="../img/AM LOGO White.png" alt="McCormick Media" onerror="this.style.display='none'" style="height:28px;width:auto;">McCormick <span>Media</span></a>
-        <p>A modern digital production company based in Orange County &amp; Santa Barbara, CA.</p>
+        <a href="../index.html" class="nav-logo"><img src="../img/AM LOGO.png" alt="McCormick Media" onerror="this.style.display='none'" style="height:28px;width:auto;">McCormick <span>Media</span></a>
+        <p>Photography, video, and brand management by Aidan McCormick. Orange County &amp; Santa Barbara, CA.</p>
         <div class="footer-socials">
           <a href="https://www.linkedin.com/in/aidanmccormick/" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
           <a href="https://www.instagram.com/aidannmccormick/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>

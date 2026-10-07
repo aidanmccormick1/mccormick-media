@@ -8,9 +8,11 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/redesign.css" />
 </head>
 <body>
+  <a class="skip-link" href="#mainContent">Skip to content</a>
 
   <!-- PAGE LOADER -->
   <div class="page-loader" id="pageLoader"><div class="loader-line"></div></div>
@@ -25,10 +27,10 @@
   <!-- NAV -->
   <nav class="nav" id="navbar">
     <a href="index.html" class="nav-logo">
-      <img src="img/AM LOGO White.png" alt="McCormick Media" onerror="this.style.display='none'">
+      <img src="img/AM LOGO.png" alt="McCormick Media" onerror="this.style.display='none'">
       McCormick <span>Media</span>
     </a>
-    <button type="button" class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+    <button type="button" class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
@@ -40,29 +42,36 @@
       <li><a href="pages/contact.html" class="nav-cta">Get a Quote</a></li>
     </ul>
   </nav>
+  <main id="mainContent">
 
-  <!-- HERO -->
-  <section class="hero">
-    <canvas id="heroCanvas"></canvas>
-    <div class="hero-bg-grid"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Orange County &amp; Santa Barbara, CA</p>
-      <h1 class="hero-headline">
-        Captivating Media<br />
-        <span class="hero-type-wrap">
-          <span class="hero-static">Content For </span>
-          <span class="hero-typewriter" id="typewriter"></span>
-        </span>
-      </h1>
-      <p class="hero-sub">Photography. Video. Brand Management. Built to make you stand out.</p>
-      <div class="hero-cta-row">
-        <a href="pages/work.html" class="btn btn-primary">View My Work</a>
-        <a href="pages/contact.html" class="btn btn-outline">Request a Quote</a>
+  <!-- Immersive viewfinder -->
+  <section class="hero" id="studio">
+    <div class="hero-pin">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Orange County &amp; Santa Barbara, CA</p>
+        <h1 class="hero-headline">Photography<br />&amp; film,<br /><span class="hero-byline">by Aidan.</span></h1>
+        <p class="hero-sub">I photograph people, cover events, and make films for brands. From the first conversation to the final edit, you work directly with me.</p>
+        <div class="hero-cta-row">
+          <a href="pages/work.html" class="btn btn-primary">View My Work <svg class="button-arrow" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 19 19 5M5 5h14v14"/></svg></a>
+          <a href="pages/contact.html" class="btn btn-outline">Request a Quote</a>
+        </div>
       </div>
-    </div>
-    <div class="hero-scroll-hint">
-      <span>Scroll</span>
-      <div class="hero-scroll-line"></div>
+      <div class="studio-scene" aria-label="A dimensional viewfinder featuring McCormick Media photography">
+        <div class="studio-object" id="studioObject">
+          <div class="studio-wall studio-wall--left"></div>
+          <div class="studio-wall studio-wall--right"></div>
+          <div class="studio-wall studio-wall--floor"></div>
+          <div class="studio-photo">
+            <img src="img/F2025_KAYAKING_-16.jpg" alt="Kayak team gathering on a California beach" fetchpriority="high" />
+          </div>
+          <div class="studio-aperture" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        </div>
+          <div class="studio-floating studio-floating--portrait"><img src="img/F25_Hallowheels_All_-21.jpg" alt="Halloween roller skating portrait" /><span>Hallowheels / Portrait</span></div>
+          <div class="studio-floating studio-floating--sport"><img src="img/S_2026_ARMFARM_APC-24.jpg" alt="Arm Farm athlete portrait" /><span>Arm Farm / Athlete</span></div>
+        <div class="studio-caption"><span>McCormick Media / Selected frames</span><span>OC + SB, CA</span></div>
+      </div>
+      <a href="#workPreview" class="hero-scroll-hint"><span>Step inside the work</span><span aria-hidden="true">↓</span></a>
+      <button type="button" class="motion-toggle" id="motionToggle" aria-pressed="false">Pause motion</button>
     </div>
   </section>
 
@@ -84,58 +93,14 @@
     </div>
   </div>
 
-  <!-- SERVICES PREVIEW -->
-  <section class="services-preview section">
-    <div class="container">
-      <div class="section-label scroll-text">What I Do</div>
-      <h2 class="section-title scroll-text">Three pillars.<br />One vision.</h2>
-      <div class="services-grid">
-
-        <div class="service-card reveal">
-          <div class="service-card-num">01</div>
-          <div class="service-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-          </div>
-          <h3>Photography</h3>
-          <p>Capturing timeless moments with 8 years of experience. Sports, portraits, events, and more, all with cutting-edge equipment.</p>
-          <a href="pages/services.html#photography" class="service-card-link">Explore →</a>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-card-num">02</div>
-          <div class="service-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-          </div>
-          <h3>Video Production</h3>
-          <p>From concept to final cut. Event coverage, documentaries, and recap reels, with every frame crafted with purpose and precision.</p>
-          <a href="pages/services.html#video" class="service-card-link">Explore →</a>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-card-num">03</div>
-          <div class="service-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
-          </div>
-          <h3>Brand Management</h3>
-          <p>Transforming your online presence into a dynamic force. Tailored strategy across Instagram, TikTok, Google Business, and beyond.</p>
-          <a href="pages/services.html#management" class="service-card-link">Explore →</a>
-        </div>
-
-      </div>
-      <div class="services-cta reveal">
-        <a href="pages/services.html" class="btn btn-primary">See All Services</a>
-      </div>
-    </div>
-  </section>
-
   <!-- WORK PREVIEW / GALLERY STRIP -->
   <section class="work-preview" id="workPreview">
-    <!-- Sticky viewport that pins during horizontal scroll -->
+    <!-- Selected photographs scroll horizontally. -->
     <div class="gallery-viewport" id="galleryViewport">
-      <!-- Header overlay on top of photos -->
+      <!-- Gallery introduction -->
       <div class="gallery-header">
         <div class="section-label">Selected Work</div>
-        <h2 class="gallery-title">A collection of<br />my favorite work.</h2>
+        <h2 class="gallery-title">Selected<br />photographs.</h2>
       </div>
       <!-- The horizontal track -->
       <div class="gallery-track" id="galleryTrack">
@@ -156,9 +121,53 @@
       <div class="gallery-progress-wrap">
         <div class="gallery-progress-bar" id="galleryProgressBar"></div>
       </div>
-      <!-- CTA at end of scroll -->
+      <!-- Gallery link and controls -->
       <div class="gallery-cta" id="galleryCta">
         <a href="pages/work.html" class="btn btn-primary">View Full Gallery</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES PREVIEW -->
+  <section class="services-preview section">
+    <div class="container">
+      <div class="section-label scroll-text">What I Do</div>
+      <h2 class="section-title scroll-text">What can we<br />make together?</h2>
+      <div class="services-grid">
+
+        <div class="service-card reveal">
+          <div class="service-card-num">01</div>
+          <div class="service-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          </div>
+          <h3>Photography</h3>
+          <p>Sports, portraits, and events, photographed with 8 years of experience behind the camera.</p>
+          <a href="pages/services.html#photography" class="service-card-link">Explore →</a>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-card-num">02</div>
+          <div class="service-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          </div>
+          <h3>Video Production</h3>
+          <p>Event coverage, documentaries, and recap reels. I handle the concept, filming, and final edit.</p>
+          <a href="pages/services.html#video" class="service-card-link">Explore →</a>
+        </div>
+
+        <div class="service-card reveal">
+          <div class="service-card-num">03</div>
+          <div class="service-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+          </div>
+          <h3>Brand Management</h3>
+          <p>Content and strategy for Instagram, TikTok, Google Business, and the other places your customers find you.</p>
+          <a href="pages/services.html#management" class="service-card-link">Explore →</a>
+        </div>
+
+      </div>
+      <div class="services-cta reveal">
+        <a href="pages/services.html" class="btn btn-primary">See All Services</a>
       </div>
     </div>
   </section>
@@ -168,19 +177,19 @@
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item reveal">
-          <span class="stat-num" data-target="6">0</span><span class="stat-plus">+</span>
+          <span class="stat-num" data-target="6">6</span><span class="stat-plus">+</span>
           <p>Years in Business</p>
         </div>
         <div class="stat-item reveal">
-          <span class="stat-num" data-target="8">0</span><span class="stat-plus">+</span>
+          <span class="stat-num" data-target="8">8</span><span class="stat-plus">+</span>
           <p>Years Experience</p>
         </div>
         <div class="stat-item reveal">
-          <span class="stat-num" data-target="5">0</span><span class="stat-plus"></span>
+          <span class="stat-num" data-target="5">5</span><span class="stat-plus"></span>
           <p>Featured Video Projects</p>
         </div>
         <div class="stat-item reveal">
-          <span class="stat-num" data-target="1">0</span><span class="stat-plus"></span>
+          <span class="stat-num" data-target="1">1</span><span class="stat-plus"></span>
           <p>National Award Won</p>
         </div>
       </div>
@@ -191,7 +200,7 @@
   <section class="featured-video section">
     <div class="container">
       <div class="section-label scroll-text">Featured Work</div>
-      <h2 class="section-title scroll-text">Video projects<br />that move people.</h2>
+      <h2 class="section-title scroll-text">Films, campaigns,<br />and event recaps.</h2>
       <div class="video-cards">
 
         <div class="video-card reveal">
@@ -232,17 +241,22 @@
       <div class="web-design-intro">
         <div>
           <div class="section-label scroll-text">Web Design</div>
-          <h2 class="section-title scroll-text">Websites built<br />to move people.</h2>
+          <h2 class="section-title scroll-text">Websites for<br />real businesses.</h2>
         </div>
         <div class="web-design-copy reveal">
           <p>A selection of websites I designed and built for brands with something worth saying.</p>
-          <p class="web-design-note">Explore each project here, then open the live site when you want to take a closer look.</p>
+          <p class="web-design-note">Open a live site or load its preview below.</p>
         </div>
       </div>
 
       <article class="web-design-feature reveal">
         <div class="web-design-preview web-design-preview--lead">
-          <iframe src="https://aidanmccormick1.github.io/alessandro-truck-site/" title="Live preview of the Alessandro Truck website" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <div class="preview-invitation">
+              <p class="preview-domain">aidanmccormick1.github.io</p>
+              <button type="button" class="preview-load" aria-label="Load live preview of the alessandro truck website">Load website preview <span aria-hidden="true">↓</span></button>
+              <p class="preview-status" role="status"></p>
+            </div>
+            <iframe data-preview-src="https://aidanmccormick1.github.io/alessandro-truck-site/" title="Live preview of the Alessandro Truck website" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
         </div>
         <div class="web-design-feature-meta">
           <div>
@@ -257,7 +271,12 @@
       <div class="web-design-grid">
         <article class="web-design-card reveal">
           <div class="web-design-preview">
-            <iframe src="https://americanbeachvolleyballclub.com/" title="Live preview of the American Beach Volleyball Club website" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <div class="preview-invitation">
+              <p class="preview-domain">americanbeachvolleyballclub.com</p>
+              <button type="button" class="preview-load" aria-label="Load live preview of the american beach volleyball club website">Load website preview <span aria-hidden="true">↓</span></button>
+              <p class="preview-status" role="status"></p>
+            </div>
+            <iframe data-preview-src="https://americanbeachvolleyballclub.com/" title="Live preview of the American Beach Volleyball Club website" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
           </div>
           <div class="web-design-card-meta">
             <div>
@@ -270,7 +289,12 @@
 
         <article class="web-design-card reveal">
           <div class="web-design-preview">
-            <iframe src="https://learn.americanbeachvolleyballclub.com/" title="Live preview of the American Beach Volleyball Club learning site" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <div class="preview-invitation">
+              <p class="preview-domain">learn.americanbeachvolleyballclub.com</p>
+              <button type="button" class="preview-load" aria-label="Load live preview of the american beach volleyball club learning site">Load website preview <span aria-hidden="true">↓</span></button>
+              <p class="preview-status" role="status"></p>
+            </div>
+            <iframe data-preview-src="https://learn.americanbeachvolleyballclub.com/" title="Live preview of the American Beach Volleyball Club learning site" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
           </div>
           <div class="web-design-card-meta">
             <div>
@@ -288,19 +312,20 @@
   <section class="cta-band">
     <div class="cta-band-bg"></div>
     <div class="container cta-band-inner scroll-text">
-      <h2>Ready to create something captivating?</h2>
+      <h2>Tell me what you’re working on.</h2>
       <p>Fill out the form and I'll be in touch. Orange County &amp; Santa Barbara based.</p>
       <a href="pages/contact.html" class="btn btn-primary btn-lg">Get in Touch</a>
     </div>
   </section>
 
   <!-- FOOTER -->
+  </main>
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
-        <img src="img/AM LOGO White.png" alt="McCormick Media" class="footer-logo-img" onerror="this.style.display='none'">
+        <img src="img/AM LOGO.png" alt="McCormick Media" class="footer-logo-img" onerror="this.style.display='none'">
         <a href="index.html" class="nav-logo">McCormick <span>Media</span></a>
-        <p>A modern digital production company based in Orange County &amp; Santa Barbara, CA.</p>
+        <p>Photography, video, and brand management by Aidan McCormick. Orange County &amp; Santa Barbara, CA.</p>
         <div class="footer-socials">
           <a href="https://www.linkedin.com/in/aidanmccormick/" target="_blank" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
