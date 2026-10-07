@@ -80,3 +80,10 @@ The hero section scrolls normally; only its inner viewfinder scene pins during t
 opening, so it does not remain behind the rest of the page.
 
 The homepage statistics strip is removed at the owner’s request.
+
+## Featured film images
+Show the corresponding YouTube video thumbnail for each homepage film: FIVE,
+OCL 2024 Recap, DPFF Advertisement, and PTSA Short Film. Thumbnails link directly
+to their videos; existing descriptions and portfolio links remain. Use the highest
+available image resolution with fallbacks shared by the homepage and Work page.
+If the thumbnail host fails, keep a readable invitation to watch the linked video.

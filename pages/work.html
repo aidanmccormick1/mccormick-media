@@ -263,7 +263,7 @@
         <div class="video-project reveal">
           <a href="https://youtu.be/oI9p2Z92RQ8" target="_blank" rel="noopener" class="video-project-inner">
             <div class="vp-thumbnail">
-              <img data-vid="oI9p2Z92RQ8" alt="FIVE | McCormick Media" loading="lazy" />
+              <img src="https://img.youtube.com/vi/oI9p2Z92RQ8/hqdefault.jpg" data-vid="oI9p2Z92RQ8" alt="FIVE | McCormick Media" loading="lazy" />
               <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             </div>
             <div class="vp-body">
@@ -284,7 +284,7 @@
         <div class="video-project reveal">
           <a href="https://www.youtube.com/watch?v=7EXa5hYzCig" target="_blank" rel="noopener" class="video-project-inner">
             <div class="vp-thumbnail">
-              <img data-vid="7EXa5hYzCig" alt="OCL 2024 Recap | McCormick Media" loading="lazy" />
+              <img src="https://img.youtube.com/vi/7EXa5hYzCig/hqdefault.jpg" data-vid="7EXa5hYzCig" alt="OCL 2024 Recap | McCormick Media" loading="lazy" />
               <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             </div>
             <div class="vp-body">
@@ -305,7 +305,7 @@
         <div class="video-project reveal">
           <a href="https://www.youtube.com/watch?v=kSD1K-4DFY0" target="_blank" rel="noopener" class="video-project-inner">
             <div class="vp-thumbnail">
-              <img data-vid="kSD1K-4DFY0" alt="OCL 2025 Recap | McCormick Media" loading="lazy" />
+              <img src="https://img.youtube.com/vi/kSD1K-4DFY0/hqdefault.jpg" data-vid="kSD1K-4DFY0" alt="OCL 2025 Recap | McCormick Media" loading="lazy" />
               <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             </div>
             <div class="vp-body">
@@ -326,7 +326,7 @@
         <div class="video-project reveal">
           <a href="https://www.youtube.com/watch?v=xVVZRi2lfjs&amp;t=12s" target="_blank" rel="noopener" class="video-project-inner">
             <div class="vp-thumbnail">
-              <img data-vid="xVVZRi2lfjs" alt="OCL 2026 Recap | McCormick Media" loading="lazy" />
+              <img src="https://img.youtube.com/vi/xVVZRi2lfjs/hqdefault.jpg" data-vid="xVVZRi2lfjs" alt="OCL 2026 Recap | McCormick Media" loading="lazy" />
               <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg></div>
             </div>
             <div class="vp-body">
@@ -347,7 +347,7 @@
         <div class="video-project reveal">
           <a href="https://www.youtube.com/watch?v=Q7CAsF3_qAI" target="_blank" rel="noopener" class="video-project-inner">
             <div class="vp-thumbnail">
-              <img data-vid="Q7CAsF3_qAI" alt="DPFF Advertisement | McCormick Media" loading="lazy" />
+              <img src="https://img.youtube.com/vi/Q7CAsF3_qAI/hqdefault.jpg" data-vid="Q7CAsF3_qAI" alt="DPFF Advertisement | McCormick Media" loading="lazy" />
               <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             </div>
             <div class="vp-body">
@@ -368,7 +368,7 @@
         <div class="video-project reveal">
           <a href="https://www.youtube.com/watch?v=d2Arwz-hlMc" target="_blank" rel="noopener" class="video-project-inner">
             <div class="vp-thumbnail">
-              <img data-vid="d2Arwz-hlMc" alt="Dana Hills Football | McCormick Media" loading="lazy" />
+              <img src="https://img.youtube.com/vi/d2Arwz-hlMc/hqdefault.jpg" data-vid="d2Arwz-hlMc" alt="Dana Hills Football | McCormick Media" loading="lazy" />
               <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             </div>
             <div class="vp-body">
@@ -389,7 +389,7 @@
         <div class="video-project reveal">
           <a href="https://www.youtube.com/watch?v=UeoR4JYEkCY" target="_blank" rel="noopener" class="video-project-inner">
             <div class="vp-thumbnail">
-              <img data-vid="UeoR4JYEkCY" alt="PTSA Short Film | McCormick Media" loading="lazy" />
+              <img src="https://img.youtube.com/vi/UeoR4JYEkCY/hqdefault.jpg" data-vid="UeoR4JYEkCY" alt="PTSA Short Film | McCormick Media" loading="lazy" />
               <div class="vp-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
             </div>
             <div class="vp-body">
@@ -485,41 +485,6 @@
 
   <script src="../js/main.js"></script>
   <script>
-    // ---- YOUTUBE THUMBNAIL SMART LOADER ----
-    // Tries maxresdefault → sddefault → hqdefault → mqdefault → default
-    // Also detects YouTube's 120x90 "no thumbnail" placeholder and skips it
-    document.querySelectorAll('img[data-vid]').forEach(img => {
-      const vid = img.dataset.vid;
-      const qualities = [
-        `https://img.youtube.com/vi/${vid}/maxresdefault.jpg`,
-        `https://img.youtube.com/vi/${vid}/sddefault.jpg`,
-        `https://img.youtube.com/vi/${vid}/hqdefault.jpg`,
-        `https://img.youtube.com/vi/${vid}/mqdefault.jpg`,
-        `https://img.youtube.com/vi/${vid}/default.jpg`,
-      ];
-      let qi = 0;
-      function tryNext() {
-        if (qi >= qualities.length) {
-          // Final fallback: styled gradient placeholder
-          img.parentElement.style.background = 'linear-gradient(135deg, #0a0a2e 0%, #001166 50%, #0066ff22 100%)';
-          img.style.display = 'none';
-          return;
-        }
-        img.src = qualities[qi];
-        img.onerror = () => { qi++; tryNext(); };
-        img.onload  = () => {
-          // YouTube returns a 120x90 grey "no thumbnail" image when none exists
-          // naturalWidth 120 with naturalHeight 90 = placeholder, skip it
-          if (img.naturalWidth === 120 && img.naturalHeight === 90) {
-            qi++; tryNext();
-          } else {
-            img.onerror = null;
-          }
-        };
-      }
-      tryNext();
-    });
-
     const tabButtons = [...document.querySelectorAll('.work-tab-btn')];
     const tabList = document.querySelector('.work-tabs-inner');
     tabList.setAttribute('role', 'tablist');

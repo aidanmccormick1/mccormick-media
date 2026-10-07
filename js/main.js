@@ -172,6 +172,29 @@
     });
   });
 
+  document.querySelectorAll('img[data-vid]').forEach(img => {
+    const qualities = ['maxresdefault', 'sddefault', 'hqdefault', 'mqdefault'];
+    let quality = 0;
+    function loadThumbnail() {
+      if (quality >= qualities.length) {
+        img.hidden = true;
+        const message = document.createElement('span');
+        message.className = 'thumbnail-message';
+        message.textContent = 'Thumbnail unavailable. Watch on YouTube.';
+        img.parentElement.appendChild(message);
+        return;
+      }
+      const candidate = new Image();
+      candidate.onload = () => {
+        if (candidate.naturalWidth <= 120) { quality++; loadThumbnail(); return; }
+        img.src = candidate.src;
+      };
+      candidate.onerror = () => { quality++; loadThumbnail(); };
+      candidate.src = `https://img.youtube.com/vi/${img.dataset.vid}/${qualities[quality]}.jpg`;
+    }
+    loadThumbnail();
+  });
+
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     const status = document.createElement('p');
