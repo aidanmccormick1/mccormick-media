@@ -105,26 +105,35 @@
     galleryCta.appendChild(controls);
   }
 
-  document.querySelectorAll('[data-preview-src]').forEach(iframe => {
-    const invitation = iframe.previousElementSibling;
-    const button = invitation.querySelector('.preview-load');
-    const status = invitation.querySelector('.preview-status');
-    button.addEventListener('click', () => {
-      button.disabled = true;
-      button.textContent = 'Loading preview…';
-      status.textContent = 'You can also open the live site using the link below.';
-      const timeout = window.setTimeout(() => {
-        button.disabled = false;
-        button.textContent = 'Try preview again';
-        status.textContent = 'The preview is taking a while. Try again or open the live site below.';
-      }, 12000);
-      iframe.addEventListener('load', () => {
-        window.clearTimeout(timeout);
-        invitation.hidden = true;
-        iframe.hidden = false;
-      }, { once: true });
-      iframe.loading = 'eager';
-      iframe.src = iframe.dataset.previewSrc;
+  if ('ResizeObserver' in window) {
+    const previewSizes = new ResizeObserver(entries => {
+      entries.forEach(({ target, contentRect }) => {
+        target.style.setProperty('--preview-scale', contentRect.width / 1280);
+        target.classList.add('preview-scaled');
+      });
+    });
+    document.querySelectorAll('.web-design-preview').forEach(preview => previewSizes.observe(preview));
+  }
+  document.querySelectorAll('.project-stage').forEach(stage => {
+    const browser = stage.querySelector('.project-browser');
+    let tiltFrame = 0;
+    let tiltX = 0;
+    let tiltY = 0;
+    function applyTilt() {
+      tiltFrame = 0;
+      browser.style.setProperty('--tilt-x', `${tiltX}deg`);
+      browser.style.setProperty('--tilt-y', `${tiltY}deg`);
+    }
+    stage.addEventListener('pointermove', event => {
+      if (!motion || !desktop.matches) return;
+      const rect = stage.getBoundingClientRect();
+      tiltX = clamp((event.clientY - rect.top) / rect.height - .5, -.5, .5) * -4;
+      tiltY = clamp((event.clientX - rect.left) / rect.width - .5, -.5, .5) * 6;
+      if (!tiltFrame) tiltFrame = requestAnimationFrame(applyTilt);
+    });
+    stage.addEventListener('pointerleave', () => {
+      tiltX = tiltY = 0;
+      if (!tiltFrame) tiltFrame = requestAnimationFrame(applyTilt);
     });
   });
 

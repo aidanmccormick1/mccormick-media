@@ -10,7 +10,7 @@ Media's identity and blue accent.
 ## Visual system
 - Warm ivory #f5f3ed, paper white, charcoal #20231f, secondary text #62665d.
 - Existing blue, deepened for readable text; use it for interaction and focus.
-- Archivo display type evokes photographic signage; Source Sans 3 supports
+- The original Bebas Neue display type and Inter body text support
   long project descriptions and forms. Use sentence case and readable spacing.
 - Generous editorial spacing, fine rules, square photographic frames, and
   slightly squared buttons. Work imagery carries the visual weight.
@@ -51,10 +51,21 @@ The visitor's journey is to see Aidan's photographs, inspect relevant work, choo
 a service, and get in touch. Retain business facts, project descriptions, artwork,
 and contact details while refining their presentation.
 
-- Pair Archivo display type with Source Sans 3 body text.
+- Retain the original Bebas Neue display and Inter body fonts, as requested.
 - Introduce Aidan directly; make service summaries and invitations conversational.
 - Use named action, error, and success colour tokens.
 - Give the lead film more space; remove decorative service numbers and the ticker.
 - Preserve form input on errors and timeouts, with clear sending and retry states.
 - Keep the 3D viewfinder; remove repeated fades and word cycling.
-- Load embedded website previews on request, with direct site links always available.
+- Automatically load embedded website previews; direct site links remain available.
+
+## Web Design presentation
+The three existing websites load automatically with eager iframe sources, including
+without JavaScript. Each preview sits in a browser window with physical edge depth,
+lighting, and a quiet project-specific surface. Alessandro remains the lead project;
+the club and learning platform follow in a staggered composition. ResizeObserver
+scales a full desktop viewport into each frame so the website design stays legible.
+The browser windows respond subtly to pointer movement, flatten during keyboard
+interaction, and remain flat on phones, with reduced motion, or when motion is paused.
+Direct live-site links are always available for third-party embed restrictions.
+Typography restores the original Bebas Neue headings and Inter body text.
