@@ -30,7 +30,7 @@ Media's identity and blue accent.
 
 ## Motion
 The opening is a CSS 3D viewfinder: photograph at the back, physical side walls,
-a floor, front aperture, and two floating photographic planes. Pointer movement
+a floor and front aperture around one photographic plane. Pointer movement
 changes the viewing angle. Scroll moves the viewpoint forward through the frame.
 The gallery uses native horizontal scrolling and previous/next controls, with
 subtle perspective on desktop. Content stays visible immediately; do not repeat generic reveal animations. Avoid scroll hijacking, continuous particle rendering, and custom cursors.
@@ -69,3 +69,12 @@ The browser windows respond subtly to pointer movement, flatten during keyboard
 interaction, and remain flat on phones, with reduced motion, or when motion is paused.
 Direct live-site links are always available for third-party embed restrictions.
 Typography restores the original Bebas Neue headings and Inter body text.
+
+## Cover sequence
+The opening contains one photographic frame. Remove floating photos that duplicate
+the gallery. Four distinct local photographs play once at 1.7-second intervals with
+short 220ms transitions, then hold the final image. Pause playback with the existing
+motion setting, while the cover is offscreen, or when the page is hidden. Reduced
+motion shows a stable frame. Images load automatically; missing images are skipped.
+The hero section scrolls normally; only its inner viewfinder scene pins during the
+opening, so it does not remain behind the rest of the page.

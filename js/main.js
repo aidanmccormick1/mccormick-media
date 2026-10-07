@@ -11,6 +11,11 @@
   let pointerY = 0;
   const object = document.getElementById('studioObject');
   const hero = document.querySelector('.hero');
+  const coverFrames = [...document.querySelectorAll('.cover-frame')];
+  const coverCaption = document.getElementById('coverCaption');
+  const coverIndex = document.getElementById('coverIndex');
+  let coverStep = 0;
+  let coverTimer = 0;
   const progress = document.getElementById('scrollProgress');
   const nav = document.getElementById('navbar');
   const clamp = (n, min, max) => Math.max(min, Math.min(n, max));
@@ -34,8 +39,38 @@
   reducedMotion.addEventListener('change', syncMotion);
   desktop.addEventListener('change', requestUpdate);
 
+  function scheduleCover() {
+    const rect = hero?.getBoundingClientRect();
+    const visible = rect && rect.bottom > 88 && rect.top < window.innerHeight;
+    if (!motion || document.hidden || !visible || coverStep >= coverFrames.length - 1) {
+      window.clearTimeout(coverTimer);
+      coverTimer = 0;
+      return;
+    }
+    if (coverTimer) return;
+    coverTimer = window.setTimeout(() => {
+      coverTimer = 0;
+      const rect = hero.getBoundingClientRect();
+      if (!motion || document.hidden || rect.bottom <= 88 || rect.top >= window.innerHeight) return;
+      let nextStep = coverStep + 1;
+      while (nextStep < coverFrames.length && coverFrames[nextStep].complete && !coverFrames[nextStep].naturalWidth) nextStep++;
+      const next = coverFrames[nextStep];
+      if (!next) return;
+      if (!next.complete || !next.naturalWidth) { scheduleCover(); return; }
+      coverFrames[coverStep].classList.remove('active');
+      coverFrames[coverStep].setAttribute('aria-hidden', 'true');
+      next.classList.add('active');
+      next.removeAttribute('aria-hidden');
+      coverStep = nextStep;
+      if (coverCaption) coverCaption.textContent = next.dataset.caption;
+      if (coverIndex) coverIndex.textContent = `${String(coverStep + 1).padStart(2, '0')} / ${String(coverFrames.length).padStart(2, '0')}`;
+      scheduleCover();
+    }, 1700);
+  }
+
   function update() {
     frame = 0;
+    scheduleCover();
     if (progress) {
       const distance = document.documentElement.scrollHeight - window.innerHeight;
       progress.style.transform = `scaleX(${distance > 0 ? window.scrollY / distance : 0})`;
@@ -58,6 +93,7 @@
   function requestUpdate() { if (!frame) frame = requestAnimationFrame(update); }
   window.addEventListener('scroll', requestUpdate, { passive: true });
   window.addEventListener('resize', requestUpdate, { passive: true });
+  document.addEventListener('visibilitychange', requestUpdate);
   hero?.addEventListener('pointermove', event => {
     if (!motion || !desktop.matches) return;
     const rect = hero.getBoundingClientRect();
