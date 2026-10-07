@@ -121,7 +121,6 @@
     if (nav && !nav.contains(event.target)) setMenu(false);
   });
 
-  document.querySelectorAll('.stat-num').forEach(el => { el.textContent = el.dataset.target; });
   const gallery = document.getElementById('galleryTrack');
   const galleryCta = document.getElementById('galleryCta');
   if (gallery && galleryCta) {

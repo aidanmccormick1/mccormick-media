@@ -17,7 +17,7 @@ Media's identity and blue accent.
 
 ## Page plan
 1. Home: split introduction and dimensional viewfinder; selected photography
-   immediately follows; retain the full services, stats, video, web-design,
+   immediately follows; retain the full services, video, web-design,
    contact, and footer content.
 2. Work: large light editorial title, accessible video/photo tabs, all existing
    projects, thumbnails, and photographs.
@@ -78,3 +78,5 @@ motion setting, while the cover is offscreen, or when the page is hidden. Reduce
 motion shows a stable frame. Images load automatically; missing images are skipped.
 The hero section scrolls normally; only its inner viewfinder scene pins during the
 opening, so it does not remain behind the rest of the page.
+
+The homepage statistics strip is removed at the owner’s request.
