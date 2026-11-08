@@ -24,7 +24,7 @@
     motion = !reducedMotion.matches && !paused;
     body.classList.toggle('motion-paused', !motion);
     if (toggle) {
-      toggle.textContent = reducedMotion.matches ? 'Reduced motion on' : paused ? 'Resume motion' : 'Pause motion';
+      toggle.textContent = reducedMotion.matches ? 'Reduced motion' : paused ? 'Resume' : 'Pause';
       toggle.setAttribute('aria-pressed', String(!motion));
       toggle.disabled = reducedMotion.matches;
     }
@@ -62,8 +62,6 @@
       next.classList.add('active');
       next.removeAttribute('aria-hidden');
       coverStep = nextStep;
-      if (coverCaption) coverCaption.textContent = next.dataset.caption;
-      if (coverIndex) coverIndex.textContent = `${String(coverStep + 1).padStart(2, '0')} / ${String(coverFrames.length).padStart(2, '0')}`;
       scheduleCover();
     }, 1700);
   }
