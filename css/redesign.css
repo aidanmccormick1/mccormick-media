@@ -340,3 +340,63 @@ img[data-vid][hidden] { display:none; }
  .vc-image { margin-bottom:24px; }
  .video-card:last-child .vc-image { margin-bottom:24px; }
 }
+
+/* Background accessibility panel */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.a11y-panel[hidden] { display: none; }
+.a11y-panel {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  z-index: 2000;
+  width: min(340px, calc(100vw - 24px));
+  background: #fff;
+  color: var(--light);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  box-shadow: 0 16px 40px #20231f22;
+  padding: 18px;
+}
+.a11y-panel h2 { font-size: 1.05rem; margin-bottom: 4px; }
+.a11y-panel p { color: var(--muted); font-size: .875rem; margin-bottom: 12px; }
+.a11y-option { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: .9rem; }
+.a11y-option input { width: 18px; height: 18px; accent-color: var(--accent); }
+.a11y-actions { display: flex; gap: 8px; margin-top: 12px; }
+.a11y-toast {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2001;
+  padding: 10px 12px;
+  background: var(--light);
+  color: #fff;
+  border-radius: 20px;
+  font-size: .85rem;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+.a11y-toast.show { opacity: 1; transform: translateY(0); }
+body.a11y-large-text { font-size: 112.5%; }
+body.a11y-underline-links a { text-decoration: underline; }
+body.a11y-strong-focus a:focus-visible,
+body.a11y-strong-focus button:focus-visible,
+body.a11y-strong-focus input:focus-visible,
+body.a11y-strong-focus textarea:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 5px;
+}
+body.a11y-system-cursor { cursor: auto !important; }
+body.a11y-high-contrast { --light: #10120f; --muted: #3d4038; --accent: #053c89; }
