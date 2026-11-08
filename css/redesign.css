@@ -501,3 +501,42 @@ body.a11y-high-contrast { --light: #10120f; --muted: #3d4038; --accent: #053c89;
 .service-card-num,
 .section-title .section-label { display: none !important; }
 .service-card-num { display: none !important; }
+
+.hero-note {
+  max-width: 420px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: .95rem;
+  line-height: 1.75;
+}
+.hero-scroll-hint {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,.72);
+}
+
+/* Cinematic video scene */
+.featured-video {
+  background: #181b16;
+  color: #f5f3ed;
+}
+.featured-video .section-label,
+.featured-video .section-title {
+  color: #f5f3ed;
+}
+.featured-video .section-label {
+  color: #8d9082;
+}
+.featured-video .video-card {
+  background: #232720;
+  border-color: #35392f;
+  color: #f5f3ed;
+}
+.featured-video .video-card p {
+  color: #bac0ad;
+}
