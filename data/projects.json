@@ -1,0 +1,85 @@
+{
+  "projects": [
+    {
+      "id": "five",
+      "title": "FIVE",
+      "category": "film",
+      "description": "Full promotional campaign for the Men's Leadership Breakfast Groups. Interview-style video plus advertisement, scripted, filmed, edited, and published end-to-end.",
+      "destination": "pages/work.html#video",
+      "featured": true
+    },
+    {
+      "id": "ocl-2024",
+      "title": "OCL 2024 Recap",
+      "category": "film",
+      "description": "Dynamic recap video for the California Association of Activity Directors leadership conference, shown live to thousands of students on the final day.",
+      "destination": "pages/work.html#video"
+    },
+    {
+      "id": "ocl-2025",
+      "title": "OCL 2025 Recap",
+      "category": "film",
+      "description": "Follow-up leadership conference recap, using the same conference coverage format as the OCL 2024 project.",
+      "destination": "pages/work.html#video"
+    },
+    {
+      "id": "ocl-2026",
+      "title": "OCL 2026 Recap",
+      "category": "film",
+      "description": "Latest California Association of Activity Directors leadership conference recap added to the portfolio.",
+      "destination": "pages/work.html#video"
+    },
+    {
+      "id": "dpff",
+      "title": "DPFF Advertisement",
+      "category": "film",
+      "description": "Promotional ad for the Dana Point Film Festival, driving nationwide student film submissions and capturing Dana Point surf culture.",
+      "destination": "pages/work.html#video"
+    },
+    {
+      "id": "dana-hills-football",
+      "title": "Dana Hills Football Season Recap",
+      "category": "film",
+      "description": "Season recap video for Dana Hills football.",
+      "destination": "pages/work.html#video"
+    },
+    {
+      "id": "ptsa-short-film",
+      "title": "PTSA National Student Short Film",
+      "category": "film",
+      "description": "Personal project submitted to and winner of the PTSA National Student Short Films competition. Themes of gratefulness and future excitement.",
+      "destination": "pages/work.html#video"
+    },
+    {
+      "id": "alessandro-truck",
+      "title": "Alessandro Truck Site",
+      "category": "web",
+      "description": "Focused digital home for a transportation business, making the service clear and easy to explore.",
+      "destination": "https://aidanmccormick1.github.io/alessandro-truck-site/",
+      "external": true
+    },
+    {
+      "id": "american-beach-volleyball-club",
+      "title": "American Beach Volleyball Club",
+      "category": "web",
+      "description": "Live club website with classes, sign-ups, and community proof.",
+      "destination": "https://americanbeachvolleyballclub.com/",
+      "external": true
+    },
+    {
+      "id": "abvc-learn",
+      "title": "ABVC Learn",
+      "category": "web",
+      "description": "Learning platform with drills, course navigation, and progress tracking.",
+      "destination": "https://learn.americanbeachvolleyballclub.com/",
+      "external": true
+    },
+    {
+      "id": "photography-cover-sequence",
+      "title": "Selected photography",
+      "category": "photo",
+      "description": "Curated local photography covers: kayak team, Hallowheels, retirement party, and Arm Farm athlete portrait.",
+      "destination": "pages/work.html"
+    }
+  ]
+}
