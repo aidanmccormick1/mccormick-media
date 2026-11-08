@@ -433,3 +433,71 @@ body.a11y-high-contrast { --light: #10120f; --muted: #3d4038; --accent: #053c89;
     margin-inline: 0;
   }
 }
+
+/* Entrance as a living photographic canvas */
+.hero {
+  height: 100svh;
+  min-height: 620px;
+}
+.hero-pin {
+  grid-template-columns: 1fr;
+  height: 100%;
+  padding: clamp(96px, 12vh, 132px) 5vw 72px;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 520px;
+  align-self: start;
+}
+.studio-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  padding: 0;
+}
+.studio-object {
+  height: 100%;
+  width: 100%;
+  transform: none;
+  transform-style: flat;
+}
+.studio-wall,
+.studio-aperture {
+  display: none !important;
+}
+.studio-photo {
+  position: absolute;
+  inset: 0;
+  transform: none;
+  background: transparent;
+}
+.cover-frame {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .9s ease;
+}
+.cover-frame.active {
+  opacity: 1;
+}
+.studio-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(245, 243, 237, .78) 0%, rgba(245, 243, 237, .26) 42%, transparent 72%);
+  pointer-events: none;
+}
+.hero-scroll-hint {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 28px;
+  right: auto;
+  text-indent: 0;
+}
+
+
+/* Quiet promotional labels */
+.service-card-num,
+.section-title .section-label { display: none !important; }
+.service-card-num { display: none !important; }
