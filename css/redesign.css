@@ -400,3 +400,36 @@ body.a11y-strong-focus textarea:focus-visible {
 }
 body.a11y-system-cursor { cursor: auto !important; }
 body.a11y-high-contrast { --light: #10120f; --muted: #3d4038; --accent: #053c89; }
+
+/* Floating navigation island */
+.nav,
+.nav.scrolled {
+  left: 50%;
+  right: auto;
+  width: max-content;
+  max-width: calc(100vw - 28px);
+  top: 12px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  justify-content: center;
+  padding: 8px 12px 8px 14px;
+  box-shadow: 0 18px 45px rgba(32, 35, 31, .08);
+}
+.nav-links {
+  margin-inline: 18px;
+}
+.nav-links .nav-cta {
+  margin-left: 8px;
+}
+@media (max-width: 768px) {
+  .nav,
+  .nav.scrolled {
+    width: calc(100vw - 28px);
+    max-width: calc(100vw - 28px);
+    justify-content: space-between;
+    padding: 8px 14px;
+  }
+  .nav-links {
+    margin-inline: 0;
+  }
+}
