@@ -90,3 +90,14 @@ If the thumbnail host fails, keep a readable invitation to watch the linked vide
 
 The cover introduces digital creation and automation: websites, content, and
 everyday business workflows, with Aidan as the direct point of contact.
+
+## Photo wall scroll passage
+The Work page briefly fills the viewport with the existing dark Alpine dot grid.
+All 28 original photos remain uncropped in seven connected four-image grids.
+A short stretch of native vertical scrolling moves the grids horizontally at a
+constant ratio, then releases directly into the film section. Perspective on
+incoming grids and a restrained entrance zoom provide depth during the passage;
+there is no timed playback. Photo card backgrounds and number overlays are removed
+so the photographs sit directly on the shared surface. Buttons, dots, keyboard
+navigation, dragging, and the full-image dialog remain available. Reduced motion
+and short viewports use an unpinned horizontal gallery.

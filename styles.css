@@ -136,3 +136,36 @@ body{background:#142a3b;color:#f1f5f8}a:focus-visible,button:focus-visible,input
 @media(max-width:520px){.archive-collection .section-heading{align-items:center;padding-bottom:20px;gap:6px}.archive-collection .section-heading .micro{font-size:8px;letter-spacing:.09em}.archive-collection h2{font-size:27px}.archive-controls>span{font-size:10px;margin-right:2px}.archive-controls{gap:4px}.archive-controls button{min-width:72px;height:40px;padding:0 10px;border-radius:22px}.photo-wall{padding:19px 0;gap:0}.wall-panel{grid-template-columns:1fr 1fr;grid-template-rows:180px 180px;gap:12px;padding:0 14px}.wall-photo-number{left:6px;bottom:6px;font-size:9px;padding:3px 5px}.wall-photo-open{right:6px;bottom:6px;font-size:13px;padding:0 5px}.wall-dots button{width:38px;height:44px}.photo-viewer{width:100vw;height:100dvh;max-height:none;max-width:none;border-radius:0;padding:12px}.viewer-toolbar{gap:10px}.viewer-toolbar .micro{font-size:9px}.viewer-stage{grid-template-columns:1fr;position:relative;padding-bottom:60px}.viewer-stage img{grid-row:1;grid-column:1}.viewer-stage button{position:absolute;bottom:0}.viewer-stage button:first-child{left:8px}.viewer-stage button:last-child{right:8px}}
 .field-photo{transition:opacity .35s,transform .55s cubic-bezier(.16,1,.3,1),visibility .35s}
 .photo-wall.is-moving{scroll-behavior:auto;scroll-snap-type:none}
+
+/* A short pinned passage carries the photo grid into the film section. */
+.scroll-wall{position:relative;width:100vw;margin-left:calc(50% - 50vw);padding:0;height:235svh;scroll-margin-top:0}
+.wall-stage{background:#192b3a}
+.scroll-wall .wall-stage{position:sticky;top:0;height:100svh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;padding:24px clamp(18px,3vw,58px) 8px;gap:12px}
+.scroll-wall .section-heading{padding:0 0 8px;border-top:0;align-items:center}
+.scroll-wall .section-heading h2{margin:0;font-size:clamp(30px,4vw,58px);line-height:1.05}
+.scroll-wall .section-heading .micro{display:none}
+.scroll-wall .wall-base{min-height:0;border-radius:0;border:0;background-color:transparent;transform:perspective(1400px) rotateX(calc(var(--wall-entry,0)*6deg)) scale(calc(1 - var(--wall-entry,0)*.08));transform-origin:center;will-change:transform}
+.scroll-wall .photo-wall{height:100%;padding:12px 0;gap:0;scroll-snap-type:none;scroll-behavior:auto}
+.scroll-wall .wall-panel{height:100%;grid-template-rows:repeat(2,minmax(0,1fr));gap:16px;padding:0 12px;transform-origin:center;will-change:transform}
+.scroll-wall .wall-photo{border:0;border-radius:0;background:transparent;box-shadow:none}
+.scroll-wall .wall-photo img{object-fit:contain;background:transparent}
+.scroll-wall .wall-photo-number,.scroll-wall .wall-photo-open{display:none}
+.scroll-wall .wall-photo:hover,.scroll-wall .wall-photo:focus-visible{transform:none;box-shadow:none}
+.scroll-wall .wall-photo:focus-visible{outline:2px solid #edf4f9;outline-offset:-3px}
+.scroll-wall .wall-bottom{padding:0;min-height:44px}
+@media(max-width:600px){
+ .scroll-wall{height:220svh}
+ .scroll-wall .wall-stage{padding:20px 12px 8px;gap:8px}
+ .scroll-wall .section-heading{gap:8px;flex-wrap:wrap}
+ .scroll-wall .archive-controls>span{display:none}
+ .scroll-wall .archive-controls button{min-width:72px}
+ .scroll-wall .wall-panel{gap:10px;padding:0 5px}
+ .scroll-wall .wall-dots button{width:38px}
+}
+@media(prefers-reduced-motion:reduce),(max-height:560px){
+ .scroll-wall{height:auto}
+ .scroll-wall .wall-stage{position:relative;height:auto;min-height:0}
+ .scroll-wall .wall-base{height:65svh;min-height:240px;transform:none;will-change:auto}
+ .scroll-wall .wall-panel{transform:none!important;will-change:auto}
+ .scroll-wall .photo-wall{scroll-snap-type:x mandatory}
+}
