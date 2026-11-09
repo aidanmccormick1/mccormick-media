@@ -127,9 +127,9 @@
     gallery.setAttribute('aria-label', 'Selected photography. Scroll horizontally to explore.');
     const controls = document.createElement('div');
     controls.className = 'gallery-controls';
-    [['←', 'Previous photographs', -1], ['→', 'Next photographs', 1]].forEach(([symbol, label, direction]) => {
+    [['Previous', 'Previous photographs', -1], ['Next', 'Next photographs', 1]].forEach(([labelText, label, direction]) => {
       const button = document.createElement('button');
-      button.type = 'button'; button.textContent = symbol; button.setAttribute('aria-label', label);
+      button.type = 'button'; button.textContent = labelText; button.setAttribute('aria-label', label);
       button.addEventListener('click', () => {
         gallery.scrollBy({ left: direction * gallery.clientWidth * .72, behavior: motion ? 'smooth' : 'instant' });
       });
