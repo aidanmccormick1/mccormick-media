@@ -101,3 +101,10 @@ there is no timed playback. Photo card backgrounds and number overlays are remov
 so the photographs sit directly on the shared surface. Buttons, dots, keyboard
 navigation, dragging, and the full-image dialog remain available. Reduced motion
 and short viewports use an unpinned horizontal gallery.
+
+## Homepage featured photograph
+The featured portrait stays uncropped and at its original portrait proportion.
+A quiet two-column stage pairs the full image with one large Photography title and
+the See photos link; on narrow screens these stack above the image. The dark blue
+surface and restrained border carry the existing Alpine palette without turning
+the photograph into a wide crop.
