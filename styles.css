@@ -204,3 +204,7 @@ body{background:#142a3b;color:#f1f5f8}a:focus-visible,button:focus-visible,input
 .video-embed iframe{position:absolute;inset:0}
 @media(max-width:600px){.video-play span:first-child{width:56px;height:56px}}
 @media(prefers-reduced-motion:reduce){.video-poster,.video-play span:first-child{transition:none}}
+
+.footer .footer-bio{max-width:390px;margin:10px 0 0;font-size:11px;line-height:1.65;color:inherit}
+
+.about-photo img{height:auto;aspect-ratio:1;object-fit:cover}
