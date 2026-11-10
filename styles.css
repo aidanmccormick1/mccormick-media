@@ -209,30 +209,34 @@ body{background:#142a3b;color:#f1f5f8}a:focus-visible,button:focus-visible,input
 
 .about-photo img{height:auto;aspect-ratio:1;object-fit:cover}
 
-/* Give the portrait its own proportion so the subject stays fully in frame. */
-.page-home .field-stage{
- max-width:none;width:min(1540px,calc(100% - 8vw));margin:0 auto;padding:7svh clamp(24px,7vw,110px);
- display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.92fr);align-items:center;gap:clamp(28px,7vw,110px);
- background:#142a3b;
-}
-.page-home .field-copy{align-self:center}
-.page-home .field-copy h2{margin:0 0 26px;font-family:Arial,Helvetica,sans-serif;font-size:clamp(54px,8vw,118px);font-weight:900;line-height:.88;letter-spacing:-.075em;color:#f1f5f8}
-.page-home .field-copy .scene-link{display:inline-block;margin:0;color:#e0e9ef;font-size:14px;border-bottom:1px solid #94aaba;padding-bottom:5px}
-.page-home .field-photo-wrap{
- width:min(100%,560px);height:min(76svh,780px);min-height:0;margin:0 auto;aspect-ratio:2/3;
- border:1px solid #718a9e;border-radius:4px;background:transparent;overflow:hidden;
-}
-.page-home .field-photo{width:100%;height:100%;object-fit:contain;object-position:center;background:transparent;transform:none!important}
-.page-home .field-photo.active{transform:none!important}
+/* Keep complete photographs in a quiet, swipeable stage. */
+.page-home .field-stage{max-width:none;width:100%;margin:0;padding:7svh clamp(22px,6vw,100px);display:flex;flex-direction:column;justify-content:center;gap:24px;background:#142a3b}
+.page-home .field-copy{width:100%;max-width:1200px;display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin:0 auto}
+.page-home .field-copy h2{margin:0;font-family:Arial,Helvetica,sans-serif;font-size:clamp(38px,5vw,68px);font-weight:800;line-height:1;letter-spacing:-.06em;color:#f1f5f8}
+.page-home .field-copy .scene-link{margin:0;flex-shrink:0;font-size:13px;color:#e0e9ef}
+.featured-gallery{width:100%;max-width:1200px;min-width:0;margin:0 auto}
+.featured-rail{position:relative;display:flex;overflow-x:auto;overflow-y:hidden;width:100%;height:clamp(280px,61svh,720px);scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:contain;border-radius:4px;background:#102536}
+.featured-rail::-webkit-scrollbar{display:none}
+.featured-rail:focus-visible{outline:2px solid #edf4f9;outline-offset:5px}
+.featured-slide{flex:0 0 100%;min-width:0;height:100%;padding:12px;scroll-snap-align:center;scroll-snap-stop:always}
+.featured-slide img{width:100%;height:100%;object-fit:contain;user-select:none}
+.featured-thumbnails{display:flex;justify-content:center;gap:8px;margin-top:18px}
+.featured-thumbnails button{display:grid;place-items:center;width:64px;height:52px;padding:4px;border:1px solid transparent;border-radius:3px;background:transparent;opacity:.55;transition:opacity .2s,border-color .2s}
+.featured-thumbnails button img{width:100%;height:100%;min-height:0;object-fit:contain;pointer-events:none}
+.featured-thumbnails button:hover,.featured-thumbnails button:focus-visible,.featured-thumbnails button[aria-current]{opacity:1;border-color:#bfd0de}
 @media(max-width:790px){
- .page-home .field-stage{width:100%;padding:110px 7vw 8svh;grid-template-columns:1fr;gap:24px;justify-items:center}
- .page-home .field-copy{width:min(100%,520px)}
- .page-home .field-copy h2{font-size:clamp(48px,10vw,76px);margin-bottom:13px}
- .page-home .field-copy .scene-link{font-size:13px}
- .page-home .field-photo-wrap{width:min(76vw,440px);height:min(58svh,580px);min-height:340px}
+ .page-home .field-stage{padding:65px 24px;gap:22px}
+ .featured-rail{height:clamp(280px,48svh,480px)}
+ .featured-thumbnails{gap:5px;margin-top:14px}
+ .featured-thumbnails button{width:54px;height:48px}
 }
 @media(max-width:420px){
- .page-home .field-stage{padding:98px 22px 55px;gap:18px}
- .page-home .field-photo-wrap{width:min(82vw,380px);height:54svh;min-height:320px}
+ .page-home .field-stage{padding:52px 18px;gap:20px}
+ .page-home .field-copy{align-items:center;gap:14px}
+ .page-home .field-copy h2{font-size:35px}
+ .page-home .field-copy .scene-link{font-size:11px}
+ .featured-thumbnails{gap:2px}
+ .featured-thumbnails button{width:48px;height:44px}
+ .featured-slide{padding:8px}
 }
-@media(prefers-reduced-motion:reduce){.page-home .field-photo{transition:none}}
+@media(prefers-reduced-motion:reduce){.featured-rail{scroll-behavior:auto}.featured-thumbnails button{transition:none}}

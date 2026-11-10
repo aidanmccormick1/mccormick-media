@@ -1,6 +1,7 @@
 import { archivePhotos as originalArchivePhotos } from '/data/photo-archive.js';
 const wallOrder = [0,18,9,25,4,22,11,2,1,27,15,3,12,20,8,5,6,23,16,10,7,26,14,21,13,24,17,19];
 const archivePhotos = wallOrder.map(index => originalArchivePhotos[index]);
+const featuredPhotos = [0,1,12,2,3,25].map(index => originalArchivePhotos[index]);
 const images = {
   kayak:'/img/F2025_KAYAKING_-16.jpg',
   hallowheels:'/img/F25_Hallowheels_All_-21.jpg',
@@ -54,7 +55,7 @@ const sceneIcons = {
 };
 function home(){return `<main class="experience">
 <section class="opening-scene scene group-inspired" id="overview"><div class="hero-composition"><div class="hero-grid" aria-hidden="true"><span>+</span><span>+</span><span>+</span><span>+</span></div><div class="opening-image">${photo(images.kayak,'People with kayaks on the coast','hero-still',true)}</div><a class="floating-project project-left" href="#image-studies" aria-label="Photography"><span class="project-icon">${sceneIcons.camera}</span><strong>Photo</strong></a><a class="floating-project project-right" href="#digital" aria-label="Web projects"><span class="project-icon">${sceneIcons.web}</span><strong>Web</strong></a><a class="floating-film" href="#moving-image" aria-label="Browse films">Film</a></div><div class="opening-copy"><h1><span>PHOTO.</span><span>FILM.</span><span>WEB.</span></h1><div class="hero-actions"><a class="hero-pill hero-pill-outline" href="/pages/work/">View the work</a><a class="hero-pill hero-pill-solid" href="/pages/contact/">Let's talk</a></div></div></section>
-<section class="field-stage scene" id="image-studies" aria-label="Featured photography"><div class="field-copy"><h2>Photography</h2><a class="scene-link photo-archive-link" href="/pages/work/#photography">See photos</a></div><div class="field-photo-wrap">${photo(images.athlete,imageDescriptions.athlete,'field-photo active')}</div></section>
+<section class="field-stage scene" id="image-studies" aria-label="Featured photography"><div class="field-copy"><h2>Photography</h2><a class="scene-link photo-archive-link" href="/pages/work/#photography">See all photos</a></div><div class="featured-gallery"><div class="featured-rail" tabindex="0" role="region" aria-label="Featured photographs. Swipe or use left and right arrow keys to browse.">${featuredPhotos.map((image,i)=>`<div class="featured-slide" role="group" aria-label="Photograph ${i+1} of ${featuredPhotos.length}"><img src="${image.src}" alt="${escapeHTML(image.alt)}" width="${image.width}" height="${image.height}" loading="lazy" decoding="async"></div>`).join('')}</div><nav class="featured-thumbnails" aria-label="Choose a photograph">${featuredPhotos.map((image,i)=>`<button type="button" data-featured-photo="${i}" aria-label="Show ${escapeHTML(image.alt)}" ${i===0?'aria-current="true"':''}><img src="${image.src}" alt="" width="${image.width}" height="${image.height}" loading="lazy" decoding="async"></button>`).join('')}</nav></div></section>
 <section class="film-scene scene embedded-film-scene" id="moving-image"><div class="scene-copy"><h2>Stories<br><i>in motion.</i></h2><a href="/pages/work/#film" class="scene-link">All films</a></div>${filmPlayer(films[0])}</section>
 <section class="web-scene scene" id="digital"><div class="web-scene-intro" data-reveal><h2>Out in<br><i>the world.</i></h2><a class="scene-link" href="/pages/web-design/">All web projects</a></div>${sitePreview(websites[0],0)}</section>
 <section class="closing-scene scene" id="next-project"><h2>What are<br><i>you making?</i></h2><a class="scene-link" href="/pages/contact/">Tell me about it</a></section>
@@ -103,6 +104,43 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let motionOff = reducedMotion.matches;
 document.body.classList.toggle('motion-off', motionOff);
 reducedMotion.addEventListener('change', event => {motionOff = event.matches; document.body.classList.toggle('motion-off', motionOff); renderMotion();});
+const featuredRail = document.querySelector('.featured-rail');
+if(featuredRail) {
+ const stage=featuredRail.closest('.field-stage'), slides=[...featuredRail.children], thumbnails=[...stage.querySelectorAll('[data-featured-photo]')];
+ let selected=0, previewSteps=0, timer, inView=false, hovered=false, interacted=false, scrollFrame;
+ const stopPreview=()=>{clearTimeout(timer);};
+ const updateSelection=()=>{
+  scrollFrame=null;
+  selected=Math.max(0,Math.min(slides.length-1,Math.round(featuredRail.scrollLeft/featuredRail.clientWidth)));
+  thumbnails.forEach((button,i)=>{if(i===selected)button.setAttribute('aria-current','true');else button.removeAttribute('aria-current');});
+ };
+ const showPhoto=index=>{
+  const target=Math.max(0,Math.min(slides.length-1,index));
+  featuredRail.scrollTo({left:target*featuredRail.clientWidth,behavior:'instant'});
+  if(!motionOff)slides[target].animate([{opacity:.4},{opacity:1}],{duration:280,easing:'ease-out'});
+ };
+ const schedulePreview=()=>{
+  stopPreview();
+  if(!inView||hovered||interacted||motionOff||document.hidden||previewSteps>=2)return;
+  timer=setTimeout(()=>{previewSteps++;showPhoto(selected+1);schedulePreview();},1900);
+ };
+ const takeControl=()=>{interacted=true;stopPreview();};
+ thumbnails.forEach((button,i)=>button.addEventListener('click',()=>{takeControl();showPhoto(i);}));
+ featuredRail.addEventListener('keydown',event=>{
+  if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+  event.preventDefault();takeControl();showPhoto(event.key==='Home'?0:event.key==='End'?slides.length-1:selected+(event.key==='ArrowRight'?1:-1));
+ });
+ featuredRail.addEventListener('scroll',()=>{if(!scrollFrame)scrollFrame=requestAnimationFrame(updateSelection);},{passive:true});
+ featuredRail.addEventListener('pointerdown',takeControl,{passive:true});
+ featuredRail.addEventListener('wheel',takeControl,{passive:true});
+ stage.addEventListener('focusin',takeControl);
+ stage.addEventListener('pointerenter',()=>{hovered=true;stopPreview();});
+ stage.addEventListener('pointerleave',()=>{hovered=false;schedulePreview();});
+ document.addEventListener('visibilitychange',schedulePreview);
+ reducedMotion.addEventListener('change',schedulePreview);
+ window.addEventListener('resize',()=>featuredRail.scrollTo({left:selected*featuredRail.clientWidth,behavior:'instant'}));
+ new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;schedulePreview();},{threshold:.55}).observe(featuredRail);
+}
 const revealTargets = document.querySelectorAll('[data-reveal], .page-heading, .gallery-figure, .list-row, .about-layout, .contact-layout, .contact-line');
 const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {if (entry.isIntersecting) {if (!motionOff) entry.target.animate([{opacity:0, transform:'translateY(70px) rotateX(5deg)'},{opacity:1, transform:'translateY(0) rotateX(0)'}], {duration:850,easing:'cubic-bezier(.16,1,.3,1)'}); revealObserver.unobserve(entry.target);}}), {threshold:.12});
 revealTargets.forEach(element => revealObserver.observe(element));

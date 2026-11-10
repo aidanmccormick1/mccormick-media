@@ -102,9 +102,10 @@ so the photographs sit directly on the shared surface. Buttons, dots, keyboard
 navigation, dragging, and the full-image dialog remain available. Reduced motion
 and short viewports use an unpinned horizontal gallery.
 
-## Homepage featured photograph
-The featured portrait stays uncropped and at its original portrait proportion.
-A quiet two-column stage pairs the full image with one large Photography title and
-the See photos link; on narrow screens these stack above the image. The dark blue
-surface and restrained border carry the existing Alpine palette without turning
-the photograph into a wide crop.
+## Homepage featured photography
+Six existing photographs mix portraits, sport, and events in a single contained
+frame. All compositions remain uncropped. A compact heading and archive link sit
+above the frame, with six selectable photo thumbnails below. Swipe, keyboard
+arrows, and thumbnail buttons provide direct browsing. On first entry, two gentle
+advances preview three images in under five seconds, then stop. Hover pauses this
+brief preview; focus, manual browsing, reduced motion, and hidden tabs stop it.
