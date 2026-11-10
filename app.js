@@ -13,13 +13,13 @@ const images = {
 };
 const imageDescriptions = {kayak:'People with kayaks on the coast', hallowheels:'Hallowheels event', athlete:'Athlete portrait', retirement:'Retirement celebration', beach:'Family at the beach', volleyball:'Beach volleyball', basketball:'Basketball game', event:'Event under blue lighting'};
 const films = [
-  ['FIVE', 'Leadership campaign', 'https://www.youtube.com/watch?v=oI9p2Z92RQ8'],
-  ['OCL 2024 Recap', 'Conference recap', 'https://www.youtube.com/watch?v=7EXa5hYzCig'],
-  ['OCL 2025 Recap', 'Conference recap', 'https://www.youtube.com/watch?v=kSD1K-4DFY0'],
-  ['OCL 2026 Recap', 'Conference recap', 'https://www.youtube.com/watch?v=xVVZRi2lfjs'],
-  ['DPFF Advertisement', 'Film festival project', 'https://www.youtube.com/watch?v=Q7CAsF3_qAI'],
-  ['Dana Hills Football', 'Season recap', 'https://www.youtube.com/watch?v=d2Arwz-hlMc'],
-  ['PTSA Short Film', 'Short film', 'https://www.youtube.com/watch?v=UeoR4JYEkCY']
+  ['FIVE', 'https://www.youtube.com/watch?v=oI9p2Z92RQ8'],
+  ['OCL 2024 Recap', 'https://www.youtube.com/watch?v=7EXa5hYzCig'],
+  ['OCL 2025 Recap', 'https://www.youtube.com/watch?v=kSD1K-4DFY0'],
+  ['OCL 2026 Recap', 'https://www.youtube.com/watch?v=xVVZRi2lfjs'],
+  ['DPFF Advertisement', 'https://www.youtube.com/watch?v=Q7CAsF3_qAI'],
+  ['Dana Hills Football', 'https://www.youtube.com/watch?v=d2Arwz-hlMc'],
+  ['PTSA Short Film', 'https://www.youtube.com/watch?v=UeoR4JYEkCY']
 ];
 const oclFilms = films.filter(([title]) => /^OCL \d{4} Recap$/.test(title)).sort((a,b) => a[0].localeCompare(b[0]));
 const websites = [
@@ -37,9 +37,9 @@ const contour = `<svg class="contour" viewBox="0 0 280 250" fill="none" aria-hid
 const header = `<header class="header" id="top"><a class="identity" href="/" aria-label="Aidan McCormick home"><img class="identity-logo" src="/img/AM%20LOGO.png" alt=""><span class="identity-type">McCormick Media</span></a><nav class="nav" aria-label="Main navigation">${links.map(([n,u])=>`<a href="${u}" ${((page==='home'&&u==='/')||(page==='web'&&u.includes('web-design'))||(page==='about'&&u.includes('history'))||(page==='work'&&u.includes('/work'))||(page==='services'&&u.includes('services')))?'aria-current="page"':''}>${n}</a>`).join('')}<a class="contact-link" href="/pages/contact/">Contact</a></nav><button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu <span aria-hidden="true">+</span></button></header><nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>${links.map(([n,u])=>`<a href="${u}">${n}</a>`).join('')}<a href="/pages/contact/">Contact</a></nav>`;
 const footer = `<footer class="footer"><div><strong>McCormick Media</strong></div><div class="footer-right"><a href="mailto:am@aidanmccormick.com">am@aidanmccormick.com</a><span>Orange County / Santa Barbara</span><span>© ${new Date().getFullYear()} Aidan McCormick</span><a href="/pages/terms/">Terms</a></div></footer>`;
 const contactLine = `<div class="contact-line"><div><p>Something in mind?</p><a href="/pages/contact/">Get in touch</a></div></div>`;
-function filmPlayer(film, index=0) {
- const id = new URL(film[2]).searchParams.get('v');
- return `<article class="film-project" data-reveal><div class="film-project-heading"><div><h3>${film[0]}</h3></div><span>${film[1]}</span></div><div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/${id}?rel=0" title="${escapeHTML(film[0])} — video player" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><div class="embed-fallback">${outbound(film[2],'Open on YouTube','row-link')}</div></article>`;
+function filmPlayer(film) {
+ const id = new URL(film[1]).searchParams.get('v');
+ return `<article class="film-project" data-reveal><div class="film-project-heading"><h3>${film[0]}</h3></div><div class="video-embed" data-video-id="${id}" data-video-title="${escapeHTML(film[0])}"><img class="video-poster" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy" decoding="async"><button class="video-play" type="button" data-play-video aria-label="Play ${escapeHTML(film[0])}"><span aria-hidden="true"></span><span>Play</span></button></div></article>`;
 }
 function filmCollection() {
  return films.map(film => {
@@ -59,7 +59,7 @@ function home(){return `<main class="experience">
 <section class="web-scene scene" id="digital"><div class="web-scene-intro" data-reveal><h2>Out in<br><i>the world.</i></h2><a class="scene-link" href="/pages/web-design/">All web projects</a></div>${sitePreview(websites[0],0)}</section>
 <section class="closing-scene scene" id="next-project"><h2>What are<br><i>you making?</i></h2><a class="scene-link" href="/pages/contact/">Tell me about it</a></section>
 <nav class="scene-dots" aria-label="Jump to a scene">${[["overview","Overview"],["image-studies","Photography"],["moving-image","Film"],["digital","Web"],["next-project","Contact"]].map(([id,label])=>`<a href="#${id}" aria-label="${label}" title="${label}"><span></span></a>`).join('')}</nav></main>`}
-function work(){return `<main class="subpage"><section class="page-heading"><h1>Photo &amp; video</h1></section><section class="collection archive-collection" id="photography"><div class="wall-stage"><div class="section-heading"><div><span class="micro">ALPINE / IMAGE STUDIES</span><h2>Photo wall</h2></div><div class="archive-controls"><span id="archive-position" aria-live="polite">01–04 / ${archivePhotos.length}</span><button type="button" id="archive-prev" aria-label="Previous photo wall section" aria-controls="photo-rail">Previous</button><button type="button" id="archive-next" aria-label="Next photo wall section" aria-controls="photo-rail">Next</button></div></div><div class="wall-base"><div class="wall-landscape" aria-hidden="true">${contour}</div><div class="photo-rail photo-wall" id="photo-rail" role="region" aria-label="Photo wall. Scroll down to explore, or use the section buttons and arrow keys. Select a photo to enlarge it." tabindex="0">${Array.from({length:Math.ceil(archivePhotos.length/4)},(_,panel)=>`<div class="wall-panel">${archivePhotos.slice(panel*4,panel*4+4).map((image,offset)=>{const i=panel*4+offset;return `<button class="wall-photo" type="button" data-photo="${i}" aria-label="Open photo ${i+1}: ${escapeHTML(image.alt)}"><img src="${image.src}" alt="${escapeHTML(image.alt)}" width="${image.width}" height="${image.height}" loading="lazy" decoding="async"><span class="wall-photo-number">${String(i+1).padStart(2,'0')}</span><span class="wall-photo-open" aria-hidden="true">View</span></button>`;}).join('')}</div>`).join('')}</div></div><div class="wall-bottom"><nav class="wall-dots" aria-label="Photo wall sections">${Array.from({length:Math.ceil(archivePhotos.length/4)},(_,i)=>`<button type="button" data-wall-section="${i}" aria-label="Photos ${i*4+1} to ${Math.min(i*4+4,archivePhotos.length)}" ${i===0?'aria-current="true"':''}><span></span></button>`).join('')}</nav></div></div><dialog class="photo-viewer" aria-label="Enlarged photograph"><div class="viewer-toolbar"><span class="micro">IMAGE STUDIES</span><span id="viewer-position" aria-live="polite"></span><button type="button" id="viewer-close" aria-label="Close photograph">Close</button></div><div class="viewer-stage"><button type="button" id="viewer-prev" aria-label="Previous photograph">Previous</button><img id="viewer-image" alt=""><button type="button" id="viewer-next" aria-label="Next photograph">Next</button></div></dialog></section><section class="collection" id="film"><div class="section-heading"><span class="micro">FILM & VIDEO</span></div><div class="film-grid">${filmCollection()}</div></section>${contactLine}</main>`}
+function work(){return `<main class="subpage"><section class="page-heading"><h1>Photo &amp; video</h1></section><section class="collection archive-collection" id="photography"><div class="wall-stage"><div class="section-heading"><div><span class="micro">ALPINE / IMAGE STUDIES</span><h2>Photo wall</h2></div></div><div class="wall-base"><div class="wall-landscape" aria-hidden="true">${contour}</div><div class="photo-rail photo-wall" id="photo-rail" role="region" aria-label="Photo wall. Scroll down to explore, or use the section buttons and arrow keys. Select a photo to enlarge it." tabindex="0">${Array.from({length:Math.ceil(archivePhotos.length/4)},(_,panel)=>`<div class="wall-panel">${archivePhotos.slice(panel*4,panel*4+4).map((image,offset)=>{const i=panel*4+offset;return `<button class="wall-photo" type="button" data-photo="${i}" aria-label="Open photo ${i+1}: ${escapeHTML(image.alt)}"><img src="${image.src}" alt="${escapeHTML(image.alt)}" width="${image.width}" height="${image.height}" loading="lazy" decoding="async"><span class="wall-photo-number">${String(i+1).padStart(2,'0')}</span><span class="wall-photo-open" aria-hidden="true">View</span></button>`;}).join('')}</div>`).join('')}</div></div><div class="wall-bottom"><nav class="wall-dots" aria-label="Photo wall sections">${Array.from({length:Math.ceil(archivePhotos.length/4)},(_,i)=>`<button type="button" data-wall-section="${i}" aria-label="Photos ${i*4+1} to ${Math.min(i*4+4,archivePhotos.length)}" ${i===0?'aria-current="true"':''}><span></span></button>`).join('')}</nav></div></div><dialog class="photo-viewer" aria-label="Enlarged photograph"><div class="viewer-toolbar"><span class="micro">IMAGE STUDIES</span><span id="viewer-position" aria-live="polite"></span><button type="button" id="viewer-close" aria-label="Close photograph">Close</button></div><div class="viewer-stage"><button type="button" id="viewer-prev" aria-label="Previous photograph">Previous</button><img id="viewer-image" alt=""><button type="button" id="viewer-next" aria-label="Next photograph">Next</button></div></dialog></section><section class="collection" id="film"><div class="film-grid">${filmCollection()}</div></section>${contactLine}</main>`}
 function web(){return `<main class="subpage web-page"><section class="page-heading"><h1>Work for the web</h1></section><section class="site-previews" aria-label="Live website projects">${websites.map(sitePreview).join('')}</section>${contactLine}</main>`}
 function about(){return `<main class="subpage"><section class="page-heading"><h1>A little background</h1></section><section class="about-layout"><div class="about-photo">${photo(images.kayak,'People and kayaks on the coast')}</div><div><p>I started with photography and kept finding new ways to make things. Video, web development, and digital tools became part of the same process.</p><p>Most of my work is about understanding what a project needs, then choosing the right way to make it.</p><p>Based between Orange County and Santa Barbara, California.</p></div></section>${contactLine}</main>`}
 function services(){return `<main class="subpage"><section class="page-heading"><h1>Ways I can help</h1></section><div class="simple-list service-list">${['Photography','Film & video','Web design','Digital systems','Content'].map(service=>`<div class="list-row"><div><strong>${service}</strong></div></div>`).join('')}</div><section class="ai-services" aria-labelledby="ai-services-title"><h2 id="ai-services-title">AI tools &amp; workflows</h2><p>Practical AI support for content, research, and everyday tasks.</p></section>${contactLine}</main>`}
@@ -93,7 +93,7 @@ function notFound(){return `<main class="subpage"><section class="page-heading">
 const content = {home,work,web,about,services,contact,terms,notFound};
 document.getElementById('app').innerHTML=`<div class="site-shell">${header}${content[page]()}${footer}</div>`;
 if (location.hash) requestAnimationFrame(() => {const hash = decodeURIComponent(location.hash.slice(1)); const target = ({video:'film',films:'film','photo-gallery':'photography'})[hash] || hash; document.getElementById(target)?.scrollIntoView();});
-document.title = ({home:'Aidan McCormick | Creative work across mediums',work:'Work | Aidan McCormick',web:'Web Design | Aidan McCormick',about:'About | Aidan McCormick',services:'Services | Aidan McCormick',contact:'Contact | Aidan McCormick',terms:'Terms | McCormick Media',notFound:'Page not found | McCormick Media'})[page];
+document.title = ({home:'Aidan McCormick | Photography, Film & Web Design',work:'Photography & Video Portfolio | Aidan McCormick',web:'Website Design Projects | Aidan McCormick',about:'About Aidan McCormick | Creative Work',services:'Creative Services | Aidan McCormick',contact:'Contact Aidan McCormick | Creative Projects',terms:'Terms & Conditions | Aidan McCormick',notFound:'Page not found | McCormick Media'})[page];
 const menu = document.querySelector('.menu-button'); const mobile = document.querySelector('.mobile-nav');
 menu.addEventListener('click',()=>{const expanded=menu.getAttribute('aria-expanded')==='true';menu.setAttribute('aria-expanded',String(!expanded));menu.textContent=expanded?'Menu':'Close';mobile.hidden=expanded;});
 
@@ -126,7 +126,7 @@ menu.addEventListener('keydown', event => {if(event.key === 'Escape') {mobile.hi
 
 const photoRail = document.getElementById('photo-rail');
 if (photoRail) {
- const panels = [...photoRail.querySelectorAll('.wall-panel')], previous = document.getElementById('archive-prev'), next = document.getElementById('archive-next'), position = document.getElementById('archive-position'), dots = [...document.querySelectorAll('[data-wall-section]')];
+ const panels = [...photoRail.querySelectorAll('.wall-panel')], dots = [...document.querySelectorAll('[data-wall-section]')];
  const wallSection = photoRail.closest('.archive-collection');
  wallSection.classList.add('scroll-wall');
  const viewer = document.querySelector('.photo-viewer'), viewerImage = document.getElementById('viewer-image'), viewerPosition = document.getElementById('viewer-position');
@@ -134,9 +134,6 @@ if (photoRail) {
  const updateWall = () => {
   selected = panels.reduce((best,panel,index) => Math.abs(panel.offsetLeft-photoRail.scrollLeft) < Math.abs(panels[best].offsetLeft-photoRail.scrollLeft) ? index : best,0);
   if(photoRail.scrollLeft >= photoRail.scrollWidth-photoRail.clientWidth-2) selected=panels.length-1;
-  const label = `${String(selected*4+1).padStart(2,'0')}–${String(Math.min(selected*4+4,archivePhotos.length)).padStart(2,'0')} / ${archivePhotos.length}`;
-  if(position.textContent!==label)position.textContent=label;
-  previous.disabled = photoRail.scrollLeft < 2; next.disabled = photoRail.scrollLeft >= photoRail.scrollWidth-photoRail.clientWidth-2;
   dots.forEach((dot,i) => {if(i===selected)dot.setAttribute('aria-current','true');else dot.removeAttribute('aria-current');});
  };
  const cancelWallAnimation = () => {cancelAnimationFrame(wallAnimation);photoRail.classList.remove('is-moving');};
@@ -197,7 +194,7 @@ if (photoRail) {
  photoRail.addEventListener('touchend',()=>{touchStart=null;},{passive:true});
  photoRail.addEventListener('touchcancel',()=>{touchStart=null;},{passive:true});
 
- previous.addEventListener('click',()=>go(selected-1));next.addEventListener('click',()=>go(selected+1));dots.forEach((dot,i)=>dot.addEventListener('click',()=>go(i)));
+ dots.forEach((dot,i)=>dot.addEventListener('click',()=>go(i)));
  photoRail.addEventListener('keydown',event=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){event.preventDefault();go(event.key==='Home'?0:event.key==='End'?panels.length-1:selected+(event.key==='ArrowRight'?1:-1));}});
  photoRail.addEventListener('scroll',()=>{clearTimeout(settleTimer);settleTimer=setTimeout(()=>{if(!wallIsPinned())photoRail.classList.remove('is-moving');updateWall();},90);},{passive:true});
  photoRail.addEventListener('pointerdown',event=>{if(event.pointerType!=='mouse'||event.button!==0)return;cancelWallAnimation();dragging=true;dragged=false;dragStart=event.clientX;scrollStart=photoRail.scrollLeft;});
@@ -207,6 +204,13 @@ if (photoRail) {
  photoRail.querySelectorAll('img').forEach(image=>image.addEventListener('dragstart',event=>event.preventDefault()));
  const showPhoto=index=>{viewing=(index+archivePhotos.length)%archivePhotos.length;const photo=archivePhotos[viewing];viewerImage.src=photo.src;viewerImage.alt=photo.alt;viewerPosition.textContent=`${String(viewing+1).padStart(2,'0')} / ${archivePhotos.length}`;};
  photoRail.addEventListener('click',event=>{if(dragged&&event.detail!==0){dragged=false;return;}dragged=false;const button=event.target.closest('[data-photo]');if(!button)return;focusedPhoto=button;showPhoto(Number(button.dataset.photo));viewer.showModal();document.body.classList.add('viewer-open');document.getElementById('viewer-close').focus();});
+ document.querySelectorAll('[data-play-video]').forEach(button=>button.addEventListener('click',()=>{
+  const frame=button.closest('.video-embed'), id=frame.dataset.videoId, title=frame.dataset.videoTitle;
+  const iframe=document.createElement('iframe');
+  iframe.src=`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1`;
+  iframe.title=`${title} video`;iframe.loading='eager';iframe.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen';iframe.allowFullscreen=true;iframe.referrerPolicy='strict-origin-when-cross-origin';
+  frame.replaceChildren(iframe);
+ }));
  document.getElementById('viewer-close').addEventListener('click',()=>viewer.close());
  document.getElementById('viewer-prev').addEventListener('click',()=>showPhoto(viewing-1));document.getElementById('viewer-next').addEventListener('click',()=>showPhoto(viewing+1));
  viewer.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();showPhoto(viewing+(event.key==='ArrowRight'?1:-1));}});
