@@ -351,3 +351,19 @@ html:has(.page-home){scroll-snap-type:y mandatory;scroll-padding-top:12px}
 @media(prefers-reduced-motion:reduce){html:has(.page-home){scroll-snap-type:none;scroll-behavior:auto}}
 .page-home .opening-scene{margin:12px clamp(18px,3vw,48px) 24px;border:1px solid #69869b;border-radius:clamp(28px,4vw,64px)}
 @media(max-width:790px){.page-home .opening-scene{margin:12px 18px 18px;border-radius:28px}}
+
+/* Match the homepage navigation to the shared page gutters and scale. */
+.page-home .header{width:min(calc(100% - 6vw),calc(1540px - 6vw));left:50%;right:auto;transform:translateX(-50%)}
+.page-home .identity-logo{width:58px;height:42px}
+@media(max-width:790px){
+ .page-home .header{width:calc(100% - 6vw)}
+ .page-home .identity-type{font-size:15px}
+ .page-home .mobile-nav:not([hidden]){left:3vw;right:3vw}
+}
+@media(max-width:600px){
+ .page-home .header{width:calc(100% - 36px)}
+ .page-home .mobile-nav:not([hidden]){left:18px;right:18px}
+}
+@media(max-width:380px){.page-home .identity-logo{width:42px}.page-home .identity-type{font-size:13px}}
+.page-home .identity{gap:12px}
+@media(max-width:380px){.page-home .identity{gap:7px}}
