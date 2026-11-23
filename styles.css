@@ -318,3 +318,36 @@ body:not(.motion-off) .subpage,body:not(.motion-off) .group-inspired h1,body:not
  .site-project-heading{align-items:flex-start;flex-wrap:wrap}
  .site-project-heading .row-link{justify-content:flex-start}
 }
+
+/* Rounded frames and a subtle topographic detail tie the portfolio together. */
+.group-inspired .opening-image{border-radius:clamp(22px,3vw,44px)}
+.hero-caption{border-radius:8px}
+.featured-rail{border:1px solid #7991a466;border-radius:clamp(20px,3vw,38px);background:#102536}
+.featured-thumbnails button{border-radius:9px}
+.featured-thumbnails button img{border-radius:5px}
+.embedded-film-scene{position:relative;isolation:isolate;margin:0 clamp(18px,3vw,48px);padding:clamp(48px,6vw,100px);border:1px solid #69869b;border-radius:clamp(28px,4vw,64px);background:#182f41;overflow:hidden}
+.embedded-film-scene .scene-copy,.embedded-film-scene .film-project{position:relative;z-index:1}
+.film-contour{position:absolute;left:-4%;bottom:-12%;width:min(43%,520px);height:65%;pointer-events:none;z-index:0}
+.film-contour .contour{stroke:#b3cbd8;stroke-width:1;opacity:.2}
+.video-embed{border-radius:clamp(16px,2vw,28px)}
+.page-home .web-scene{padding-top:clamp(80px,8vw,130px)}
+.live-browser{border-radius:clamp(18px,2.5vw,30px)}
+.page-home .closing-scene{margin:0 clamp(18px,3vw,48px) clamp(18px,3vw,48px);border:1px solid #69869b;border-radius:clamp(28px,4vw,64px);overflow:hidden}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ .group-inspired .opening-image img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+ .group-inspired .hero-composition:hover .opening-image img{transform:scale(1.025)}
+ .featured-thumbnails button{transition:opacity .2s,border-color .2s,transform .2s}
+ .featured-thumbnails button:hover{transform:translateY(-2px)}
+}
+@media(max-width:790px){
+ .embedded-film-scene{margin-inline:18px;padding:48px 24px;border-radius:28px}
+ .film-contour{width:65%;height:42%;bottom:-4%}
+ .page-home .closing-scene{margin:0 18px 18px;border-radius:28px}
+}
+@media(max-width:520px){
+ .embedded-film-scene{padding:38px 20px;gap:24px}
+ .film-contour{width:85%;height:35%;opacity:.8}
+ .page-home .closing-scene{padding:60px 22px}
+ .featured-rail{border-radius:20px}
+ .video-embed{border-radius:16px}
+}
