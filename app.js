@@ -22,7 +22,6 @@ const films = [
   ['Dana Hills Football', 'https://www.youtube.com/watch?v=d2Arwz-hlMc'],
   ['PTSA Short Film', 'https://www.youtube.com/watch?v=UeoR4JYEkCY']
 ];
-const oclFilms = films.filter(([title]) => /^OCL \d{4} Recap$/.test(title)).sort((a,b) => a[0].localeCompare(b[0]));
 const websites = [
   ['Alessandro', 'Local service website', 'https://aidanmccormick1.github.io/alessandro-truck-site/'],
   ['American Beach Volleyball Club', 'Club website', 'https://americanbeachvolleyballclub.com/'],
@@ -42,12 +41,7 @@ function filmPlayer(film) {
  const id = new URL(film[1]).searchParams.get('v');
  return `<article class="film-project" data-reveal><div class="film-project-heading"><h3>${film[0]}</h3></div><div class="video-embed" data-video-id="${id}" data-video-title="${escapeHTML(film[0])}"><img class="video-poster" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy" decoding="async"><button class="video-play" type="button" data-play-video aria-label="Play ${escapeHTML(film[0])}"><span aria-hidden="true"></span><span>Play</span></button></div></article>`;
 }
-function filmCollection() {
- return films.map(film => {
-  if(film===oclFilms[0]) return `<section class="ocl-series" aria-labelledby="ocl-series-title"><h2 id="ocl-series-title">Three years of OCL coverage!</h2><div class="ocl-series-grid">${oclFilms.map(filmPlayer).join('')}</div></section>`;
-  return oclFilms.includes(film) ? '' : filmPlayer(film);
- }).join('');
-}
+function filmCollection() { return films.map(filmPlayer).join(''); }
 function sitePreview(site, index) {return `<article class="site-project is-browsing" data-reveal><div class="site-project-heading"><div><h2>${site[0]}</h2></div>${outbound(site[2],'Open site','row-link')}</div><div class="live-browser"><div class="live-toolbar"><span>${new URL(site[2]).hostname}</span><button type="button" class="browse-toggle" aria-pressed="true">Pause preview</button></div><div class="live-viewport"><iframe src="${site[2]}" title="${site[0]} live website" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe><button type="button" class="preview-cover" hidden aria-label="Browse ${site[0]} inside this page"><span>Browse site</span></button></div></div></article>`}
 const sceneIcons = {
  camera:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h4l2-3h4l2 3h4v14H4z"/><circle cx="12" cy="12" r="4"/></svg>',
