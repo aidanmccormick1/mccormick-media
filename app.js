@@ -54,7 +54,7 @@ const sceneIcons = {
  web:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01M13 6.5h.01"/></svg>'
 };
 function home(){return `<main class="experience">
-<section class="opening-scene scene group-inspired" id="overview"><div class="hero-composition"><div class="hero-grid" aria-hidden="true"><span>+</span><span>+</span><span>+</span><span>+</span></div><div class="opening-image">${photo(images.kayak,'People with kayaks on the coast','hero-still',true)}</div><a class="floating-project project-left" href="#image-studies" aria-label="Photography"><span class="project-icon">${sceneIcons.camera}</span><strong>Photo</strong></a><a class="floating-project project-right" href="#digital" aria-label="Web projects"><span class="project-icon">${sceneIcons.web}</span><strong>Web</strong></a><a class="floating-film" href="#moving-image" aria-label="Browse films">Film</a></div><div class="opening-copy"><h1><span>PHOTO.</span><span>FILM.</span><span>WEB.</span></h1><div class="hero-actions"><a class="hero-pill hero-pill-outline" href="/pages/work/">View the work</a><a class="hero-pill hero-pill-solid" href="/pages/contact/">Let's talk</a></div></div></section>
+<section class="opening-scene scene group-inspired" id="overview"><div class="opening-copy"><p class="hero-eyebrow">Santa Barbara / Orange County</p><h1><span>PHOTO.</span><span>FILM.</span><span>WEB.</span></h1><p class="hero-intro">Creative work for people, projects, and places.</p><div class="hero-actions"><a class="hero-pill hero-pill-outline" href="/pages/work/">View the work</a><a class="hero-pill hero-pill-solid" href="/pages/contact/">Let's talk</a></div></div><div class="hero-composition"><div class="opening-image">${photo(images.kayak,'People with kayaks on the coast','hero-still',true)}</div><span class="hero-caption">Photography / Film / Digital</span></div></section>
 <section class="field-stage scene" id="image-studies" aria-label="Featured photography"><div class="field-copy"><h2>Photography</h2><a class="scene-link photo-archive-link" href="/pages/work/#photography">See all photos</a></div><div class="featured-gallery"><div class="featured-rail" tabindex="0" role="region" aria-label="Featured photographs. Swipe or use left and right arrow keys to browse.">${featuredPhotos.map((image,i)=>`<div class="featured-slide" role="group" aria-label="Photograph ${i+1} of ${featuredPhotos.length}"><img src="${image.src}" alt="${escapeHTML(image.alt)}" width="${image.width}" height="${image.height}" loading="lazy" decoding="async"></div>`).join('')}</div><nav class="featured-thumbnails" aria-label="Choose a photograph">${featuredPhotos.map((image,i)=>`<button type="button" data-featured-photo="${i}" aria-label="Show ${escapeHTML(image.alt)}" ${i===0?'aria-current="true"':''}><img src="${image.src}" alt="" width="${image.width}" height="${image.height}" loading="lazy" decoding="async"></button>`).join('')}</nav></div></section>
 <section class="film-scene scene embedded-film-scene" id="moving-image"><div class="scene-copy"><h2>Stories<br><i>in motion.</i></h2><a href="/pages/work/#film" class="scene-link">All films</a></div>${filmPlayer(films[0])}</section>
 <section class="web-scene scene" id="digital"><div class="web-scene-intro" data-reveal><h2>Out in<br><i>the world.</i></h2><a class="scene-link" href="/pages/web-design/">All web projects</a></div>${sitePreview(websites[0],0)}</section>
@@ -148,11 +148,12 @@ const previewCards = document.querySelectorAll('.site-project');
 previewCards.forEach(card => {
  const toggle = card.querySelector('.browse-toggle'), cover = card.querySelector('.preview-cover'), frame = card.querySelector('iframe');
  const setActive = active => {card.classList.toggle('is-browsing', active); frame.inert = !active; frame.tabIndex = active ? 0 : -1; toggle.setAttribute('aria-pressed', String(active)); toggle.textContent = active ? 'Pause preview' : 'Browse site'; cover.hidden = active;};
+ if (matchMedia('(max-width: 790px)').matches) setActive(false);
  toggle.addEventListener('click', () => setActive(!card.classList.contains('is-browsing')));
  cover.addEventListener('click', () => {setActive(true); frame.focus();});
  card.addEventListener('keydown', event => {if(event.key === 'Escape') {setActive(false); toggle.focus();}});
 });
-const animatedScenes = [...document.querySelectorAll('.opening-scene, .film-scene')];
+const animatedScenes = [...document.querySelectorAll('.film-scene')];
 let motionFrame = null;
 const renderMotion = () => {
  motionFrame = null;
@@ -160,8 +161,15 @@ const renderMotion = () => {
 };
 window.addEventListener('scroll', () => {if(!motionFrame) motionFrame = requestAnimationFrame(renderMotion);}, {passive:true});
 window.addEventListener('resize', renderMotion); renderMotion();
-menu.addEventListener('keydown', event => {if(event.key === 'Escape') {mobile.hidden = true; menu.setAttribute('aria-expanded','false');menu.textContent='Menu';}});
+document.addEventListener('keydown', event => {if(event.key === 'Escape' && !mobile.hidden) {mobile.hidden = true; menu.setAttribute('aria-expanded','false');menu.textContent='Menu';menu.focus();}});
 
+ document.querySelectorAll('[data-play-video]').forEach(button=>button.addEventListener('click',()=>{
+  const frame=button.closest('.video-embed'), id=frame.dataset.videoId, title=frame.dataset.videoTitle;
+  const iframe=document.createElement('iframe');
+  iframe.src=`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1`;
+  iframe.title=`${title} video`;iframe.loading='eager';iframe.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen';iframe.allowFullscreen=true;iframe.referrerPolicy='strict-origin-when-cross-origin';
+  frame.replaceChildren(iframe);
+ }));
 const photoRail = document.getElementById('photo-rail');
 if (photoRail) {
  const panels = [...photoRail.querySelectorAll('.wall-panel')], dots = [...document.querySelectorAll('[data-wall-section]')];
@@ -175,7 +183,7 @@ if (photoRail) {
   dots.forEach((dot,i) => {if(i===selected)dot.setAttribute('aria-current','true');else dot.removeAttribute('aria-current');});
  };
  const cancelWallAnimation = () => {cancelAnimationFrame(wallAnimation);photoRail.classList.remove('is-moving');};
- const wallIsPinned = () => !motionOff && window.innerHeight > 560;
+ const wallIsPinned = () => !motionOff && window.innerHeight > 560 && window.innerWidth > 790;
  const wallRange = () => ({start:wallSection.getBoundingClientRect().top+window.scrollY,travel:wallSection.offsetHeight-window.innerHeight});
  const syncWall = () => {
   wallFrame = null;
@@ -242,13 +250,6 @@ if (photoRail) {
  photoRail.querySelectorAll('img').forEach(image=>image.addEventListener('dragstart',event=>event.preventDefault()));
  const showPhoto=index=>{viewing=(index+archivePhotos.length)%archivePhotos.length;const photo=archivePhotos[viewing];viewerImage.src=photo.src;viewerImage.alt=photo.alt;viewerPosition.textContent=`${String(viewing+1).padStart(2,'0')} / ${archivePhotos.length}`;};
  photoRail.addEventListener('click',event=>{if(dragged&&event.detail!==0){dragged=false;return;}dragged=false;const button=event.target.closest('[data-photo]');if(!button)return;focusedPhoto=button;showPhoto(Number(button.dataset.photo));viewer.showModal();document.body.classList.add('viewer-open');document.getElementById('viewer-close').focus();});
- document.querySelectorAll('[data-play-video]').forEach(button=>button.addEventListener('click',()=>{
-  const frame=button.closest('.video-embed'), id=frame.dataset.videoId, title=frame.dataset.videoTitle;
-  const iframe=document.createElement('iframe');
-  iframe.src=`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1`;
-  iframe.title=`${title} video`;iframe.loading='eager';iframe.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen';iframe.allowFullscreen=true;iframe.referrerPolicy='strict-origin-when-cross-origin';
-  frame.replaceChildren(iframe);
- }));
  document.getElementById('viewer-close').addEventListener('click',()=>viewer.close());
  document.getElementById('viewer-prev').addEventListener('click',()=>showPhoto(viewing-1));document.getElementById('viewer-next').addEventListener('click',()=>showPhoto(viewing+1));
  viewer.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();showPhoto(viewing+(event.key==='ArrowRight'?1:-1));}});

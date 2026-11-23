@@ -240,3 +240,81 @@ body{background:#142a3b;color:#f1f5f8}a:focus-visible,button:focus-visible,input
  .featured-slide{padding:8px}
 }
 @media(prefers-reduced-motion:reduce){.featured-rail{scroll-behavior:auto}.featured-thumbnails button{transition:none}}
+
+/* Responsive composition */
+html:has(.page-home){scroll-snap-type:none}
+.scene{min-height:0;scroll-snap-align:none}
+.group-inspired.opening-scene{min-height:min(820px,100svh);display:grid;grid-template-columns:minmax(0, .95fr) minmax(0, 1.05fr);align-items:center;gap:clamp(32px,5vw,80px);padding:145px clamp(32px,6vw,100px) 70px;overflow:visible}
+.group-inspired .opening-copy{position:relative;z-index:2;max-width:640px}
+.group-inspired .opening-copy h1{position:static;font-size:clamp(72px,9.3vw,150px);line-height:.85;letter-spacing:-.075em;margin:0;pointer-events:auto}
+.group-inspired .opening-copy h1>span:nth-child(n){margin-left:0}
+.group-inspired .hero-eyebrow{margin:0 0 24px;color:#bfd1df;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.group-inspired .hero-intro{max-width:360px;margin:26px 0;color:#d5e2eb;font-size:16px;line-height:1.6}
+.group-inspired .hero-actions{justify-content:flex-start;flex-wrap:wrap;margin:0}
+.group-inspired .hero-pill{min-height:52px;font-size:15px;letter-spacing:0;padding:12px 22px}
+.hero-composition{position:relative;width:100%;height:auto;min-height:0;aspect-ratio:4/5;max-height:570px;margin:0}
+.group-inspired .opening-image{position:absolute;inset:0;z-index:0;border:0;border-radius:12px;rotate:0deg;box-shadow:none;will-change:auto}
+.group-inspired .opening-image img{transform:none}
+.hero-caption{position:absolute;bottom:16px;left:16px;padding:7px 11px;background:#142a3be8;color:#fff;font-size:11px;letter-spacing:.04em}
+.scene-dots{display:none}
+.page-home .field-stage{min-height:0;padding-top:100px;padding-bottom:100px}
+.embedded-film-scene{min-height:0;margin:0;border-radius:0;padding:100px clamp(24px,6vw,100px)}
+.page-home .web-scene{min-height:0;margin:0;padding:100px clamp(24px,6vw,100px)}
+.closing-scene{min-height:0;padding:120px clamp(24px,6vw,100px)}
+.footer .footer-bio{font-size:13px;line-height:1.7}
+.footer-right{font-size:13px;gap:10px}
+.mobile-nav a{font-size:16px}
+@media(max-width:790px){
+ .header,.page-home .header{height:68px;min-height:68px;border-radius:16px}
+ .page-home .mobile-nav:not([hidden]){top:88px;left:14px;right:14px;border-radius:12px;padding:8px 16px}
+ .group-inspired.opening-scene{min-height:0;grid-template-columns:1fr;gap:30px;padding:125px 24px 55px}
+ .group-inspired .opening-copy h1{font-size:clamp(64px,13vw,110px)}
+ .group-inspired .hero-eyebrow{margin-bottom:20px}
+ .group-inspired .hero-intro{margin:20px 0 24px}
+ .hero-composition{aspect-ratio:16/10;max-height:430px}
+ .page-home .field-stage{padding:65px 24px}
+ .embedded-film-scene,.page-home .web-scene{padding:65px 24px}
+ .closing-scene{padding:80px 24px}
+ .scroll-wall{height:auto}
+ .scroll-wall .wall-stage{position:relative;height:auto;padding:24px 18px 12px}
+ .scroll-wall .wall-base{height:clamp(320px,65svh,560px);transform:none;will-change:auto}
+ .scroll-wall .wall-panel{transform:none!important;will-change:auto}
+ .scroll-wall .photo-wall{scroll-snap-type:x mandatory}
+ .wall-dots button{width:44px}
+ .contact-info svg{display:none}
+ .about-layout,.contact-layout{margin-bottom:70px}
+}
+@media(max-width:520px){
+ .group-inspired.opening-scene{padding:115px 18px 48px;gap:26px}
+ .group-inspired .opening-copy h1{font-size:clamp(58px,16vw,82px)}
+ .group-inspired .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+ .group-inspired .hero-pill{min-width:0;font-size:14px;padding:12px}
+ .hero-composition{aspect-ratio:4/3}
+ .hero-caption{font-size:10px;bottom:10px;left:10px}
+ .page-home .field-stage{padding:52px 18px}
+ .embedded-film-scene,.page-home .web-scene{padding:55px 18px}
+ .embedded-film-scene .scene-copy h2,.page-home .web-scene h2{font-size:clamp(42px,11vw,60px)}
+ .closing-scene{padding:70px 18px}
+ .closing-scene h2{font-size:clamp(48px,12vw,70px)}
+ .page-heading h1{font-size:clamp(40px,10vw,60px);letter-spacing:-.06em}
+ .site-project-heading{align-items:center}
+ .live-viewport,.web-scene .live-viewport{height:420px;min-height:0}
+ .footer,.page-home .footer{padding:30px 18px 50px}
+ .footer-right{text-align:left}
+ .contact-form button{width:100%}
+ .wall-dots{max-width:100%;justify-content:center}
+ .wall-dots button{width:min(44px,13vw)}
+}
+/* Keep navigation aligned with the page gutters and content immediately visible. */
+body:not(.page-home) .header{width:100%;margin:18px 0 0}
+body:not(.motion-off) .subpage,body:not(.motion-off) .group-inspired h1,body:not(.motion-off) .opening-image{animation:none}
+@media(max-width:790px){body:not(.page-home) .header{margin-top:14px}}
+@media(max-width:380px){
+ .header,.page-home .header{gap:8px;padding-inline:12px}
+ .identity{gap:7px;min-width:0}
+ .identity-logo{width:42px;flex:none}
+ .identity-type,.page-home .identity-type{font-size:13px}
+ .menu-button{gap:8px;padding-inline:11px;flex:none}
+ .site-project-heading{align-items:flex-start;flex-wrap:wrap}
+ .site-project-heading .row-link{justify-content:flex-start}
+}
