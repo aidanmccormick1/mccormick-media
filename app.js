@@ -48,12 +48,12 @@ const sceneIcons = {
  web:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01M13 6.5h.01"/></svg>'
 };
 function home(){return `<main class="experience">
-<section class="opening-scene scene group-inspired" id="overview"><div class="opening-copy"><p class="hero-eyebrow">Santa Barbara / Orange County</p><h1><span>PHOTO.</span><span>FILM.</span><span>WEB.</span></h1><p class="hero-intro">Creative work for people, projects, and places.</p><div class="hero-actions"><a class="hero-pill hero-pill-outline" href="/pages/work/">View the work</a><a class="hero-pill hero-pill-solid" href="/pages/contact/">Let's talk</a></div></div><div class="hero-composition"><div class="opening-image">${photo(images.kayak,'People with kayaks on the coast','hero-still',true)}</div><span class="hero-caption">Photography / Film / Digital</span></div></section>
+<section class="opening-scene scene group-inspired" id="overview"><div class="opening-copy"><p class="hero-eyebrow">Santa Barbara / Orange County</p><h1><span>PHOTO.</span><span>FILM.</span><span>WEB.</span></h1><p class="hero-intro">Creative work for people, projects, and places.</p><div class="hero-actions"><a class="hero-pill hero-pill-outline" href="/pages/work/">View the work</a><a class="hero-pill hero-pill-solid" href="/pages/contact/">Let's talk</a></div><a class="hero-next" href="#image-studies">Next: Photography <span aria-hidden="true">↓</span></a></div><div class="hero-composition"><div class="opening-image">${photo(images.kayak,'People with kayaks on the coast','hero-still',true)}</div><span class="hero-caption">Photography / Film / Digital</span></div></section>
 <section class="field-stage scene" id="image-studies" aria-label="Featured photography"><div class="field-copy"><h2>Photography</h2><a class="scene-link photo-archive-link" href="/pages/work/#photography">See all photos</a></div><div class="featured-gallery"><div class="featured-rail" tabindex="0" role="region" aria-label="Featured photographs. Swipe or use left and right arrow keys to browse.">${featuredPhotos.map((image,i)=>`<div class="featured-slide" role="group" aria-label="Photograph ${i+1} of ${featuredPhotos.length}"><img src="${image.src}" alt="${escapeHTML(image.alt)}" width="${image.width}" height="${image.height}" loading="lazy" decoding="async"></div>`).join('')}</div><nav class="featured-thumbnails" aria-label="Choose a photograph">${featuredPhotos.map((image,i)=>`<button type="button" data-featured-photo="${i}" aria-label="Show ${escapeHTML(image.alt)}" ${i===0?'aria-current="true"':''}><img src="${image.src}" alt="" width="${image.width}" height="${image.height}" loading="lazy" decoding="async"></button>`).join('')}</nav></div></section>
 <section class="film-scene scene embedded-film-scene" id="moving-image"><div class="film-contour" aria-hidden="true">${contour}</div><div class="scene-copy"><h2>Stories<br><i>in motion.</i></h2><a href="/pages/work/#film" class="scene-link">All films</a></div>${filmPlayer(films[0])}</section>
 <section class="web-scene scene" id="digital"><div class="web-scene-intro" data-reveal><h2>Out in<br><i>the world.</i></h2><a class="scene-link" href="/pages/web-design/">All web projects</a></div>${sitePreview(websites[0],0)}</section>
 <section class="closing-scene scene" id="next-project"><h2>What are<br><i>you making?</i></h2><a class="scene-link" href="/pages/contact/">Tell me about it</a></section>
-<nav class="scene-dots" aria-label="Jump to a scene">${[["overview","Overview"],["image-studies","Photography"],["moving-image","Film"],["digital","Web"],["next-project","Contact"]].map(([id,label])=>`<a href="#${id}" aria-label="${label}" title="${label}"><span></span></a>`).join('')}</nav></main>`}
+<nav class="scene-dots" aria-label="Jump to a scene">${[["overview","Overview"],["image-studies","Photography"],["moving-image","Film"],["digital","Web"],["next-project","Contact"]].map(([id,label])=>`<a href="#${id}" aria-label="${label}" title="${label}"${id==='overview'?' aria-current="location"':''}><span></span></a>`).join('')}</nav></main>`}
 function work(){return `<main class="subpage"><section class="page-heading"><h1>Photo &amp; video</h1></section><section class="collection archive-collection" id="photography"><div class="wall-stage"><div class="section-heading"><div><span class="micro">ALPINE / IMAGE STUDIES</span><h2>Photo wall</h2></div></div><div class="wall-base"><div class="wall-landscape" aria-hidden="true">${contour}</div><div class="photo-rail photo-wall" id="photo-rail" role="region" aria-label="Photo wall. Scroll down to explore, or use the section buttons and arrow keys. Select a photo to enlarge it." tabindex="0">${Array.from({length:Math.ceil(archivePhotos.length/4)},(_,panel)=>`<div class="wall-panel">${archivePhotos.slice(panel*4,panel*4+4).map((image,offset)=>{const i=panel*4+offset;return `<button class="wall-photo" type="button" data-photo="${i}" aria-label="Open photo ${i+1}: ${escapeHTML(image.alt)}"><img src="${image.src}" alt="${escapeHTML(image.alt)}" width="${image.width}" height="${image.height}" loading="lazy" decoding="async"><span class="wall-photo-number">${String(i+1).padStart(2,'0')}</span><span class="wall-photo-open" aria-hidden="true">View</span></button>`;}).join('')}</div>`).join('')}</div></div><div class="wall-bottom"><nav class="wall-dots" aria-label="Photo wall sections">${Array.from({length:Math.ceil(archivePhotos.length/4)},(_,i)=>`<button type="button" data-wall-section="${i}" aria-label="Photos ${i*4+1} to ${Math.min(i*4+4,archivePhotos.length)}" ${i===0?'aria-current="true"':''}><span></span></button>`).join('')}</nav></div></div><dialog class="photo-viewer" aria-label="Enlarged photograph"><div class="viewer-toolbar"><span class="micro">IMAGE STUDIES</span><span id="viewer-position" aria-live="polite"></span><button type="button" id="viewer-close" aria-label="Close photograph">Close</button></div><div class="viewer-stage"><button type="button" id="viewer-prev" aria-label="Previous photograph">Previous</button><img id="viewer-image" alt=""><button type="button" id="viewer-next" aria-label="Next photograph">Next</button></div></dialog></section><section class="collection" id="film"><div class="film-grid">${filmCollection()}</div></section>${contactLine}</main>`}
 function web(){return `<main class="subpage web-page"><section class="page-heading"><h1>Work for the web</h1></section><section class="site-previews" aria-label="Live website projects">${websites.map(sitePreview).join('')}</section>${contactLine}</main>`}
 function about(){return `<main class="subpage"><section class="page-heading"><h1>About me</h1></section><section class="about-layout"><div class="about-photo">${photo('/img/aidan-mccormick.jpg','Aidan McCormick')}</div><div><p>I'm an AI entrepreneur and media creator based in Santa Barbara, California. My work spans artificial intelligence and software development, media production, photography and videography, creative technology, and web design and development. I started in photography and kept finding new ways to make things. Video, web development, and digital tools became part of the same process. I focus on understanding what a project needs and choosing the right way to make it. I work across Santa Barbara and Orange County.</p></div></section>${contactLine}</main>`}
@@ -142,7 +142,7 @@ const previewCards = document.querySelectorAll('.site-project');
 previewCards.forEach(card => {
  const toggle = card.querySelector('.browse-toggle'), cover = card.querySelector('.preview-cover'), frame = card.querySelector('iframe');
  const setActive = active => {card.classList.toggle('is-browsing', active); frame.inert = !active; frame.tabIndex = active ? 0 : -1; toggle.setAttribute('aria-pressed', String(active)); toggle.textContent = active ? 'Pause preview' : 'Browse site'; cover.hidden = active;};
- if (matchMedia('(max-width: 790px)').matches) setActive(false);
+ if (card.closest('.experience') || matchMedia('(max-width: 790px)').matches) setActive(false);
  toggle.addEventListener('click', () => setActive(!card.classList.contains('is-browsing')));
  cover.addEventListener('click', () => {setActive(true); frame.focus();});
  card.addEventListener('keydown', event => {if(event.key === 'Escape') {setActive(false); toggle.focus();}});
@@ -255,10 +255,24 @@ if (photoRail) {
  syncWall();updateWall();
 }
 
-const sceneDots = document.querySelectorAll('.scene-dots a');
+const sceneDots = [...document.querySelectorAll('.scene-dots a')];
 if (sceneDots.length) {
- const sectionObserver = new IntersectionObserver(entries => entries.forEach(entry => {if (entry.isIntersecting) sceneDots.forEach(dot => {const active = dot.hash === `#${entry.target.id}`;if(active) dot.setAttribute('aria-current','location');else dot.removeAttribute('aria-current');});}),{rootMargin:'-35% 0px -35% 0px'});
- document.querySelectorAll('.experience > .scene').forEach(scene => sectionObserver.observe(scene));
+ const scenes = sceneDots.map(dot => document.getElementById(dot.hash.slice(1)));
+ let sceneFrame;
+ function updateCurrentScene() {
+  sceneFrame = undefined;
+  const activeScene = scenes.findLast(scene => scene.getBoundingClientRect().top <= innerHeight / 4) ?? scenes[0];
+  sceneDots.forEach(dot => {
+   if (dot.hash === `#${activeScene.id}`) dot.setAttribute('aria-current', 'location');
+   else dot.removeAttribute('aria-current');
+  });
+ }
+ function scheduleSceneUpdate() {
+  sceneFrame ??= requestAnimationFrame(updateCurrentScene);
+ }
+ window.addEventListener('scroll', scheduleSceneUpdate, {passive:true});
+ window.addEventListener('resize', scheduleSceneUpdate);
+ updateCurrentScene();
 }
 
 const inquiryForm = document.getElementById('contact-form');
