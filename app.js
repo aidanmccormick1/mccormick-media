@@ -58,7 +58,13 @@ function work(){return `<main class="subpage"><section class="page-heading"><h1>
 function web(){return `<main class="subpage web-page"><section class="page-heading"><h1>Work for the web</h1></section><section class="site-previews" aria-label="Live website projects">${websites.map(sitePreview).join('')}</section>${contactLine}</main>`}
 function about(){return `<main class="subpage"><section class="page-heading"><h1>About me</h1></section><section class="about-layout"><div class="about-photo">${photo('/img/aidan-mccormick.jpg','Aidan McCormick')}</div><div><p>I'm an AI entrepreneur and media creator based in Santa Barbara, California. My work spans artificial intelligence and software development, media production, photography and videography, creative technology, and web design and development. I started in photography and kept finding new ways to make things. Video, web development, and digital tools became part of the same process. I focus on understanding what a project needs and choosing the right way to make it. I work across Santa Barbara and Orange County.</p></div></section>${contactLine}</main>`}
 function services(){return `<main class="subpage"><section class="page-heading"><h1>Ways I can help</h1></section><div class="simple-list service-list">${['Photography','Film & video','Web design','Digital systems','Content'].map(service=>`<div class="list-row"><div><strong>${service}</strong></div></div>`).join('')}</div><section class="ai-services" aria-labelledby="ai-services-title"><h2 id="ai-services-title">AI tools &amp; workflows</h2><p>Practical AI support for content, research, and everyday tasks.</p></section>${contactLine}</main>`}
-function contact(){return `<main class="subpage"><section class="page-heading"><h1>Get in touch</h1></section><section class="contact-layout"><div class="contact-info"><a href="mailto:am@aidanmccormick.com">am@aidanmccormick.com</a><p>Orange County / Santa Barbara</p>${contour}</div><form id="contact-form" class="contact-form" action="https://formspree.io/f/xlgzlodb" method="POST"><label>Name<input name="name" required autocomplete="name" placeholder="Your name"></label><label>Email<input type="email" name="email" required autocomplete="email" placeholder="you@example.com"></label><label>Project type<select name="service"><option>General inquiry</option><option>Photography</option><option>Video</option><option>Website</option><option>Automation</option><option>Other</option></select></label><label>What are you working on?<textarea name="message" rows="5" required placeholder="A few details are enough."></textarea></label><button type="submit">Send message</button></form></section></main>`}
+function contact(){return `<main class="subpage"><section class="page-heading"><h1>Let's make something good.</h1><p>Choose what you're working on. I'll shape the details into a ready-to-send email for you.</p></section><section class="contact-layout"><div class="contact-info contact-intro"><span class="micro">A GOOD PLACE TO START</span><p>Share the rough idea, the timing, or the question on your mind. You can edit every line before sending.</p><a class="email-direct" href="mailto:am@aidanmccormick.com">Or email me directly</a>${contour}</div><form id="contact-form" class="contact-form"><div class="form-progress" aria-hidden="true"><span></span></div><p class="form-kicker">PROJECT NOTE</p><label>Your name<input name="name" required autocomplete="name" placeholder="What should I call you?"></label><label>Your email<input type="email" name="email" required autocomplete="email" placeholder="you@example.com"></label><fieldset class="project-options"><legend>What are you dreaming up?</legend><div>${[['Photography','A camera'],['Film','A film frame'],['Website','A browser'],['Digital systems','A workflow'],['Something else','A spark']].map(([value,label],i)=>`<label class="project-option"><input type="radio" name="service" value="${value}" ${i===0?'checked':''}><span>${label}</span></label>`).join('')}</div></fieldset><div class="form-pair"><label>When are you thinking?<select name="timing"><option>Just exploring</option><option>As soon as possible</option><option>In the next few weeks</option><option>In the next few months</option><option>I have a date in mind</option></select></label><label>Budget range<select name="budget"><option>Still figuring it out</option><option>Under $500</option><option>$500-$1,500</option><option>$1,500-$5,000</option><option>$5,000+</option></select></label></div><label>A few details<textarea name="message" rows="4" placeholder="A place, a feeling, a goal, or just where you'd like to begin…"></textarea></label><div class="draft-preview"><span class="micro">YOUR EMAIL PREVIEW</span><p><strong id="draft-subject">Project inquiry: Photography</strong></p><p id="draft-body">Hi Aidan,
+
+I'm reaching out about a photography project. I'm still exploring the details and would love to talk through what might be possible.
+
+Best,
+[Your name]</p><span>You can edit the whole email in your mail app.</span></div><button class="draft-button" type="submit">Open my email draft <span aria-hidden="true">↗</span></button><p class="draft-note">Your mail app opens with everything filled in. Review it, then press Send.</p><p class="form-status" role="status" aria-live="polite"></p></form></section></main>`}
+
 function terms(){return `<main class="subpage"><section class="page-heading"><h1>Terms &amp;<br>conditions</h1></section><section class="terms-copy"><p>Last updated: 2025</p>
 
       <h2>1. Services</h2>
@@ -277,16 +283,31 @@ if (sceneDots.length) {
 
 const inquiryForm = document.getElementById('contact-form');
 if (inquiryForm) {
- const status = document.createElement('p'); status.className = 'form-status'; status.setAttribute('role','status'); status.setAttribute('aria-live','polite'); inquiryForm.append(status);
- inquiryForm.addEventListener('submit',async event => {
-  event.preventDefault(); if(!inquiryForm.reportValidity()) return;
-  const button = inquiryForm.querySelector('button[type="submit"]'); button.disabled = true; button.textContent = 'Sending…'; status.textContent = '';
-  const controller = new AbortController(), timeout = setTimeout(() => controller.abort(),20000);
-  try {
-   const response = await fetch(inquiryForm.action,{method:'POST',body:new FormData(inquiryForm),headers:{Accept:'application/json'},signal:controller.signal});
-   if(!response.ok) throw new Error('Submission failed');
-   inquiryForm.reset(); status.textContent = 'Message sent. Thank you for getting in touch.';
-  } catch(error) {status.textContent = 'Your message could not be sent. Please try again, or email am@aidanmccormick.com. Your details are still here.';}
-  finally {clearTimeout(timeout);button.disabled = false;button.textContent = 'Send message';}
+ const fields = inquiryForm.elements;
+ const subjectPreview = document.getElementById('draft-subject');
+ const bodyPreview = document.getElementById('draft-body');
+ const status = inquiryForm.querySelector('.form-status');
+ const selectedService = () => fields.service.value || 'Something else';
+ const makeDraft = () => {
+  const name = fields.name.value.trim() || '[Your name]';
+  const email = fields.email.value.trim() || '[Your email]';
+  const service = selectedService();
+  const details = fields.message.value.trim() || "I'm still exploring the details and would love to talk through what might be possible.";
+  const subject = `Project inquiry: ${service}`;
+  const body = `Hi Aidan,\n\nI'm reaching out about ${service.toLowerCase()}. ${details}\n\nTiming: ${fields.timing.value}\nBudget: ${fields.budget.value}\n\nYou can reach me at ${email}.\n\nBest,\n${name}`;
+  subjectPreview.textContent = subject;
+  bodyPreview.textContent = body;
+  return {subject, body};
+ };
+ inquiryForm.addEventListener('input', makeDraft);
+ inquiryForm.addEventListener('change', makeDraft);
+ inquiryForm.addEventListener('submit', event => {
+  event.preventDefault();
+  if (!inquiryForm.reportValidity()) return;
+  const {subject, body} = makeDraft();
+  const draft = `mailto:am@aidanmccormick.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  status.textContent = 'Your email draft is ready. Review it in your mail app, then press Send.';
+  location.href = draft;
  });
+ makeDraft();
 }
